@@ -2,9 +2,152 @@
     ViewData["Title"] = "Home Page";
 
 }
-<!-- Coolors Palette Widget -->
-<script src="https://coolors.co/palette-widget/widget.js"></script>
-<script data-id="043939286039851067">new CoolorsPaletteWidget("043939286039851067", ["4f6d7a", "c0d6df", "dbe9ee", "4a6fa5", "166088"]);</script>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 0.1fr 2fr 1fr;
+            grid-template-rows: 0.2fr 1fr;
+            gap: 5px 0px;
+            grid-template-areas:
+                "info-banner info-banner info-banner info-banner info-banner"
+                "left-banner left-banner mid-banner right-banner right-banner"
+                "bottom-banner bottom-banner bottom-banner bottom-banner bottom-banner";
+        }
 
+        .info-banner {
+            grid-area: info-banner;
+        }
 
+        .left-banner {
+            grid-area: left-banner;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .right-banner {
+            grid-area: right-banner;
+        }
+
+        .mid-banner {
+            grid-area: mid-banner;
+        }
+
+        .bottom-banner {
+            grid-area: bottom-banner;
+        }
+
+        .startpage-img {
+            object-fit: cover;
+            width: 100%;
+            max-height: 100%;
+        }
+
+        .solid {
+            border-style: solid;
+            border-color: #4f6d7a;
+            border-width: thin;
+        }
+
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .info-text {
+            font-weight: bold;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .pulse {
+            -webkit-animation-name: pulse;
+            animation-name: pulse;
+            -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            animation-iteration-count: infinite;
+        }
+  @@-webkit-keyframes pulse {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  50% {
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+  transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  }
+  @@keyframes pulse {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  50% {
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
+  transform: scale3d(1.05, 1.05, 1.05);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  }
+
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="info-banner solid">
+            <p class="info-text pulse">BIGGEST SUPPLIER OF PROPELLER HEADWEAR | DELIVERIES CLOSE TO YOU | GREAT DEALS FOR EVERYONE</p>
+        </div>
+        <div class="left-banner solid" id="ytplayer">
+            <iframe id="ytplayer" class="responsive-iframe"
+                    src="https://www.youtube.com/watch?v=NxhzahiQshQ" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="right-banner solid">
+            <img src="~/images/salesoffer1.png" class="startpage-img" />
+        </div>
+        <div class="mid-banner"></div>
+        <div class="bottom-banner solid">
+            <img src="~/images/happyeaster.png" class="startpage-img" />
+        </div>
+    </div>
+    <script>
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Replace the 'ytplayer' element with an <iframe> and
+        // YouTube player after the API code downloads.
+        var player;
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: '285',
+                width: '640',
+                videoId: 'NxhzahiQshQ'
+            });
+        }
+    </script>
+</body>
+</html>
