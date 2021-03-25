@@ -2805,7 +2805,7 @@ input:hover, input:focus {
     }
 
         .header-area .main-header .menu-wrapper .main-menu ul li a {
-            font-size: 16px;
+            font-size: 20px;
             font-family: "Josefin Sans",sans-serif;
             color: #166088;
             font-weight: 600;
@@ -2827,7 +2827,7 @@ input:hover, input:focus {
 }
 
 .header-area .main-header .menu-wrapper .main-menu ul li:hover > a {
-    color: #166088
+    color: #c0d6df
 }
 
 .header-area .main-header .menu-wrapper .main-menu ul li.hot {
@@ -2898,7 +2898,7 @@ input:hover, input:focus {
         }
 
             .header-area .main-header .menu-wrapper .main-menu ul ul.submenu > li > a:hover {
-                color: #166088;
+                color: #c0d6df;
                 background: none
             }
 
@@ -4450,17 +4450,14 @@ input:hover, input:focus {
     color: #012f5f;
     margin-bottom: 15px
 }
-
     .footer-area .footer-tittle ul li a {
         color: #868c98;
         font-weight: 300
     }
-
         .footer-area .footer-tittle ul li a:hover {
             color: #ff2020;
             padding-left: 5px
         }
-
 .footer-copy-right {
     padding-top: 50px
 }

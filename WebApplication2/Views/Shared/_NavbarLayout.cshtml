@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -50,8 +54,23 @@
                             <ul>
                                 <li>
                                     <a><span class="flaticon-user"></span></a>
-                                    <ul class="submenu">
-                                        <partial name="_LoginPartial" />
+                                    <ul class="submenu navbar-nav">
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            <li>
+                                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage</a>
+                                            </li>
+                                            <li>
+                                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                    <button type="submit"class="btn btn-primary">Logout</button>
+                                                </form>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Register">Register <i class="fa fa-address-card"></i></a></li>
+                                            <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Login">Login <i class="fa fa-sign-in-alt"></i></a></li>
+                                        }
                                     </ul>
                                 </li>
                                 <li><a href="#"><span class="flaticon-shopping-cart"></span></a> </li>
