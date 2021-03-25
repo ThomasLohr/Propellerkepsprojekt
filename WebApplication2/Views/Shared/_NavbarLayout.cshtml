@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>PropStore</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="~/img/logo.png">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/slicknav.css">
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <link rel="stylesheet" href="~/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/css/slick.css">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Header Start -->
+        <div class="header-area" style="background: white">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="menu-wrapper">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a asp-action="Index"><img src="~/img/logo.png" alt=""></a>
+                        </div>
+                        <!-- Main-menu -->
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation">
+                                    <li><a asp-controller="Home" asp-action="Index">Hem</a></li>
+                                    <li>
+                                        <a asp-controller="Home" asp-action="Products">Produkter</a>
+                                        <ul class="submenu">
+                                            <li><a asp-controller="Home" asp-action="Products">Alla produkter</a></li>
+                                            <li><a href="#">För hundar</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- Header Right -->
+                        <div class="header-right">
+                            <ul>
+                                <li>
+                                    <div class="nav-search search-switch">
+                                        <span class="flaticon-search"></span>
+                                    </div>
+                                </li>
+                                <li> <a href="#"><span class="flaticon-user"></span></a></li>
+                                <li><a href="#"><span class="flaticon-shopping-cart"></span></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="~/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/animated.headline.js"></script>
+    <script src="~/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/jquery.sticky.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/main.js"></script>
+</body>
+</html>
