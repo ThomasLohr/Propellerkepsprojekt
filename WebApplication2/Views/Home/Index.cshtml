@@ -3,15 +3,11 @@
 
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
     <style>
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 2fr 0.1fr 2fr 1fr;
-            grid-template-rows: 0.2fr 1fr;
+            grid-template-rows: 0.1fr 1fr;
             gap: 5px 0px;
             grid-template-areas:
                 "info-banner info-banner info-banner info-banner info-banner"
@@ -21,6 +17,7 @@
 
         .info-banner {
             grid-area: info-banner;
+            background-color: #c0d6df;
         }
 
         .left-banner {
@@ -51,7 +48,7 @@
         .solid {
             border-style: solid;
             border-color: #4f6d7a;
-            border-width: thin;
+            border-width: 2px;
         }
 
         .responsive-iframe {
@@ -67,6 +64,15 @@
             font-weight: bold;
             text-align: center;
             padding: 20px 0;
+            font-size: 15pt;
+            color: #4f6d7a;
+        }
+
+        @@supports (-webkit-text-stroke: 1px white) {
+            .stroke {
+                -webkit-text-stroke: 1px white;
+            }
+
         }
 
         .pulse {
@@ -108,11 +114,10 @@
   }
 
     </style>
-</head>
-<body>
+
     <div class="grid-container">
         <div class="info-banner solid">
-            <p class="info-text pulse">BIGGEST SUPPLIER OF PROPELLER HEADWEAR | DELIVERIES CLOSE TO YOU | GREAT DEALS FOR EVERYONE</p>
+            <p class="info-text pulse stroke">BIGGEST SUPPLIER OF PROPELLER HEADWEAR | DELIVERIES CLOSE TO YOU | GREAT DEALS FOR EVERYONE</p>
         </div>
         <div class="left-banner solid" id="ytplayer">
             <iframe id="ytplayer" class="responsive-iframe"
@@ -143,11 +148,9 @@
         var player;
         function onYouTubePlayerAPIReady() {
             player = new YT.Player('ytplayer', {
-                height: '285',
+                height: '287',
                 width: '640',
                 videoId: 'NxhzahiQshQ'
             });
         }
     </script>
-</body>
-</html>
