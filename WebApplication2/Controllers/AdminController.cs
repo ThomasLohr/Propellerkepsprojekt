@@ -26,5 +26,9 @@ namespace WebApplication2.Controllers
         {
             return View(UserList);
         }
+        public IActionResult EditOrder()
+        {
+            return View();
+        }
     }
 }
