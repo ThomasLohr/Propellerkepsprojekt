@@ -3,6 +3,8 @@
     Layout = "_NavbarLayout";
 }
 
+<link rel="stylesheet" href="~/css/style.css">
+
     <style>
         .grid-container {
             display: grid;
@@ -17,7 +19,7 @@
 
         .info-banner {
             grid-area: info-banner;
-            background-color: #c0d6df;
+            background-color: #dbe9ee;
         }
 
         .left-banner {
@@ -61,16 +63,16 @@
             height: 100%;
         }
         .info-text {
-            font-weight: bold;
+            font-weight: bolder;
             text-align: center;
             padding: 20px 0;
-            font-size: 15pt;
+            font-size: 17pt;
             color: #4f6d7a;
         }
 
         @@supports (-webkit-text-stroke: 1px white) {
             .stroke {
-                -webkit-text-stroke: 1px white;
+                -webkit-text-stroke: 1px black;
             }
 
         }
@@ -117,7 +119,7 @@
 
     <div class="grid-container">
         <div class="info-banner solid">
-            <p class="info-text pulse stroke">BIGGEST SUPPLIER OF PROPELLER HEADWEAR | DELIVERIES CLOSE TO YOU | GREAT DEALS FOR EVERYONE</p>
+            <p class="info-text pulse">STÖRST I NORDEN | LEVERANS NÄRA DIG | PRISVÄRT FÖR ALLA</p>
         </div>
         <div class="left-banner solid" id="ytplayer">
             <iframe id="ytplayer" class="responsive-iframe"
@@ -148,7 +150,7 @@
         var player;
         function onYouTubePlayerAPIReady() {
             player = new YT.Player('ytplayer', {
-                height: '287',
+                height: '295',
                 width: '640',
                 videoId: 'NxhzahiQshQ'
             });
