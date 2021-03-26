@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Admin Dashboard</h1>
+<a asp-controller="Admin" asp-action="Orders">
+    <input type="button" style='width:300px;height:200px;font-size:30px;margin-top:20px' class="btn btn-primary" value="Orders" />
+</a>
+<a asp-controller="Admin" asp-action="Users">
+    <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Users" />
+</a>
