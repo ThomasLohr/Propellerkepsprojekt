@@ -11,128 +11,187 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="pb-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+<div class="pb-5 py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
-                    <!-- Shopping cart table -->
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="p-2 px-3 text-uppercase">Product</div>
-                                    </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Price</div>
-                                    </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Quantity</div>
-                                    </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Remove</div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row" class="border-0">
-                                        <div class="p-2">
-                                            <img src="https://i.pinimg.com/736x/2a/0d/42/2a0d423c3d9c7507218f36c8ac862d3f.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                            <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">"Negative Lives" Cat Hat</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: Animals</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="border-0 align-middle"><strong>$39.99</strong></td>
-                                    <td class="border-0 align-middle"><strong>3</strong></td>
-                                    <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="p-2">
-                                            <img src="https://img.joomcdn.net/0ad7baaecbf783a56bc726da88d7aa06150a9ec1_original.jpeg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                            <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">"I Can Fly" Prop Helmet</a></h5><span class="text-muted font-weight-normal font-italic">Category: Rubber Duck Accessories</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="align-middle"><strong>$34.52</strong></td>
-                                    <td class="align-middle"><strong>3</strong></td>
-                                    <td class="align-middle">
-                                        <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="p-2">
-                                            <img src="https://i.pinimg.com/originals/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                            <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">"The Executive" Business Cap</a></h5><span class="text-muted font-weight-normal font-italic">Category: Formal Dress</span>
-                                            </div>
-                                        </div>
-                                    <td class="align-middle"><strong>$79.00</strong></td>
-                                    <td class="align-middle"><strong>3</strong></td>
-                                    <td class="align-middle">
-                                        <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                            <th scope="row">
-                                <div class="p-2">
-                                    <img src="https://i.pinimg.com/originals/0f/65/fe/0f65feb821fc13cf7241297e7a4ff956.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                    <div class="ml-3 d-inline-block align-middle">
-                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">"The Lincoln" Prop Top Hat</a></h5><span class="text-muted font-weight-normal font-italic">Category: Formal Dress</span>
-                                    </div>
-                                </div>
-                            <td class="align-middle"><strong>$79.00</strong></td>
-                            <td class="align-middle"><strong>3</strong></td>
-                            <td class="align-middle">
-                                <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
-                            </td>
+                <!-- Shopping cart table -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2 px-3 text-uppercase">Produkt</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Pris</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Antal</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2 text-uppercase">Radera</div>
+                                </th>
                             </tr>
-                            </tbody>
-                        </table>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="border-0">
+                                    <div class="p-2">
+                                        <img src="https://i.pinimg.com/736x/2a/0d/42/2a0d423c3d9c7507218f36c8ac862d3f.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">"Negative Lives" Cat Hat</a></h5><span class="text-muted font-weight-normal font-italic d-block">Kategori: Djur</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="border-0 align-middle"><strong>$39.99</strong></td>
+                                <td class="border-0 align-middle"><strong>3</strong></td>
+                                <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <div class="p-2">
+                                        <img src="https://img.joomcdn.net/0ad7baaecbf783a56bc726da88d7aa06150a9ec1_original.jpeg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">"I Can Fly" Prop Helmet</a></h5><span class="text-muted font-weight-normal font-italic">Kategori: Gummianka Tillbehör</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="align-middle"><strong>$34.52</strong></td>
+                                <td class="align-middle"><strong>3</strong></td>
+                                <td class="align-middle">
+                                    <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <div class="p-2">
+                                        <img src="https://i.pinimg.com/originals/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">"The Executive" Business Cap</a></h5><span class="text-muted font-weight-normal font-italic">Kategori: Formell Klädsel</span>
+                                        </div>
+                                    </div>
+                                <td class="align-middle"><strong>$79.00</strong></td>
+                                <td class="align-middle"><strong>3</strong></td>
+                                <td class="align-middle">
+                                    <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        <th scope="row">
+                            <div class="p-2">
+                                <img src="https://i.pinimg.com/originals/0f/65/fe/0f65feb821fc13cf7241297e7a4ff956.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                <div class="ml-3 d-inline-block align-middle">
+                                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">"The Lincoln" Prop Top Hat</a></h5><span class="text-muted font-weight-normal font-italic">Kategori: Formell Klädsel</span>
+                                </div>
+                            </div>
+                        <td class="align-middle"><strong>$79.00</strong></td>
+                        <td class="align-middle"><strong>3</strong></td>
+                        <td class="align-middle">
+                            <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+
+        <div class="row py-5 p-4 bg-white rounded shadow-sm">
+            <div class="col-lg-6">
+                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Dina Uppgifter</div>
+
+                <div class="p-4">
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">E-postadress</a></h5>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input class="form-control border-0" type="text" placeholder="Ex. namn@mail.com" aria-describedby="button-addon3" />
                     </div>
-                    <!-- End -->
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Förnamn</a></h5>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input class="form-control border-0" type="text" placeholder="Ex. Lars" aria-describedby="button-addon3" />
+                    </div>
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Efternamn</a></h5>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input class="form-control border-0" type="text" placeholder="Ex. von Propellerkeps" aria-describedby="button-addon3" />
+                    </div>
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Telefonnummer</a></h5>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input class="form-control border-0" type="text" placeholder="Ex. 0771 793 336" aria-describedby="button-addon3" />
+                    </div>
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Leveransadress</a></h5>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input class="form-control border-0" type="text" placeholder="Ex. Propellergatan 16" aria-describedby="button-addon3" />
+                    </div>
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Postnummer</a></h5>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input class="form-control border-0" type="text" placeholder="Ex. 226 56" aria-describedby="button-addon3" />
+                    </div>
+                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Stad</a></h5>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input class="form-control border-0" type="text" placeholder="Ex. Flygköping" aria-describedby="button-addon3" />
+                    </div>
                 </div>
             </div>
+        </div>
 
+        <div class="py-5">
             <div class="row py-5 p-4 bg-white rounded shadow-sm">
                 <div class="col-lg-6">
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Rabattkod</div>
                     <div class="p-4">
-                        <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+                        <p class="font-italic mb-4">Om du har en rabattkod, vänligen skriv in den i nedan fält.</p>
                         <div class="input-group mb-4 border rounded-pill p-2">
-                            <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+                            <input type="text" placeholder="Ange rabattkod" aria-describedby="button-addon3" class="form-control border-0">
                             <div class="input-group-append border-0">
-                                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+                                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Lägg till rabattkod</button>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instruktioner till butiken</div>
                     <div class="p-4">
-                        <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
+                        <p class="font-italic mb-4">Om du har specialinstruktioner till butiken eller till transportör, vänligen skriv dem i nedan fält.</p>
                         <textarea name="" cols="30" rows="2" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Ordersammanfattning</div>
                     <div class="p-4">
-                        <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+                        <p class="font-italic mb-4">Fraktkostnad och ytterligare kostnader beräknas utifrån de värden du har angett.</p>
                         <ul class="list-unstyled mb-4">
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
-                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Summa</strong><strong>$390.00</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong>$10.00</strong></li>
+                            <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>$0.00</strong></li>
                             <li class="d-flex justify-content-between py-3 border-bottom">
-                                <strong class="text-muted">Total</strong>
+                                <strong class="text-muted">Summa (inkl. moms)</strong>
                                 <h5 class="font-weight-bold">$400.00</h5>
                             </li>
-                        </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                        </ul>
+                        <button type="button" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#completeOrderModal">Slutför Beställning</button>
                     </div>
                 </div>
             </div>
-
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="completeOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">BESTÄLLNING SKICKAD</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tack för din beställning! En orderbekräftelse skickas till &lt;användares e-mail&gt;.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="javascript:window.location='/Home/Index'" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
