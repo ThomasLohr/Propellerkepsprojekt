@@ -30,5 +30,9 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+        public IActionResult EditUser()
+        {
+            return View();
+        }
     }
 }
