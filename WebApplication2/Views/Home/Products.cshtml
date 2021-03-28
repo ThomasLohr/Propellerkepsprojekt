@@ -15,90 +15,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div class="single-popular-items mb-50 text-center">
-                    <div class="popular-img">
-                        <img src="https://www.buttericks.se/media/catalog/product/cache/950aa184ad48b1712670346bf4c14135/2/5/252558_propellerkeps.jpg" alt="">
-                        <div class="img-cap">
-                            <span>Lägg till i kundvagn</span>
+            @foreach (var product in ViewBag.Products)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-popular-items mb-50 text-center">
+                        <div class="popular-img">
+                            <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id">
+                                <img src="@product.ImageUrl" alt=""/>
+                            </a>
+                            <div class="img-cap">
+                                <span>Lägg till i kundvagn</span>
+                            </div>
+                        </div>
+                        <div class="popular-caption">
+                            <h3><a href="#">@product.Name</a></h3>
+                            <span>$ @product.Price</span>
+
                         </div>
                     </div>
-                    <div class="popular-caption">
-                        <h3><a href="#">Propellerkeps Hund.</a></h3>
-                        <span>$ 45,743</span>
-                    </div>
                 </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div class="single-popular-items mb-50 text-center">
-                    <div class="popular-img">
-                        <img src="https://www.netshirt.se/wp-content/uploads/2020/05/207513-Alt-Exempel-2.jpg" alt="">
-                        <div class="img-cap">
-                            <span>Lägg till i kundvagn</span>
-                        </div>
-                    </div>
-                    <div class="popular-caption">
-                        <h3><a href="#">Propellerkeps Creep.</a></h3>
-                        <span>$ 45,743</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div class="single-popular-items mb-50 text-center">
-                    <div class="popular-img">
-                        <img src="https://www.buttericks.se/media/catalog/product/p/r/propellerkeps_207513_snurr.gif" alt="">
-                        <div class="img-cap">
-                            <span>Lägg till i kundvagn</span>
-                        </div>
-                    </div>
-                    <div class="popular-caption">
-                        <h3><a href="#">Propellerkeps Motor.</a></h3>
-                        <span>$ 45,743</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div class="single-popular-items mb-50 text-center">
-                    <div class="popular-img">
-                        <img src="https://assets.partyking.org/img/products/1300/propellerkeps-blagul-1.jpg" alt="">
-                        <div class="img-cap">
-                            <span>Lägg till i kundvagn</span>
-                        </div>
-                    </div>
-                    <div class="popular-caption">
-                        <h3><a href="#">Propellerkeps Sverige.</a></h3>
-                        <span>$ 45,743</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div class="single-popular-items mb-50 text-center">
-                    <div class="popular-img">
-                        <img src="https://cdn.partykungen.se/img/products/1300/propellerkeps-2.jpg" alt="">
-                        <div class="img-cap">
-                            <span>Lägg till i kundvagn</span>
-                        </div>
-                    </div>
-                    <div class="popular-caption">
-                        <h3><a href="#">Propellerkeps Sunkig.</a></h3>
-                        <span>$ 45,743</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div class="single-popular-items mb-50 text-center">
-                    <div class="popular-img">
-                        <img src="https://www.buttericks.se/media/catalog/product/cache/acd4dfa8a93870011719dc120b266203/2/0/207513_propellerkeps_sida.jpg" alt="">
-                        <div class="img-cap">
-                            <span>Lägg till i kundvagn</span>
-                        </div>
-                    </div>
-                    <div class="popular-caption">
-                        <h3><a href="#">Propellerkeps Sideswag.</a></h3>
-                        <span>$ 45,743</span>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>

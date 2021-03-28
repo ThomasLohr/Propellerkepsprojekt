@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Product";
+    Layout = "_NavbarLayout";
+}
+
+<div>
+    
+    <p>
+    </p>
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            <div class="single-popular-items mb-50 text-center">
+                <div class="popular-img">
+                    <img class="img-thumbnail" src="@ViewBag.Product.ImageUrl" alt="">
+                    <div class="img-cap">
+                        <span>Lägg till i kundvagn</span>
+                    </div>
+                </div>
+                <div class="popular-caption">
+                    <h3>@ViewBag.Product.Name</h3>
+                    <span>$ @ViewBag.Product.Price</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

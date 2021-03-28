@@ -12,19 +12,63 @@ namespace WebApplication2.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        
+        private List<Product> products = new List<Product>();
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+
+            // TODO: Lägg tillbaka bilder för alla produkter
+            Product product1 = new Product(1, "Propellerkeps hund", 45.50m, "Propellerkeps hund");
+            product1.ImageUrl = "https://www.buttericks.se/media/catalog/product/cache/950aa184ad48b1712670346bf4c14135/2/5/252558_propellerkeps.jpg";
+            Product product2 = new Product(2, "Propellerkeps Creep", 40.50m, "Propellerkeps Creep");
+            product2.ImageUrl = "https://www.netshirt.se/wp-content/uploads/2020/05/207513-Alt-Exempel-2.jpg";
+            Product product3 = new Product(3, "Propellerkeps Motor", 45.50m, "Propellerkeps Motor");
+            product3.ImageUrl = "https://www.buttericks.se/media/catalog/product/p/r/propellerkeps_207513_snurr.gif";
+            Product product4 = new Product(4, "Propellerkeps Sverige", 45.50m, "Propellerkeps Sverige");
+            product4.ImageUrl = "https://assets.partyking.org/img/products/1300/propellerkeps-blagul-1.jpg";
+            Product product5 = new Product(5, "Propellerkeps Sunkig", 45.50m, "Propellerkeps Sunkig");
+            product5.ImageUrl = "https://cdn.partykungen.se/img/products/1300/propellerkeps-2.jpg";
+            Product product6 = new Product(6, "Propellerkeps Sideswag", 45.50m, "Propellerkeps Sideswag");
+            product6.ImageUrl = "https://www.buttericks.se/media/catalog/product/cache/acd4dfa8a93870011719dc120b266203/2/0/207513_propellerkeps_sida.jpg";
+
+            products.Add(product1);
+            products.Add(product2);
+            products.Add(product3);
+            products.Add(product4);
+            products.Add(product5);
+            products.Add(product6);
+
         }
 
         public IActionResult Index()
         {
             return View();
         }
+        public IActionResult Product(int id)
+        {
+            //Product productToMatch = products.SingleOrDefault(p => p.Id == id);
+
+            Product product = null;
+            for (int i = 0; i < products.Count; i++)
+            {
+                Product currentProductInLoop = products[i];
+                if (currentProductInLoop.Id == id)
+                {
+                    product = currentProductInLoop;
+                }
+            }
+
+            ViewBag.Product = product;
+
+            return View();
+        }
 
         public IActionResult Products()
         {
+            ViewBag.Products = products;
+
             return View();
         }
 
@@ -46,7 +90,8 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-
+        
+      
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
