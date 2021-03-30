@@ -31,7 +31,7 @@
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo">
-                            <a asp-action="Index"><img src="~/img/logo.png" alt=""></a>
+                            <a asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" alt=""></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
@@ -63,7 +63,7 @@
                                 <li>
                                     <a>
                                         <form class="form-inline my-2 my-lg-0">
-                                            <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Sök..." aria-label="Search">
                                         </form>
                                     </a>
                                 </li>
@@ -73,7 +73,7 @@
                                         @if (SignInManager.IsSignedIn(User))
                                         {
                                             <li>
-                                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage</a>
+                                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hantera konto</a>
                                             </li>
                                             <li>
                                                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

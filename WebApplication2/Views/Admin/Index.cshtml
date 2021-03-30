@@ -1,24 +1,24 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Admin kontrollpanel";
     @* Layout = "~/Views/Shared/_Layout.cshtml";*@
 Layout = "_NavbarLayout";
 
 }
 
-<h1>Admin Dashboard</h1>
+<h1>Admin kontrollpanel</h1>
 <a asp-controller="Admin" asp-action="Orders">
-    <input type="button" style='width:300px;height:200px;font-size:30px;margin-top:20px' class="btn btn-primary" value="Orders" />
+    <input type="button" style='width:300px;height:200px;font-size:30px;margin-top:20px' class="btn btn-primary" value="Ordrar" />
 </a>
 <a asp-controller="Admin" asp-action="Users">
-    <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Users" />
+    <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Användare" />
 </a>
 
 
     <tr>
 
         <th scope="col" class="border-0 bg-light">
-            <div class="p-2 px-3 text-uppercase" style="margin-top:250px">Product info</div>
+            <div class="p-2 px-3 text-uppercase" style="margin-top:250px">Produktinformation</div>
         </th>
 
     </tr>
