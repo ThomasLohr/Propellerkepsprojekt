@@ -4,24 +4,82 @@
     Layout = "_NavbarLayout";
 }
 
-<div>
-    
-    <p>
-    </p>
+
+
+<!--Section: Block Content-->
+
+<div class="container">
     <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+        <div class="col-lg p-3">  
             <div class="single-popular-items mb-50 text-center">
                 <div class="popular-img">
                     <img class="img-thumbnail" src="@ViewBag.Product.ImageUrl" alt="">
                     <div class="img-cap">
-                        <span>Lägg till i kundvagn</span>
+                        <a asp-controller="Home" asp-action="Buy" asp-route-id="@ViewBag.Product.Id">
+                            
+                        </a>
                     </div>
-                </div>
-                <div class="popular-caption">
-                    <h3>@ViewBag.Product.Name</h3>
-                    <span>$ @ViewBag.Product.Price</span>
                 </div>
             </div>
         </div>
+        <div class="col-lg p-3">
+            <h5>Hund i Propellerkeps</h5>
+            <p><span class="mr-1"><strong>100kr</strong></span></p>
+            <p class="pt-1">
+                @ViewBag.Product.Details
+            </p>
+            <div class="table-responsive">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Model</strong></th>
+                            <td>Propellerkeps 2700</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Color</strong></th>
+                            <td>Multi färgad</td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Delivery</strong></th>
+                            <td>Sverige Endast</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div class="table-responsive mb-2">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="pl-0 pb-0 w-25">Antal</td>
+                            <td class="pb-0">En Storlek</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-0">
+                                <div class="def-number-input number-input safari_only mb-0">
+                                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="mt-1">
+                                    <div class="form-check form-check-inline pl-0">
+                                        <input type="radio" class="form-check-input" id="small" name="materialExampleRadios"
+                                               checked>
+                                        <label class="form-check-label small text-uppercase card-link-secondary"
+                                               for="small">Unisex</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-primary btn-md mr-1 mb-2">Köp</button>
+            <button type="button" class="btn btn-light btn-md mr-1 mb-2">
+                <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
+            </button>
+        </div>
     </div>
 </div>
+
+<!--Section: Block Content-->

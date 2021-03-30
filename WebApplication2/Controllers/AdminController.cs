@@ -9,7 +9,8 @@ namespace WebApplication2.Controllers
 {
     public class AdminController : Controller
     {
-        List<Order> OrderList = new List<Order>()
+       
+        List<Order> OrderList = new List<Order>
         {
             new Order(){ CustomerName ="Johan Rova", ItemAmount = 2, OrderTime = new DateTime(2021, 03, 25), OrderSent = true}
         };
