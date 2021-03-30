@@ -77,14 +77,14 @@
                                             </li>
                                             <li>
                                                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                                    <button type="submit" class="btn btn-primary">Logout</button>
+                                                    <button type="submit" class="btn btn-primary">Logga ut</button>
                                                 </form>
                                             </li>
                                         }
                                         else
                                         {
-                                            <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Register">Register <i class="fa fa-address-card"></i></a></li>
-                                            <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Login">Login <i class="fa fa-sign-in-alt"></i></a></li>
+                                            <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Register">Registrera <i class="fa fa-address-card"></i></a></li>
+                                            <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Login">Logga in <i class="fa fa-sign-in-alt"></i></a></li>
                                         }
                                     </ul>
                                 </li>
