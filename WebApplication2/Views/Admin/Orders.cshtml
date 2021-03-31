@@ -15,16 +15,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
+                Kund ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RegistrationDate)
+                Datum för beställning
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderQty)
+                Antal artiklar
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderSent)
+                Order skickad
             </th>
             <th></th>
         </tr>
@@ -45,9 +45,9 @@
                 @Html.DisplayFor(modelItem => item.OrderSent)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditOrder", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Ändra", "EditOrder", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Detaljer", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Ta bort", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

@@ -1,7 +1,7 @@
 ﻿@model WebApplication2.Models.Order
 
 @{
-    ViewData["Title"] = "EditOrder";
+    ViewData["Title"] = "Ändra order";
     Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
 
@@ -14,17 +14,17 @@
     <form asp-action="EditOrder">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="CustomerId" class="control-label"></label>
+            <label asp-for="CustomerId" class="control-label">Kund ID</label>
             <input asp-for="CustomerId" class="form-control" />
             <span asp-validation-for="CustomerId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="RegistrationDate" class="control-label"></label>
+            <label asp-for="RegistrationDate" class="control-label">Datum för beställning</label>
             <input asp-for="RegistrationDate" class="form-control" />
             <span asp-validation-for="RegistrationDate" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="OrderQty" class="control-label"></label>
+            <label asp-for="OrderQty" class="control-label">Antal artiklar</label>
             <input asp-for="OrderQty" class="form-control" />
             <span asp-validation-for="OrderQty" class="text-danger"></span>
         </div>
