@@ -7,32 +7,32 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Repositories
 {
-    //public class UserRepository : IUserRepository
-    //{
-    //    private ApplicationDbContext _ctx = null;
+    public class UserRepository : IUserRepository
+    {
+        private ApplicationDbContext _ctx = null;
 
-    //    public UserRepository(ApplicationDbContext ctx)
-    //    {
-    //        _ctx = ctx;
-    //    }
+        public UserRepository(ApplicationDbContext ctx)
+        {
+            _ctx = ctx;
+        }
 
-        //public List<ApplicationUser> ReadUsers()
-        //{
+        public List<ApplicationUser> ReadUsers()
+        {
 
-        //    return _ctx.Users.ToList();
+            return _ctx.Users.ToList();
 
-        //}
+        }
 
-        //public void SaveUsers(List<ApplicationUser> users)
-        //{
+        public void SaveUsers(List<ApplicationUser> users)
+        {
 
-        //    foreach (var user in users)
-        //    {
-        //        _ctx.Users.Add(user);
-        //    }
+            foreach (var user in users)
+            {
+                _ctx.Users.Add(user);
+            }
 
-        //    _ctx.SaveChanges();
+            _ctx.SaveChanges();
 
-        //}
-    //}
+        }
+    }
 }
