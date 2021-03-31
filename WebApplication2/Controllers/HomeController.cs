@@ -6,6 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.Models;
+using WebApplication2.Services;
+using Microsoft.AspNetCore.Session;
+using WebApplication2.Data;
 
 namespace WebApplication2.Controllers
 {
@@ -16,6 +19,9 @@ namespace WebApplication2.Controllers
         private List<Product> products = new List<Product>();
 
         private List<Product> purchasedItems = new List<Product>();
+        private ProductService _productService;
+
+
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -68,7 +74,7 @@ namespace WebApplication2.Controllers
 
         public IActionResult Products()
         {
-            ViewBag.Products = products;
+
 
             return View();
         }
