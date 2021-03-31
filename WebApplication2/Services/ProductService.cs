@@ -10,17 +10,21 @@ namespace WebApplication2.Services
 {
     public class ProductService
     {
+        private ApplicationDbContext _ctx;
 
-
-        private IProductRepository _productRepository = null;
-
-        public ProductService(IProductRepository productRepository)
+        public ProductService()
         {
-            _productRepository = productRepository;
+            _ctx = new ApplicationDbContext();
         }
 
         public List<Product> GetAll()
         {
+            return _ctx.Products.ToList();
+        }
+
+        public Product GetProductById(int id)
+        {
+            return _ctx.Products.FirstOrDefault(p => p.Id.Equals(id));
         }
     }
 }

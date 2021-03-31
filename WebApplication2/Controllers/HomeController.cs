@@ -26,6 +26,7 @@ namespace WebApplication2.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _productService = new ProductService();
 
             
             //Product product1 = new Product(1, "Propellerkeps hund", 45.50m,"En fantastisk Propellerkeps för din hund att njuta i och skyddar den från solens farliga strålar",  " ", "", 0);
@@ -55,28 +56,15 @@ namespace WebApplication2.Controllers
         }
         public IActionResult Product(int id)
         {
-            //Product productToMatch = products.SingleOrDefault(p => p.Id == id);
 
-            Product product = null;
-            for (int i = 0; i < products.Count; i++)
-            {
-                Product currentProductInLoop = products[i];
-                if (currentProductInLoop.Id == id)
-                {
-                    product = currentProductInLoop;
-                }
-            }
-
-            ViewBag.Product = product;
-
-            return View();
+            return View(_productService.GetProductById(id));
         }
 
         public IActionResult Products()
         {
 
 
-            return View();
+            return View(_productService.GetAll()); ;
         }
 
         public IActionResult Login()
