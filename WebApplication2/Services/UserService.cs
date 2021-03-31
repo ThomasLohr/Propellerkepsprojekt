@@ -30,5 +30,11 @@ namespace WebApplication2.Services
             var listOfAllUsers = _userRepository.ReadUsers();
             return listOfAllUsers;
         }
+
+        public void SaveUsers(List<User> users)
+        {
+            _userRepository.SaveUsers(users);
+        }
+
     }
 }
