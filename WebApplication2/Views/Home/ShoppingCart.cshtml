@@ -1,6 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Shopping Cart";
 
+
+    ApplicationUser currentUser = checkUser(ViewBag.CurrentUser);
+
+    ApplicationUser checkUser(ApplicationUser user)
+    {
+        if(user != null)
+        {
+            return user;
+        }
+        else
+        {
+            ApplicationUser user2 = new ApplicationUser();
+            user2.FirstName = "";
+            user2.LastName = "";
+            user2.Email = "";
+            user2.PhoneNumber = "";
+            user2.Street = "";
+            user2.Zip = "";
+            user2.City = "";
+            return user2;
+        }
+    }
+
+
 }
 
 <style>
@@ -108,31 +132,39 @@
                 <div class="p-4">
                     <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">E-postadress</a></h5>
                     <div class="input-group mb-4 border rounded-pill p-2">
-                        <input class="form-control border-0" type="text" placeholder="Ex. namn@mail.com" aria-describedby="button-addon3" />
+                        <input class="form-control border-0" type="text" value="@currentUser.Email" placeholder="Ex. namn@mail.com" aria-describedby="button-addon3" />
                     </div>
-                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Förnamn</a></h5>
-                    <div class="input-group mb-4 border rounded-pill p-2">
-                        <input class="form-control border-0" type="text" placeholder="Ex. Lars" aria-describedby="button-addon3" />
+                    <div style="display:inline-block">
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Förnamn</a></h5>
+                        <div class="input-group mb-4 border rounded-pill p-2">
+                            <input class="form-control border-0" type="text" value="@currentUser.FirstName" placeholder="Ex. Lars" aria-describedby="button-addon3" />
+                        </div>
                     </div>
-                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Efternamn</a></h5>
-                    <div class="input-group mb-4 border rounded-pill p-2">
-                        <input class="form-control border-0" type="text" placeholder="Ex. von Propellerkeps" aria-describedby="button-addon3" />
+                    <div style="display:inline-block;margin-left:10px">
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Efternamn</a></h5>
+                        <div class="input-group mb-4 border rounded-pill p-2">
+                            <input class="form-control border-0" type="text" value="@currentUser.LastName" placeholder="Ex. von Propellerkeps" aria-describedby="button-addon3" />
+                        </div>
                     </div>
                     <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Telefonnummer</a></h5>
                     <div class="input-group mb-4 border rounded-pill p-2">
-                        <input class="form-control border-0" type="text" placeholder="Ex. 0771 793 336" aria-describedby="button-addon3" />
+                        <input class="form-control border-0" type="text" value="@currentUser.PhoneNumber" placeholder="Ex. 0771 793 336" aria-describedby="button-addon3" />
                     </div>
                     <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Leveransadress</a></h5>
                     <div class="input-group mb-4 border rounded-pill p-2">
-                        <input class="form-control border-0" type="text" placeholder="Ex. Propellergatan 16" aria-describedby="button-addon3" />
+                        <input class="form-control border-0" type="text" value="@currentUser.Street" placeholder="Ex. Propellergatan 16" aria-describedby="button-addon3" />
                     </div>
-                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Postnummer</a></h5>
-                    <div class="input-group mb-4 border rounded-pill p-2">
-                        <input class="form-control border-0" type="text" placeholder="Ex. 226 56" aria-describedby="button-addon3" />
+                    <div style="display:inline-block">
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Postnummer</a></h5>
+                        <div class="input-group mb-4 border rounded-pill p-2">
+                            <input class="form-control border-0" type="text" value="@currentUser.Zip" placeholder="Ex. 226 56" aria-describedby="button-addon3" />
+                        </div>
                     </div>
-                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Stad</a></h5>
-                    <div class="input-group mb-4 border rounded-pill p-2">
-                        <input class="form-control border-0" type="text" placeholder="Ex. Flygköping" aria-describedby="button-addon3" />
+                    <div style="display:inline-block;margin-left:10px">
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Stad</a></h5>
+                        <div class="input-group mb-4 border rounded-pill p-2">
+                            <input class="form-control border-0" type="text" value="@currentUser.City" placeholder="Ex. Flygköping" aria-describedby="button-addon3" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,11 +182,6 @@
                                 <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Lägg till rabattkod</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instruktioner till butiken</div>
-                    <div class="p-4">
-                        <p class="font-italic mb-4">Om du har specialinstruktioner till butiken eller till transportör, vänligen skriv dem i nedan fält.</p>
-                        <textarea name="" cols="30" rows="2" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">

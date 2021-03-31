@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace WebApplication2.Controllers
 
         private List<Product> purchasedItems = new List<Product>();
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
-
+            _userManager = userManager;
             
             //Product product1 = new Product(1, "Propellerkeps hund", 45.50m,"En fantastisk Propellerkeps för din hund att njuta i och skyddar den från solens farliga strålar",  " ", "", 0);
             //product1.ImageUrl = "https://www.buttericks.se/media/catalog/product/cache/950aa184ad48b1712670346bf4c14135/2/5/252558_propellerkeps.jpg";
@@ -82,9 +85,11 @@ namespace WebApplication2.Controllers
             return View();
         }
         
-        public IActionResult ShoppingCart()
+        public async Task<IActionResult> ShoppingCartAsync()
         {
-            ViewBag.Purshases = purchasedItems;
+            //ApplicationUser user = await _userManager.GetUserAsync(User);
+            ViewBag.Purshases = purchasedItems; 
+            ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             return View();
         }
 
