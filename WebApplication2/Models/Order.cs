@@ -7,9 +7,12 @@ namespace WebApplication2.Models
 {
     public class Order
     {
-        public string CustomerName { get; set; }
-        public DateTime OrderTime { get; set; }
-        public int ItemAmount { get; set; }
+        public int Id { get; set; }
+        public int CustomerId { get; set; }
+        public int ProductId { get; set; }
+        public int OrderQty { get; set; }
         public bool OrderSent { get; set; }
+        public virtual DateTime? RegistrationDate { get; set; }
+        public virtual DateTime? ModifiedDate { get; set; }
     }
 }

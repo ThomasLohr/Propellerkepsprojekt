@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication2.Models.User>
+﻿@model IEnumerable<WebApplication2.Models.ApplicationUser>
 
 @{
     ViewData["Title"] = "Användare";
@@ -17,10 +17,10 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Password)
+                @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RegisterDate)
+                @Html.DisplayNameFor(model => model.RegistrationDate)
             </th>
             <th></th>
         </tr>
@@ -32,10 +32,10 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditUser", new { /* id=item.PrimaryKey */ }) |

@@ -14,19 +14,19 @@
     <form asp-action="EditOrder">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="CustomerName" class="control-label">Kundnamn</label>
-            <input asp-for="CustomerName" class="form-control" />
-            <span asp-validation-for="CustomerName" class="text-danger"></span>
+            <label asp-for="CustomerId" class="control-label"></label>
+            <input asp-for="CustomerId" class="form-control" />
+            <span asp-validation-for="CustomerId" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="OrderTime" class="control-label">Datum på beställning</label>
-            <input asp-for="OrderTime" class="form-control" />
-            <span asp-validation-for="OrderTime" class="text-danger"></span>
+            <label asp-for="RegistrationDate" class="control-label"></label>
+            <input asp-for="RegistrationDate" class="form-control" />
+            <span asp-validation-for="RegistrationDate" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ItemAmount" class="control-label">Antal artiklar</label>
-            <input asp-for="ItemAmount" class="form-control" />
-            <span asp-validation-for="ItemAmount" class="text-danger"></span>
+            <label asp-for="OrderQty" class="control-label"></label>
+            <input asp-for="OrderQty" class="form-control" />
+            <span asp-validation-for="OrderQty" class="text-danger"></span>
         </div>
         <div class="form-group form-check">
             <label class="form-check-label">
