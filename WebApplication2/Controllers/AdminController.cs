@@ -19,7 +19,7 @@ namespace WebApplication2.Controllers
         {
             new Order(){  CustomerId =12345, OrderQty = 2, RegistrationDate = new DateTime(2021, 03, 25), OrderSent = true}
         };
-        List<User> UserList = new List<User>() { new User() { Email = "Johan.rova@protonmail.com", Password = "Johan#123", RegisterDate = new DateTime(2021, 03, 25) } };
+        List<ApplicationUser> UserList = new List<ApplicationUser>() { new ApplicationUser() { Email = "Johan.rova@protonmail.com", RegistrationDate = new DateTime(2021, 03, 25) } };
 
         private readonly ApplicationDbContext _context;
         public AdminController(ApplicationDbContext context)
@@ -37,62 +37,33 @@ namespace WebApplication2.Controllers
             return View(OrderList);
         }
 
-        public IActionResult Users(ApplicationDbContext context)
+        public IActionResult Users()
         {
 
             // DUMMY CODE FOR USER REPOSITORY AND SERVICE //
 
-            var userRepository = new UserRepository(context);
-            var userService = new UserService(userRepository);
+            //var userRepository = new UserRepository(_context);
+            //var userService = new UserService(userRepository);
 
-            var allUsers = userService.GetAllusers(); // Gets all users from DB
+            //var allUsers = userService.GetAllusers(); // Gets all users from DB
 
-            var listOfUsers = new List<User> // Dummy list of users
-            {
-                   new User
-                   {
-                       Id = 1,
-                       FirstName = "Kalle",
-                       LastName = "Kula",
-                       Email = "Kalle.Kula@mail.com",
-                       Password = "SuperSecret",
-                       Phone = "123456",
-                       Street = "Stadsgatan 123",
-                       Zip = "321 45",
-                       City = "Staden",
-                       RegisterDate = new DateTime(2021, 03, 25)
-                   },
+            //var listOfUsers = new List<ApplicationUser> // Dummy list of users
+            //{
+            //       new ApplicationUser
+            //       {
+            //           FirstName = "Kalle",
+            //           LastName = "Kula",
+            //           Email = "Kalle.Kula@mail.com",
+            //           PasswordHash = "SuperSecret",
+            //           PhoneNumber = "123456",
+            //           Street = "Stadsgatan 123",
+            //           Zip = "321 45",
+            //           City = "Staden",
+            //           RegistrationDate = new DateTime(2021, 03, 25)
+            //       }
+            //    };
 
-                   new User
-                   {
-                       Id = 2,
-                       FirstName = "Benny",
-                       LastName = "Banan",
-                       Email = "Benny.Banan@mail.com",
-                       Password = "SuperSecret",
-                       Phone = "123456",
-                       Street = "Banangatan 123",
-                       Zip = "321 45",
-                       City = "Staden",
-                       RegisterDate = new DateTime(2021, 02, 08)
-                   },
-
-                   new User
-                   {
-                       Id = 3,
-                       FirstName = "Sture",
-                       LastName = "Strularsson",
-                       Email = "Struliz@mail.com",
-                       Password = "SuperSecret",
-                       Phone = "123456",
-                       Street = "Strulgatan 123",
-                       Zip = "321 45",
-                       City = "Staden",
-                       RegisterDate = new DateTime(2021, 02, 08)
-                   }
-                };
-
-                userService.SaveUsers(listOfUsers);
+            //userService.SaveUsers(listOfUsers);
 
             ////////////////////////////////////////////////
 

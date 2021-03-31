@@ -19,19 +19,19 @@ namespace WebApplication2.Services
             _userRepository = userRepository;
         }
 
-        public User GetByUserName(string Name)
+        public ApplicationUser GetByUserName(string Name)
         {
             var listOfUsers = _userRepository.ReadUsers(); // Call Readusers() from UserRepository
             return listOfUsers.FirstOrDefault(u => u.FirstName == Name);
         }
 
-        public List<User> GetAllusers()
+        public List<ApplicationUser> GetAllusers()
         {
             var listOfAllUsers = _userRepository.ReadUsers();
             return listOfAllUsers;
         }
 
-        public void SaveUsers(List<User> users)
+        public void SaveUsers(List<ApplicationUser> users)
         {
             _userRepository.SaveUsers(users);
         }

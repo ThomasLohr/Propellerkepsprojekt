@@ -16,14 +16,14 @@ namespace WebApplication2.Repositories
             _ctx = ctx;
         }
 
-        public List<User> ReadUsers()
+        public List<ApplicationUser> ReadUsers()
         {
 
             return _ctx.Users.ToList();
 
         }
 
-        public void SaveUsers(List<User> users)
+        public void SaveUsers(List<ApplicationUser> users)
         {
 
             foreach (var user in users)

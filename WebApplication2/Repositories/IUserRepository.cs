@@ -9,7 +9,7 @@ namespace WebApplication2.Repositories
     public interface IUserRepository
     {
 
-        List<User> ReadUsers(); // Returns a list of users
-        void SaveUsers(List<User> users); // Takes a list of users (and saves to a data source)
+        List<ApplicationUser> ReadUsers(); // Returns a list of users
+        void SaveUsers(List<ApplicationUser> users); // Takes a list of users (and saves to a data source)
     }
 }
