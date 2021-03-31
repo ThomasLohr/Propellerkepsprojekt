@@ -31,5 +31,11 @@ namespace WebApplication2.Services
             _ctx.Products.Add(product);
             _ctx.SaveChanges();
         }
+
+        public void Update(Product product)
+        {
+            _ctx.Products.Update(product);
+            _ctx.SaveChanges();
+        }
     }
 }

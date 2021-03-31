@@ -46,9 +46,15 @@ namespace WebApplication2.Controllers
             return View(OrderList);
         }
 
-
+        [HttpGet]
         public IActionResult EditProduct()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            _productService.Update(product);
             return View();
         }
 
