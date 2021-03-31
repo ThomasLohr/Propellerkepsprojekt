@@ -26,5 +26,10 @@ namespace WebApplication2.Services
         {
             return _ctx.Products.FirstOrDefault(p => p.Id.Equals(id));
         }
+        public void Create(Product product)
+        {
+            _ctx.Products.Add(product);
+            _ctx.SaveChanges();
+        }
     }
 }
