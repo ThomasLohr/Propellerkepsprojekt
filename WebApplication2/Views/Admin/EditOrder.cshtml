@@ -1,45 +1,42 @@
 ﻿@model WebApplication2.Models.Order
 
-@{
-    ViewData["Title"] = "Ändra order";
-    Layout = "~/Views/Shared/_NavbarLayout.cshtml";
-}
+@{ ViewData["Title"] = "Ändra order";
+                Layout = "~/Views/Shared/_NavbarLayout.cshtml"; }
 
 <h1>Ändra beställning</h1>
-
 <h4>Beställning</h4>
 <hr />
 <div class="row">
     <div class="col-md-4" style="float:left; margin-top:10px">
-    <form asp-action="EditOrder">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="CustomerId" class="control-label">Kund ID</label>
-            <input asp-for="CustomerId" class="form-control" />
-            <span asp-validation-for="CustomerId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="RegistrationDate" class="control-label">Datum för beställning</label>
-            <input asp-for="RegistrationDate" class="form-control" />
-            <span asp-validation-for="RegistrationDate" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="OrderQty" class="control-label">Antal artiklar</label>
-            <input asp-for="OrderQty" class="form-control" />
-            <span asp-validation-for="OrderQty" class="text-danger"></span>
-        </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="OrderSent" />
-                Order skickad
-            </label>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Spara" class="btn btn-primary" />
-        </div>
-    </form>
+        <form asp-action="EditOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label">Kund ID</label>
+                <input asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationDate" class="control-label">Datum för beställning</label>
+                <input asp-for="RegistrationDate" class="form-control" />
+                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderQty" class="control-label">Antal artiklar</label>
+                <input asp-for="OrderQty" class="form-control" />
+                <span asp-validation-for="OrderQty" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OrderSent" />
+                    Order skickad
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Spara" class="btn btn-primary" />
+            </div>
+        </form>
 
-</div>
+    </div>
     <div style="float:right; margin-left:100px">
         <table class="table">
             <thead>
@@ -73,7 +70,7 @@
                     <td>
                         3
                     </td>
-</table>
+        </table>
     </div>
 </div>
 
