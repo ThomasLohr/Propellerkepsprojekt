@@ -11,7 +11,7 @@
     <a asp-action="CreateProduct" class="btn btn-primary">Skapa ny</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th>
                 Produktnamn
@@ -43,34 +43,33 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.Discount)
             </td>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.Model)
             </td>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.Size)
             </td>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.Color)
             </td>
-            <td>
+            <td class="text-align-vertical-middle">
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
             <td>
-                <a asp-action="EditProduct" asp-route-id="@item.Id">Ändra</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
-                <a asp-action="DeleteProduct" asp-route-id="@item.Id">Ta bort</a>
+                <a asp-action="EditProduct" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
+                <a asp-action="RemoveProduct" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
 }
