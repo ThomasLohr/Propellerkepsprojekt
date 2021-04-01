@@ -20,11 +20,13 @@ namespace WebApplication2.Controllers
             new Order(){  CustomerId =12345, OrderQty = 2, RegistrationDate = new DateTime(2021, 03, 25), OrderSent = true}
         };
         List<ApplicationUser> UserList = new List<ApplicationUser>() { new ApplicationUser() { Email = "Johan.rova@protonmail.com", RegistrationDate = new DateTime(2021, 03, 25) } };
+        private ProductService _productService;
 
         private readonly ApplicationDbContext _context;
         public AdminController(ApplicationDbContext context)
         {
             _context = context;
+            _productService = new ProductService();
         }
 
         public IActionResult Index()
@@ -32,11 +34,50 @@ namespace WebApplication2.Controllers
 
             return View();
         }
+
+
+        public IActionResult Products()
+        {
+            return View(_productService.GetAll());
+        }
+
         public IActionResult Orders()
         {
             return View(OrderList);
         }
 
+        [HttpGet]
+        public IActionResult EditProduct(int Id)
+        {
+            
+            return View(_productService.GetProductById(Id));
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            _productService.Update(product);
+            return RedirectToAction("Products");
+        }
+
+
+        public IActionResult RemoveProduct(int Id)
+        {
+            _productService.RemoveById(Id);
+            return RedirectToAction("Products");
+        }
+        [HttpPost]
+        public IActionResult CreateProduct(Product product)
+        {
+            _productService.Create(product);
+            return View();
+        }   
+
+        [HttpGet]
+        public IActionResult CreateProduct()
+        {
+            return View();
+        }
         public IActionResult Users()
         {
 

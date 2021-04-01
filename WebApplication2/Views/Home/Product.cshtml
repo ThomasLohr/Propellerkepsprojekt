@@ -4,6 +4,7 @@
     Layout = "_NavbarLayout";
 }
 
+@model Product 
 
 
 <!--Section: Block Content-->
@@ -13,9 +14,9 @@
         <div class="col-lg p-3">
             <div class="single-popular-items mb-50 text-center">
                 <div class="popular-img">
-                    <img class="img-thumbnail" src="@ViewBag.Product.ImageUrl" alt="">
+                    <img class="img-thumbnail" src="@Model.ImageUrl" alt="">
                     <div class="img-cap">
-                        <a asp-controller="Home" asp-action="Buy" asp-route-id="@ViewBag.Product.Id">
+                        <a asp-controller="Home" asp-action="Buy" asp-route-id="@Model.Id">
 
                         </a>
                     </div>
@@ -26,7 +27,7 @@
             <h5>Hund i Propellerkeps</h5>
             <p><span class="mr-1"><strong>100kr</strong></span></p>
             <p class="pt-1">
-                @ViewBag.Product.ProductDescription
+                @Model.ProductDescription
             </p>
             <div class="table-responsive">
                 <table class="table table-sm table-borderless mb-0">

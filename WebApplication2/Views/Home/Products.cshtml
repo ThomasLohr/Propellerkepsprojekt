@@ -3,6 +3,8 @@
     Layout = "_NavbarLayout";
 }
 
+@model List<Product>
+
 <div class="popular-items section-padding30">
     <div class="container">
         <!-- Section tittle -->
@@ -15,7 +17,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach (var product in ViewBag.Products)
+            @foreach (var product in Model)
             {
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                     <div class="single-popular-items mb-50 text-center">

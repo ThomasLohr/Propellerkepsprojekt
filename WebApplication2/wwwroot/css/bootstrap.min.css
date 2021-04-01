@@ -1798,8 +1798,12 @@ pre {
 
 .table .thead-dark th {
     color: #fff;
-    background-color: #212529;
-    border-color: #32383e
+    background-color: #4f6d7a;
+    border-color: #4f6d7a
+}
+.table .text-align-vertical-middle
+{
+    vertical-align:middle
 }
 
 .table .thead-light th {
