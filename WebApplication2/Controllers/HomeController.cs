@@ -78,10 +78,25 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> SearchResult(string searchProduct, ApplicationDbContext ctx)
         {
             _ctx=ctx;
-            var formattedSearch = searchProduct.ToLower();
-            var searchResult = ctx.Products.Where(s => s.ProductName == searchProduct);
-            //products.Select(p => p.ProductName.Where(s => s.ToString().ToLower().Contains(searchProduct)));
-            return View(await searchResult.ToListAsync());
+            var product = from m in _ctx.Products
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchProduct))
+            {
+                product = product.Where(s => s.ProductName.Contains(searchProduct));
+            }
+            return View(await product.ToListAsync());
+
+            ////var formattedSearch = searchProduct.ToLower();
+
+            //if (!string.IsNullOrEmpty(searchProduct))
+            //{
+            //var searchResult = ctx.Products.Where(s => s.ProductName == searchProduct);
+            //return View(await searchResult.ToListAsync());
+            //}
+
+            ////products.Select(p => p.ProductName.Where(s => s.ToString().ToLower().Contains(searchProduct)));
+            //return View();
         }
     }
 }
