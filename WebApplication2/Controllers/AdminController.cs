@@ -11,7 +11,7 @@ using WebApplication2.Services;
 
 namespace WebApplication2.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
        

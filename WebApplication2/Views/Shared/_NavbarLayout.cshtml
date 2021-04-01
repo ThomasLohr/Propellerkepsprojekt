@@ -48,7 +48,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AboutUs">Om oss</a>
                                     </li>
-                                    @if (SignInManager.IsSignedIn(User))
+                                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                                     {
                                         <li class="nav-item">
                                             <a class="nav-link" style="color: #dbe9ee;" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
