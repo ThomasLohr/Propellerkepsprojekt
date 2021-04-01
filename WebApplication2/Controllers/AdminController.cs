@@ -51,6 +51,13 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+
+
+        public IActionResult RemoveProduct(int Id)
+        {
+            _productService.RemoveById(Id);
+            return RedirectToAction("Products");
+        }
         [HttpPost]
         public IActionResult EditProduct(Product product)
         {

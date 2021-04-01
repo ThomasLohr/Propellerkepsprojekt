@@ -37,5 +37,12 @@ namespace WebApplication2.Services
             _ctx.Products.Update(product);
             _ctx.SaveChanges();
         }
+
+        public void RemoveById(int Id)
+        {
+            var productToRemove = _ctx.Products.FirstOrDefault(p => p.Id.Equals(Id));
+            _ctx.Products.Remove(productToRemove);
+            _ctx.SaveChanges();
+        }
     }
 }

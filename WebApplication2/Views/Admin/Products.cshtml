@@ -8,7 +8,7 @@
 <h1>Produkter</h1>
 
 <p>
-    <a asp-action="CreateProduct">Skapa ny</a>
+    <a asp-action="CreateProduct" class="btn btn-primary">Skapa ny</a>
 </p>
 <table class="table">
     <thead>
@@ -70,7 +70,7 @@
             <td>
                 <a asp-action="EditProduct" asp-route-id="@item.Id">Ändra</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Ta bort</a>
+                <a asp-action="DeleteProduct" asp-route-id="@item.Id">Ta bort</a>
             </td>
         </tr>
 }
