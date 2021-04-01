@@ -62,12 +62,10 @@
                             <ul>
                                 <li>
                                     <a>
-                                        <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Home" asp-action="SearchResult">
-                                            
-                                            <input id="Search" class="form-control mr-sm-2" type="search" placeholder="Sök..." aria-label="Search">
-                                            <button class="btn btn-primary" onclick="location.href='@Url.Action("SearchResult","SearchProduct")?Value=' + $('#Search').val()" type="submit">Sök</button>
+                                        <form class="form-inline my-2 my-lg-0" asp-controller="Home" asp-action="SearchResult" method="get">
+                                                <input class="form-control mr-sm-2" type="text" name="SearchProduct" placeholder="Sök..." />
+                                                <input class="btn btn-primary" type="submit" value="Sök">
                                         </form>
-
                                     </a>
                               
                                 </li>

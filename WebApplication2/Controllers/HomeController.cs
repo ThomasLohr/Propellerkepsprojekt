@@ -74,6 +74,7 @@ namespace WebApplication2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
         private ApplicationDbContext _ctx = null;
         public async Task<IActionResult> SearchResult(string searchProduct, ApplicationDbContext ctx)
         {
