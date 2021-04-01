@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication2.Data;
 using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
@@ -98,6 +100,15 @@ namespace WebApplication2.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        private ApplicationDbContext _ctx = null;
+        public async Task<IActionResult> SearchResult(string searchProduct, ApplicationDbContext ctx)
+        {
+            _ctx=ctx;
+            var formattedSearch = searchProduct.ToLower();
+            var searchResult = ctx.Products.Where(s => s.ProductName == searchProduct);
+            //products.Select(p => p.ProductName.Where(s => s.ToString().ToLower().Contains(searchProduct)));
+            return View(await searchResult.ToListAsync());
         }
     }
 }

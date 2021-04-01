@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Söka produkt";
+    Layout = "~/Views/Shared/_NavbarLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg p-3">
+            <div class="single-popular-items mb-50 text-center">
+                <div class="popular-img">
+                    <img class="img-thumbnail" src="@ViewBag.Product.ImageUrl" alt="">
+                    <div class="img-cap">
+                        <a asp-controller="Home" asp-action="SearchProduct" asp-route-id="@ViewBag.searchResult">
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
