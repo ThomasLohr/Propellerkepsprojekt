@@ -47,9 +47,17 @@ namespace WebApplication2.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditProduct()
+        public IActionResult EditProduct(int Id)
         {
-            return View();
+            
+            return View(_productService.GetProductById(Id));
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            _productService.Update(product);
+            return RedirectToAction("Products");
         }
 
 
@@ -58,13 +66,6 @@ namespace WebApplication2.Controllers
             _productService.RemoveById(Id);
             return RedirectToAction("Products");
         }
-        [HttpPost]
-        public IActionResult EditProduct(Product product)
-        {
-            _productService.Update(product);
-            return View();
-        }
-
         [HttpPost]
         public IActionResult CreateProduct(Product product)
         {
