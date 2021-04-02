@@ -10,7 +10,6 @@ using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Services;
 using Microsoft.AspNetCore.Session;
-using WebApplication2.Data;
 
 namespace WebApplication2.Controllers
 {
@@ -76,28 +75,20 @@ namespace WebApplication2.Controllers
         }
         
         private ApplicationDbContext _ctx = null;
-        public async Task<IActionResult> SearchResult(string searchProduct, ApplicationDbContext ctx)
+        public async Task<IActionResult> Search(string result, ApplicationDbContext ctx)
         {
-            _ctx=ctx;
+            _ctx = ctx;
+
+            ViewBag.searchResult = result;
+
             var product = from m in _ctx.Products
                          select m;
 
-            if (!String.IsNullOrEmpty(searchProduct))
+            if (!String.IsNullOrEmpty(result))
             {
-                product = product.Where(s => s.ProductName.Contains(searchProduct));
+                product = product.Where(s => s.ProductName.Contains(result));
             }
             return View(await product.ToListAsync());
-
-            ////var formattedSearch = searchProduct.ToLower();
-
-            //if (!string.IsNullOrEmpty(searchProduct))
-            //{
-            //var searchResult = ctx.Products.Where(s => s.ProductName == searchProduct);
-            //return View(await searchResult.ToListAsync());
-            //}
-
-            ////products.Select(p => p.ProductName.Where(s => s.ToString().ToLower().Contains(searchProduct)));
-            //return View();
         }
     }
 }
