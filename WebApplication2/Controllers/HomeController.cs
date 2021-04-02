@@ -74,21 +74,20 @@ namespace WebApplication2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         
-        private ApplicationDbContext _ctx = null;
-        public async Task<IActionResult> Search(string result, ApplicationDbContext ctx)
+        public async Task<IActionResult> Search(string result)
         {
-            _ctx = ctx;
+            var product = _productService.SearchProducts(result);
 
-            ViewBag.searchResult = result;
-
-            var product = from m in _ctx.Products
-                         select m;
-
-            if (!String.IsNullOrEmpty(result))
+            if (product != null)
             {
-                product = product.Where(s => s.ProductName.Contains(result));
+                ViewBag.searchResult = $"Visar alla resultat som matchar <b>{result}</b>.";
+
+                return View(await product.ToListAsync());
             }
-            return View(await product.ToListAsync());
+
+            ViewBag.searchResult = $"Inga resultat matchar <b>{result}</b>.";
+
+            return View(new List<Product>());
         }
     }
 }
