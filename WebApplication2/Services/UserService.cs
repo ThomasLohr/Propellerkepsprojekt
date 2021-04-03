@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Repositories;
 
@@ -40,7 +41,7 @@ namespace WebApplication2.Services
             _userRepository.SaveUsers(users);
         }
 
-        internal ApplicationUser GetUserById(string id)
+        public ApplicationUser GetUserById(string id)
         {
             var userById = _userRepository.ReadUsers();
             
@@ -48,5 +49,24 @@ namespace WebApplication2.Services
 
             return user;
         }
+
+        public void UpdateUser(ApplicationUser user)
+        {
+            _userRepository.UpdateUser(user);
+        }
+
+        public void Create(ApplicationUser user)
+        {
+            _userRepository.AddUser(user);
+
+        }
+
+        public void RemoveById(string Id)
+        {
+            var user = _userRepository.ReadUsers().FirstOrDefault(p => p.Id.Equals(Id));
+
+            _userRepository.DeleteUser(user);
+        }
+
     }
 }

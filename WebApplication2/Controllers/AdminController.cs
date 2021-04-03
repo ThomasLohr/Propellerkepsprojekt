@@ -97,5 +97,32 @@ namespace WebApplication2.Controllers
         {
             return View(_userService.GetUserById(Id));
         }
+
+        [HttpPost]
+        public IActionResult EditUser(ApplicationUser user)
+        {
+            _userService.UpdateUser(user);
+
+            return RedirectToAction("Users");
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser(ApplicationUser user)
+        {
+            _userService.Create(user);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+        public IActionResult RemoveUser(string Id)
+        {
+            _userService.RemoveById(Id);
+            return RedirectToAction("Users");
+        }
     }
 }
