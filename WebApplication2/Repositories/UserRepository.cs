@@ -11,9 +11,9 @@ namespace WebApplication2.Repositories
     {
         private ApplicationDbContext _ctx = null;
 
-        public UserRepository(ApplicationDbContext ctx)
+        public UserRepository()
         {
-            _ctx = ctx;
+            _ctx = new ApplicationDbContext();
         }
 
         public List<ApplicationUser> ReadUsers()

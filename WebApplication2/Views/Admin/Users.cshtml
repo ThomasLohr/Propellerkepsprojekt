@@ -2,48 +2,79 @@
 
 @{
     ViewData["Title"] = "Användare";
-    Layout = "_NavbarLayout";
+    Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
 
 <h1>Användare</h1>
 
-<p>
-    <a asp-action="Create">Skapa ny</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                E-mail
-            </th>
-            <th>
-                Telefonnummer
-            </th>
-            <th>
-                Datum för registrering
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="container overflow-hidden">
+    <div class="float-left">
+        <p>
+            <a asp-action="CreateUser" class="btn btn-primary">Lägg till användare</a>
+        </p>
+    </div>
+    <div class="float-right">
+        <form class="form-inline my-2 my-lg-0" asp-controller="Admin" asp-action="Users" method="get">
+            <input class="form-control mr-sm-2" type="text" name="searchString" placeholder="Sök användarnamn..." />
+            <input class="btn btn-primary" type="submit" value="Sök">
+        </form>
+        <br />
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegistrationDate)
-                </td>
-                <td>
-                    @Html.ActionLink("Ändra", "EditUser", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Detaljer", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Ta bort", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+                <th>
+                    Namn
+                </th>
+                <th>
+                    E-Post
+                </th>
+                <th>
+                    Telefon
+                </th>
+                <th>
+                    Adress
+                </th>
+                <th>
+                    Registrerad
+                </th>
+                <th>
+                    Inloggad
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-align-vertical-middle" width="200">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.Street)<br />
+                        @Html.DisplayFor(modelItem => item.Zip)<br />
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td class="text-align-vertical-middle" width="90">
+                        @Html.DisplayFor(modelItem => item.RegistrationDate)
+                    </td>
+                    <td class="text-align-vertical-middle" width="90">
+                        @Html.DisplayFor(modelItem => item.LastLoginTime)
+                    </td>
+                    <td style="width: 150px">
+                        <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
+                        <a asp-action="RemoveUser" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

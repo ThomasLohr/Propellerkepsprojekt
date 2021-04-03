@@ -14,15 +14,19 @@ namespace WebApplication2.Services
     {
         private IUserRepository _userRepository = null;
 
-        public UserService(IUserRepository userRepository)
+        public UserService()
         {
-            _userRepository = userRepository;
+            _userRepository = new UserRepository();
         }
 
-        public ApplicationUser GetByUserName(string Name)
+        public List<ApplicationUser> GetByUserName(string Name)
         {
-            var listOfUsers = _userRepository.ReadUsers(); // Call Readusers() from UserRepository
-            return listOfUsers.FirstOrDefault(u => u.FirstName == Name);
+
+            var listOfAllUsers = _userRepository.ReadUsers();
+
+            listOfAllUsers = listOfAllUsers.Where(u => u.FirstName.Contains(Name)).ToList();
+
+            return listOfAllUsers;
         }
 
         public List<ApplicationUser> GetAllusers()
@@ -36,5 +40,13 @@ namespace WebApplication2.Services
             _userRepository.SaveUsers(users);
         }
 
+        internal ApplicationUser GetUserById(string id)
+        {
+            var userById = _userRepository.ReadUsers();
+            
+            var user = userById.FirstOrDefault(p => p.Id.Equals(id));
+
+            return user;
+        }
     }
 }
