@@ -24,7 +24,7 @@
         <thead class="thead-dark">
             <tr>
                 <th>
-                    Namn
+                    ID
                 </th>
                 <th>
                     E-Post
@@ -33,13 +33,13 @@
                     Telefon
                 </th>
                 <th>
-                    Adress
+                    Inloggad
                 </th>
                 <th>
                     Registrerad
                 </th>
                 <th>
-                    Inloggad
+                    Modifierad
                 </th>
                 <th></th>
             </tr>
@@ -49,8 +49,7 @@
             {
                 <tr>
                     <td class="text-align-vertical-middle" width="200">
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                        @Html.DisplayFor(modelItem => item.LastName)
+                        @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td class="text-align-vertical-middle">
                         @Html.DisplayFor(modelItem => item.Email)
@@ -59,15 +58,13 @@
                         @Html.DisplayFor(modelItem => item.PhoneNumber)
                     </td>
                     <td class="text-align-vertical-middle">
-                        @Html.DisplayFor(modelItem => item.Street)<br />
-                        @Html.DisplayFor(modelItem => item.Zip)<br />
-                        @Html.DisplayFor(modelItem => item.City)
+                        @Html.DisplayFor(modelItem => item.LastLoginDate)
                     </td>
                     <td class="text-align-vertical-middle" width="90">
-                        @Html.DisplayFor(modelItem => item.RegistrationDate)
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
                     </td>
                     <td class="text-align-vertical-middle" width="90">
-                        @Html.DisplayFor(modelItem => item.LastLoginTime)
+                        @Html.DisplayFor(modelItem => item.ModifiedDate)
                     </td>
                     <td style="width: 150px">
                         <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>

@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using WebApplication2.Configuration;
 using WebApplication2.Models;
 
 namespace WebApplication2.Data
@@ -17,14 +21,11 @@ namespace WebApplication2.Data
             : base(options)
         {
         }
-
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=aspnet-WebApplication2-1FDAC551-453E-4CED-A3C2-1E518F06628C; Trusted_Connection=True; MultipleActiveResultSets=true;");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=PropStoreDB; Trusted_Connection=True; MultipleActiveResultSets=true; Pooling=false");
             }
         }
         public DbSet<Order> Orders { get; set; }
@@ -33,6 +34,86 @@ namespace WebApplication2.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            
+            builder.ApplyConfiguration(new ProductConfiguration());
+
+            // any guid
+            const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
+            // any guid, but nothing is against to use the same one
+            const string ROLE_ID = ADMIN_ID;
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = ROLE_ID,
+                Name = "Admin",
+                NormalizedName = "Admin"
+            });
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = ADMIN_ID,
+                UserName = "admin@admin.com",
+                NormalizedUserName = "admin@admin.com",
+                Email = "admin@admin.com",
+                NormalizedEmail = "admin@admin.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "password123"),
+                SecurityStamp = string.Empty
+            });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = ROLE_ID,
+                UserId = ADMIN_ID
+            });
+        }
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            OnBeforeSaving();
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override async Task<int> SaveChangesAsync(
+           bool acceptAllChangesOnSuccess,
+           CancellationToken cancellationToken = default(CancellationToken)
+        )
+        {
+            OnBeforeSaving();
+            return (await base.SaveChangesAsync(acceptAllChangesOnSuccess,
+                          cancellationToken));
+        }
+        private void OnBeforeSaving()
+        {
+            var entries = ChangeTracker.Entries();
+            var utcNow = DateTime.UtcNow;
+
+            foreach (var entry in entries)
+            {
+                // for entities that inherit from BaseEntity,
+                // set UpdatedOn / CreatedOn appropriately
+                if (entry.Entity is ApplicationUser trackable)
+                {
+
+                    switch (entry.State)
+                    {
+                        case EntityState.Modified:
+                            // set the updated date to "now"
+                            trackable.ModifiedDate = utcNow;
+
+                            // mark property as "don't touch"
+                            // we don't want to update on a Modify operation
+                            entry.Property("CreatedDate").IsModified = false;
+                            break;
+
+                        case EntityState.Added:
+                            // set both updated and created date to "now"
+                            trackable.CreatedDate = utcNow;
+                            trackable.ModifiedDate = utcNow;
+                            break;
+                    }
+                }
+            }
         }
     }
 }
