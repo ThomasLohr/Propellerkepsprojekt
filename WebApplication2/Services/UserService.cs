@@ -20,14 +20,14 @@ namespace WebApplication2.Services
             _userRepository = new UserRepository();
         }
 
-        public List<ApplicationUser> GetByUserName(string Name)
+        public ApplicationUser GetUserByName(string Name)
         {
 
             var listOfAllUsers = _userRepository.ReadUsers();
 
-            listOfAllUsers = listOfAllUsers.Where(u => u.FirstName.Contains(Name)).ToList();
+            var userByName = listOfAllUsers.FirstOrDefault(u => u.FirstName.Contains(Name));
 
-            return listOfAllUsers;
+            return userByName;
         }
 
         public List<ApplicationUser> GetAllusers()

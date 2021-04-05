@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApplication2.Data.Migrations
 {
-    public partial class UserSchemeUpdate : Migration
+    public partial class DBSchemeUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace WebApplication2.Data.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Street = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Zip = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Zip = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastLoginDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -52,46 +52,6 @@ namespace WebApplication2.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    OrderQty = table.Column<int>(type: "int", nullable: false),
-                    OrderSent = table.Column<bool>(type: "bit", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Stock = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,27 +160,87 @@ namespace WebApplication2.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    OrderSent = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ProductDescription = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", "054ff747-78ba-4732-a50c-25f91a1e74e1", "Admin", "Admin" });
+                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", "f30e6ee3-a49b-488c-9767-35031baa7997", "Admin", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "FirstName", "LastLoginDate", "LastName", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Street", "TwoFactorEnabled", "UserName", "Zip" },
-                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, null, "b9207516-3126-4639-8326-72f0ad181bd1", new DateTime(2021, 4, 5, 1, 16, 3, 681, DateTimeKind.Utc).AddTicks(9925), "admin@admin.com", true, null, null, null, false, null, null, "admin@admin.com", "admin@admin.com", "AQAAAAEAACcQAAAAEFOp7EGsr1Q2mrLvQpc3UT+rPxDvjFY+d5NaQfn7L/RBFaifI+Q77/e5pgEVcNQxyQ==", null, false, "", null, false, "admin@admin.com", null });
+                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, null, "8d7ac3c2-5fa5-4271-9cb8-f0ed9ba1bec3", new DateTime(2021, 4, 5, 15, 11, 20, 661, DateTimeKind.Utc).AddTicks(4440), "admin@admin.com", true, null, null, null, false, null, null, "admin@admin.com", "admin@admin.com", "AQAAAAEAACcQAAAAEDuzQwhoJalxrsFYzhm26RY4ZDP0YHRaNcf6ArZvRfrBhgPsRl0QIfbY4OE7GPqBmw==", null, false, "", null, false, "admin@admin.com", null });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Color", "Discount", "Gender", "ImageUrl", "Model", "Price", "ProductDescription", "ProductName", "Size", "Stock" },
+                columns: new[] { "Id", "Color", "CreatedDate", "Discount", "Gender", "ImageUrl", "Model", "ModifiedDate", "OrderId", "Price", "ProductDescription", "ProductName", "Size", "Stock" },
                 values: new object[,]
                 {
-                    { 1, "Multifärgad", 0m, "Unisex", "https://cdn11.bigcommerce.com/s-27y5anms1z/images/stencil/728x728/products/64957/30204/126988__95020.1583560155.jpg?c=2", "Hund", 399m, "Elegant, multifärgad propellerkeps till din hund eller väldigt håriga respektive.", "Propellerkeps Hund", "XL", 5000 },
-                    { 2, "Multifärgad", 0m, "Unisex", "https://i.etsystatic.com/5376657/r/il/4dead6/1511480960/il_570xN.1511480960_7c63.jpg", "Katt", 399m, "Elegant, multifärgad propellerkeps till din katt eller väldigt håriga respektive.", "Propellerkeps Katt", "XS", 5000 },
-                    { 3, "Multifärgad", 0m, "Unisex", "https://i.pinimg.com/474x/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg", "Standard", 499m, "Oavsett om du tuggar qualudes på Wall Street med trippla telefoner i öronen eller klickar                     'Köp' på Avanza så visar denna modell att du är nästa Warren Buffet.", "Propellerkeps Affärsman", "M", 5000 },
-                    { 4, "Svart", 0m, "Unisex", "https://images-na.ssl-images-amazon.com/images/I/615G86JGkpL._AC_SL1001_.jpg", "Hjälm", 599m, "Är du en gummianka med medelsålderskris? Då är den här modellen för dig. Fem-växlad, highway-to-hell hjälm som visar damerna på Sweden Rock festival att du fortfarande är viril och har ett outömligt förråd av gummi. OBS! Pilotbrillor ingår ej.", "Propellerkeps Gummianka", "S", 5000 },
-                    { 5, "Multifärgad", 0m, "Man", "https://i.imgflip.com/4/3spz10.jpg", "President", 10000m, "Alla säger att denna propellerkeps är bäst. Jag har många vänner, alla vänner och de säger miljarder gånger att denna propellerkeps är det bästa som har hänt dem.", "Propellerkeps Bäst", "5XL", 5000 },
-                    { 6, "Multifärgad", 0m, "Unisex", "https://ih1.redbubble.net/image.745680506.6038/st,small,507x507-pad,600x600,f8f8f8.u2.jpg", "Sport", 10000m, "Läser du till systemutvecklare hos Newton i Malmö? Då vet du att du har nått zenith i ditt liv. Det blir inte bättre än så här, förutom med denna keps! Köp den nu och sälla dig till legenderna som tar examen 2022.", "Propellerkeps Peak Performance", "L", 5000 }
+                    { 1, "Multifärgad", new DateTime(2021, 4, 5, 15, 11, 20, 628, DateTimeKind.Utc).AddTicks(4768), 0m, "Unisex", "https://cdn11.bigcommerce.com/s-27y5anms1z/images/stencil/728x728/products/64957/30204/126988__95020.1583560155.jpg?c=2", "Hund", null, null, 399m, "Elegant, multifärgad propellerkeps till din hund eller väldigt håriga respektive.", "Propellerkeps Hund", "XL", 5000 },
+                    { 2, "Multifärgad", new DateTime(2021, 4, 5, 15, 11, 20, 629, DateTimeKind.Utc).AddTicks(7867), 0m, "Unisex", "https://i.etsystatic.com/5376657/r/il/4dead6/1511480960/il_570xN.1511480960_7c63.jpg", "Katt", null, null, 399m, "Elegant, multifärgad propellerkeps till din katt eller väldigt håriga respektive.", "Propellerkeps Katt", "XS", 5000 },
+                    { 3, "Multifärgad", new DateTime(2021, 4, 5, 15, 11, 20, 629, DateTimeKind.Utc).AddTicks(7893), 0m, "Unisex", "https://i.pinimg.com/474x/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg", "Standard", null, null, 499m, "Oavsett om du tuggar qualudes på Wall Street med trippla telefoner i öronen eller klickar                     'Köp' på Avanza så visar denna modell att du är nästa Warren Buffet.", "Propellerkeps Affärsman", "M", 5000 },
+                    { 4, "Svart", new DateTime(2021, 4, 5, 15, 11, 20, 629, DateTimeKind.Utc).AddTicks(7900), 0m, "Unisex", "https://images-na.ssl-images-amazon.com/images/I/615G86JGkpL._AC_SL1001_.jpg", "Hjälm", null, null, 599m, "Är du en gummianka med medelsålderskris? Då är den här modellen för dig. Fem-växlad, highway-to-hell hjälm som visar damerna på Sweden Rock festival att du fortfarande är viril och har ett outömligt förråd av gummi. OBS! Pilotbrillor ingår ej.", "Propellerkeps Gummianka", "S", 5000 },
+                    { 5, "Multifärgad", new DateTime(2021, 4, 5, 15, 11, 20, 629, DateTimeKind.Utc).AddTicks(7904), 0m, "Man", "https://i.imgflip.com/4/3spz10.jpg", "President", null, null, 10000m, "Alla säger att denna propellerkeps är bäst. Jag har många vänner, alla vänner och de säger miljarder gånger att denna propellerkeps är det bästa som har hänt dem.", "Propellerkeps Bäst", "5XL", 5000 },
+                    { 6, "Multifärgad", new DateTime(2021, 4, 5, 15, 11, 20, 629, DateTimeKind.Utc).AddTicks(7908), 0m, "Unisex", "https://ih1.redbubble.net/image.745680506.6038/st,small,507x507-pad,600x600,f8f8f8.u2.jpg", "Sport", null, null, 10000m, "Läser du till systemutvecklare hos Newton i Malmö? Då vet du att du har nått zenith i ditt liv. Det blir inte bättre än så här, förutom med denna keps! Köp den nu och sälla dig till legenderna som tar examen 2022.", "Propellerkeps Peak Performance", "L", 5000 }
                 });
 
             migrationBuilder.InsertData(
@@ -266,6 +286,21 @@ namespace WebApplication2.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_ApplicationUserId",
+                table: "Orders",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_OrderId",
+                table: "Products",
+                column: "OrderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -286,13 +321,13 @@ namespace WebApplication2.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

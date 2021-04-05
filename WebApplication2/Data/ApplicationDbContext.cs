@@ -37,6 +37,9 @@ namespace WebApplication2.Data
             
             builder.ApplyConfiguration(new ProductConfiguration());
 
+            builder.Entity<ApplicationUser>().HasMany(u => u.Orders).WithOne(u => u.User);
+            builder.Entity<Order>().HasMany(u => u.Products);
+
             // any guid
             const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
             // any guid, but nothing is against to use the same one

@@ -16,10 +16,11 @@ namespace WebApplication2.Models
         public string LastName { get; set; }
         [MaxLength(50)]
         public string Street { get; set; }
-        [MaxLength(10)]
+        [MaxLength(11)]
         public string Zip { get; set; }
         [MaxLength(50)]
         public string City { get; set; }
+        public List<Order> Orders { get; set; }
         public virtual DateTime? LastLoginDate { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual DateTime? CreatedDate { get; set; } = DateTime.UtcNow;

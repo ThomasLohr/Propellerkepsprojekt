@@ -14,11 +14,6 @@ namespace WebApplication2.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-       
-        List<Order> OrderList = new List<Order>
-        {
-            new Order(){  CustomerId =12345, OrderQty = 2, RegistrationDate = new DateTime(2021, 03, 25), OrderSent = true}
-        };
         
         private ProductService _productService;
         private UserService _userService;
@@ -44,6 +39,12 @@ namespace WebApplication2.Controllers
 
         public IActionResult Orders()
         {
+
+            List<Order> OrderList = new List<Order>
+        {
+            new Order(){   Id = 1, User = _userService.GetUserById("a18be9c0-aa65-4af8-bd17-00bd9344e575"), OrderSent = true }
+        };
+
             return View(OrderList);
         }
 
@@ -84,7 +85,11 @@ namespace WebApplication2.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                return View(_userService.GetByUserName(searchString));
+                var foundUser = new List<ApplicationUser>();
+                
+                foundUser.Add(_userService.GetUserByName(searchString));
+
+                return View(foundUser);
             }
 
             return View(_userService.GetAllusers());

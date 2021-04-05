@@ -21,9 +21,6 @@
                 Datum för beställning
             </th>
             <th>
-                Antal artiklar
-            </th>
-            <th>
                 Order skickad
             </th>
             <th></th>
@@ -33,13 +30,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
+                @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RegistrationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderQty)
+                @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderSent)

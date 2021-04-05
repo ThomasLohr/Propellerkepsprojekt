@@ -49,7 +49,7 @@ namespace WebApplication2.Configuration
                 {
                     Id = 3,
                     ImageUrl = "https://i.pinimg.com/474x/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg",
-                    ProductName = "Propellerkeps Affärsman",
+                    ProductName = "Propellerkeps Affärsperson",
                     ProductDescription = "Oavsett om du tuggar qualudes på Wall Street med trippla telefoner i öronen eller klickar " +
                     "                    'Köp' på Avanza så visar denna modell att du är nästa Warren Buffet.",
                     Color = "Multifärgad",
@@ -101,7 +101,7 @@ namespace WebApplication2.Configuration
                     Color = "Multifärgad",
                     Size = "L",
                     Model = "Sport",
-                    Gender = "Unisex",
+                    Gender = "Kvinna",
                     Price = 10000,
                     Discount = 0,
                     Stock = 5000

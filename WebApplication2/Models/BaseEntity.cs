@@ -10,7 +10,6 @@ namespace WebApplication2.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual DateTime? CreatedDate { get; set; } = DateTime.UtcNow;
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public virtual DateTime? ModifiedDate { get; set; }
     }
 }
