@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication2.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser, IModelDates
     {
         [MaxLength(50)]
         public string FirstName { get; set; }

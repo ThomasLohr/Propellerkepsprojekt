@@ -37,13 +37,15 @@ namespace WebApplication2.Data
             
             builder.ApplyConfiguration(new ProductConfiguration());
 
-            builder.Entity<ApplicationUser>().HasMany(u => u.Orders).WithOne(u => u.User);
-            builder.Entity<Order>().HasMany(u => u.Products);
+            // Set entity dependencies and foreign keys
 
-            // any guid
+            builder.Entity<ApplicationUser>().HasMany(u => u.Orders).WithOne(u => u.User);
+            builder.Entity<Product>().HasMany(u => u.Orders);
+
+            // Set default Admin guid and assign it to role
             const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
-            // any guid, but nothing is against to use the same one
             const string ROLE_ID = ADMIN_ID;
+
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = ROLE_ID,
@@ -52,6 +54,8 @@ namespace WebApplication2.Data
             });
 
             var hasher = new PasswordHasher<ApplicationUser>();
+
+            // Create Admin account
 
             builder.Entity<ApplicationUser>().HasData(new ApplicationUser
             {
@@ -65,12 +69,16 @@ namespace WebApplication2.Data
                 SecurityStamp = string.Empty
             });
 
+            // Assign admin to admin role
+
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = ROLE_ID,
                 UserId = ADMIN_ID
             });
         }
+
+        // Overrides SaveChanges() to DB so that ModifiedDate /CreatedDate is updated before save occurs
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             OnBeforeSaving();
@@ -93,24 +101,22 @@ namespace WebApplication2.Data
 
             foreach (var entry in entries)
             {
-                // for entities that inherit from BaseEntity,
-                // set UpdatedOn / CreatedOn appropriately
-                if (entry.Entity is ApplicationUser trackable)
+                // Entities that implement IModelDate set CreatedDate / ModifiedDate appropriately
+                if (entry.Entity is IModelDates trackable)
                 {
 
                     switch (entry.State)
                     {
                         case EntityState.Modified:
-                            // set the updated date to "now"
+                            // Set the updated date to "now"
                             trackable.ModifiedDate = utcNow;
 
-                            // mark property as "don't touch"
-                            // we don't want to update on a Modify operation
+                            // Mark property as "don't touch" so CreatedDate is not updated on a Modify operation
                             entry.Property("CreatedDate").IsModified = false;
                             break;
 
                         case EntityState.Added:
-                            // set both updated and created date to "now"
+                            // Set CreatedDate and ModifiedDate to now
                             trackable.CreatedDate = utcNow;
                             trackable.ModifiedDate = utcNow;
                             break;
