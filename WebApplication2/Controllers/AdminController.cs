@@ -8,6 +8,7 @@ using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Repositories;
 using WebApplication2.Services;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
 {
@@ -18,6 +19,7 @@ namespace WebApplication2.Controllers
         private ProductService _productService;
         private UserService _userService;
         private OrderService _orderService;
+        private OrderProductService _orderProductService;
         private readonly ApplicationDbContext _context;
         public AdminController(ApplicationDbContext context)
         {
@@ -25,6 +27,7 @@ namespace WebApplication2.Controllers
             _productService = new ProductService();
             _userService = new UserService();
             _orderService = new OrderService();
+            _orderProductService = new OrderProductService();
         }
 
         public IActionResult Index()
@@ -85,7 +88,12 @@ namespace WebApplication2.Controllers
         public IActionResult EditOrder(int Id)
         {
 
-            return View(_orderService.GetOrderById(Id));
+            OrderViewModel orderViewModel = new OrderViewModel();
+
+            orderViewModel.Order = _orderService.GetOrderById(Id);
+            orderViewModel.OrderProduct = _orderProductService.GetOrderProductById(Id);
+
+            return View(orderViewModel);
         }
 
         [HttpPost]
