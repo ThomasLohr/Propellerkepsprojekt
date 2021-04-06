@@ -39,8 +39,9 @@ namespace WebApplication2.Data
 
             // Set entity dependencies and foreign keys
 
-            builder.Entity<ApplicationUser>().HasMany(u => u.Orders).WithOne(u => u.User);
-            builder.Entity<Product>().HasMany(u => u.Orders);
+            builder.Entity<Order>().HasOne(op => op.OrderProduct).WithOne(o => o.Order);
+            builder.Entity<Order>().HasOne(u => u.User).WithMany(o => o.Orders);
+            builder.Entity<OrderProduct>().HasOne(p => p.Product).WithOne(op => op.OrderProduct);
 
             // Set default Admin guid and assign it to role
             const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";

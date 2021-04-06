@@ -49,7 +49,7 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
-                            ConcurrencyStamp = "6d9f20f4-b7e8-4ff6-aee2-02c05050aaa1",
+                            ConcurrencyStamp = "a0e4b50a-c2df-4083-823a-852e7cf62046",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -269,14 +269,14 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1cbb813-6701-4c6a-8eaf-682f6884550f",
-                            CreatedDate = new DateTime(2021, 4, 5, 20, 6, 18, 533, DateTimeKind.Utc).AddTicks(3172),
+                            ConcurrencyStamp = "877f713b-1a7c-47dd-896f-187b672cc01f",
+                            CreatedDate = new DateTime(2021, 4, 6, 5, 14, 20, 1, DateTimeKind.Utc).AddTicks(8468),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@admin.com",
                             NormalizedUserName = "admin@admin.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPWd6kXtndYMB3dEgWNRTRzcZfTsapqjFOr6pyaPUThI27fiJdrEi7/8kH+DDnswgQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFoRp7qTWTyTjRD4JB7AKBLLAbVelTubM+UPB6zfZCBK5/DZi9r4j43VOumu9WHY7A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -301,19 +301,44 @@ namespace WebApplication2.Data.Migrations
                     b.Property<bool>("OrderSent")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("ShippedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("WebApplication2.Models.OrderProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Product", b =>
@@ -377,7 +402,7 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = 1,
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 5, 20, 6, 18, 524, DateTimeKind.Utc).AddTicks(1709),
+                            CreatedDate = new DateTime(2021, 4, 6, 5, 14, 19, 990, DateTimeKind.Utc).AddTicks(9878),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://cdn11.bigcommerce.com/s-27y5anms1z/images/stencil/728x728/products/64957/30204/126988__95020.1583560155.jpg?c=2",
@@ -392,7 +417,7 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = 2,
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 5, 20, 6, 18, 525, DateTimeKind.Utc).AddTicks(2973),
+                            CreatedDate = new DateTime(2021, 4, 6, 5, 14, 19, 992, DateTimeKind.Utc).AddTicks(1949),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://i.etsystatic.com/5376657/r/il/4dead6/1511480960/il_570xN.1511480960_7c63.jpg",
@@ -407,7 +432,7 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = 3,
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 5, 20, 6, 18, 525, DateTimeKind.Utc).AddTicks(2997),
+                            CreatedDate = new DateTime(2021, 4, 6, 5, 14, 19, 992, DateTimeKind.Utc).AddTicks(1963),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://i.pinimg.com/474x/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg",
@@ -422,7 +447,7 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = 4,
                             Color = "Svart",
-                            CreatedDate = new DateTime(2021, 4, 5, 20, 6, 18, 525, DateTimeKind.Utc).AddTicks(3003),
+                            CreatedDate = new DateTime(2021, 4, 6, 5, 14, 19, 992, DateTimeKind.Utc).AddTicks(1967),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/615G86JGkpL._AC_SL1001_.jpg",
@@ -437,7 +462,7 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = 5,
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 5, 20, 6, 18, 525, DateTimeKind.Utc).AddTicks(3008),
+                            CreatedDate = new DateTime(2021, 4, 6, 5, 14, 19, 992, DateTimeKind.Utc).AddTicks(1971),
                             Discount = 0m,
                             Gender = "Man",
                             ImageUrl = "https://i.imgflip.com/4/3spz10.jpg",
@@ -452,7 +477,7 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = 6,
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 5, 20, 6, 18, 525, DateTimeKind.Utc).AddTicks(3013),
+                            CreatedDate = new DateTime(2021, 4, 6, 5, 14, 19, 992, DateTimeKind.Utc).AddTicks(1974),
                             Discount = 0m,
                             Gender = "Kvinna",
                             ImageUrl = "https://ih1.redbubble.net/image.745680506.6038/st,small,507x507-pad,600x600,f8f8f8.u2.jpg",
@@ -518,17 +543,30 @@ namespace WebApplication2.Data.Migrations
 
             modelBuilder.Entity("WebApplication2.Models.Order", b =>
                 {
-                    b.HasOne("WebApplication2.Models.Product", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId");
-
                     b.HasOne("WebApplication2.Models.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Product");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebApplication2.Models.OrderProduct", b =>
+                {
+                    b.HasOne("WebApplication2.Models.Order", "Order")
+                        .WithOne("OrderProduct")
+                        .HasForeignKey("WebApplication2.Models.OrderProduct", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication2.Models.Product", "Product")
+                        .WithOne("OrderProduct")
+                        .HasForeignKey("WebApplication2.Models.OrderProduct", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("WebApplication2.Models.ApplicationUser", b =>
@@ -536,9 +574,14 @@ namespace WebApplication2.Data.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("WebApplication2.Models.Order", b =>
+                {
+                    b.Navigation("OrderProduct");
+                });
+
             modelBuilder.Entity("WebApplication2.Models.Product", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("OrderProduct");
                 });
 #pragma warning restore 612, 618
         }

@@ -20,11 +20,12 @@ namespace WebApplication2.Models
         public string Zip { get; set; }
         [MaxLength(50)]
         public string City { get; set; }
-        public List<Order> Orders { get; set; }
         public virtual DateTime? LastLoginDate { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual DateTime? CreatedDate { get; set; } = DateTime.UtcNow;
         public virtual DateTime? ModifiedDate { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }
 
