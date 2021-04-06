@@ -17,12 +17,14 @@ namespace WebApplication2.Controllers
         
         private ProductService _productService;
         private UserService _userService;
+        private OrderService _orderService;
         private readonly ApplicationDbContext _context;
         public AdminController(ApplicationDbContext context)
         {
             _context = context;
             _productService = new ProductService();
             _userService = new UserService();
+            _orderService = new OrderService();
         }
 
         public IActionResult Index()
@@ -31,21 +33,11 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+        // PRODUCTS
 
         public IActionResult Products()
         {
             return View(_productService.GetAll());
-        }
-
-        public IActionResult Orders()
-        {
-
-            List<Order> OrderList = new List<Order>
-        {
-            new Order(){   Id = 1, User = _userService.GetUserById("a18be9c0-aa65-4af8-bd17-00bd9344e575"), OrderSent = true }
-        };
-
-            return View(OrderList);
         }
 
         [HttpGet]
@@ -80,13 +72,54 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+
+        // ORDERS
+
+        public IActionResult Orders()
+        {
+
+            return View(_orderService.GetAll());
+        }
+
+        [HttpGet]
+        public IActionResult EditOrder(int Id)
+        {
+
+            return View(_orderService.GetOrderById(Id));
+        }
+
+        [HttpPost]
+        public IActionResult EditOrder(Order order)
+        {
+            _orderService.Update(order);
+            return RedirectToAction("Orders");
+        }
+        public IActionResult RemoveOrder(int Id)
+        {
+            _orderService.RemoveById(Id);
+            return RedirectToAction("Orders");
+        }
+        public IActionResult CreateOrder(Order order)
+        {
+            _orderService.Create(order);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateOrder()
+        {
+            return View();
+        }
+
+        // USERS
+
         public IActionResult Users(string searchString)
         {
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 var foundUser = new List<ApplicationUser>();
-                
+
                 foundUser.Add(_userService.GetUserByName(searchString));
 
                 return View(foundUser);
@@ -94,10 +127,7 @@ namespace WebApplication2.Controllers
 
             return View(_userService.GetAllusers());
         }
-        public IActionResult EditOrder()
-        {
-            return View();
-        }
+
         public IActionResult EditUser(string Id)
         {
             return View(_userService.GetUserById(Id));

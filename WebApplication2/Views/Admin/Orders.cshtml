@@ -8,42 +8,64 @@
 
 <h1>Ordrar</h1>
 
-<p>
-    <a asp-action="Create">Skapa ny</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Kund ID
-            </th>
-            <th>
-                Datum för beställning
-            </th>
-            <th>
-                Order skickad
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderSent)
-            </td>
-            <td>
-                @Html.ActionLink("Ändra", "EditOrder", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Detaljer", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Ta bort", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container overflow-hidden">
+    <div class="float-left">
+        <p>
+            <a asp-action="CreateOrder" class="btn btn-primary">Lägg till order</a>
+        </p>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Kund
+                </th>
+                <th>
+                    Order Skickad
+                </th>
+                <th>
+                    Skickad
+                </th>
+                <th>
+                    Registrerad
+                </th>
+                <th>
+                    Modifierad
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-align-vertical-middle" width="200">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.OrderSent)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.ShippedDate)
+                    </td>
+                    <td class="text-align-vertical-middle" width="90">
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td class="text-align-vertical-middle" width="90">
+                        @Html.DisplayFor(modelItem => item.ModifiedDate)
+                    </td>
+                    <td style="width: 150px">
+                        <a asp-action="EditOrder" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
+                        <a asp-action="RemoveOrder" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
