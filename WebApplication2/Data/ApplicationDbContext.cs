@@ -35,11 +35,15 @@ namespace WebApplication2.Data
         {
             base.OnModelCreating(builder);
             
+            // Seed DB with Products, Orders and OrderProducts
+
             builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new OrderConfiguration());
+            builder.ApplyConfiguration(new OrderProductConfiguration());
 
             // Set entity dependencies and foreign keys
 
-            builder.Entity<Order>().HasOne(op => op.OrderProduct).WithOne(o => o.Order);
+            builder.Entity<Order>().HasMany(op => op.OrderProducts).WithOne(o => o.Order);
             builder.Entity<Order>().HasOne(u => u.User).WithMany(o => o.Orders);
             builder.Entity<OrderProduct>().HasOne(p => p.Product).WithOne(op => op.OrderProduct);
 

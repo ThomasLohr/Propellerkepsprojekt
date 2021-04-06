@@ -17,6 +17,7 @@ namespace WebApplication2.Models
         public virtual DateTime? ShippedDate { get; set; }
 
         public ApplicationUser User { get; set; }
-        public OrderProduct OrderProduct { get; set; }
+        public string UserId { get; set; }
+        public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }
