@@ -25,7 +25,7 @@
         </div>
         <div class="col-lg p-3">
             <h5>@Model.ProductName</h5>
-            <p><span class="mr-1"><strong>100kr</strong></span></p>
+            <p><span class="mr-1"><strong>@Model.Price</strong></span></p>
             <p class="pt-1">
                 @Model.ProductDescription
             </p>
@@ -34,11 +34,11 @@
                     <tbody>
                         <tr>
                             <th class="pl-0 w-25" scope="row"><strong>Modell</strong></th>
-                            <td>Propellerkeps 2700</td>
+                            <td>@Model.Model</td>
                         </tr>
                         <tr>
                             <th class="pl-0 w-25" scope="row"><strong>Färg</strong></th>
-                            <td>Multi färgad</td>
+                            <td>@Model.Color</td>
                         </tr>
                         <tr>
                             <th class="pl-0 w-25" scope="row"><strong>Leverans</strong></th>
@@ -53,7 +53,7 @@
                     <tbody>
                         <tr>
                             <td class="pl-0 pb-0 w-25">Antal</td>
-                            <td class="pb-0">En Storlek</td>
+                            <td class="pb-0">Storlek: @Model.Size</td>
                         </tr>
                         <tr>
                             <td class="pl-0">
@@ -67,7 +67,7 @@
                                         <input type="radio" class="form-check-input" id="small" name="materialExampleRadios"
                                                checked>
                                         <label class="form-check-label small text-uppercase card-link-secondary"
-                                               for="small">Unisex</label>
+                                               for="small">@Model.Gender</label>
                                     </div>
                                 </div>
                             </td>
