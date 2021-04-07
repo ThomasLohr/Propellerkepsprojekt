@@ -58,7 +58,7 @@ namespace WebApplication2.Controllers
         
         public IActionResult ShoppingCart()
         {
-            ViewBag.Purshases = purchasedItems;
+            
             return View();
         }
 
