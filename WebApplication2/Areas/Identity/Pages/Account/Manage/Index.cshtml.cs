@@ -48,6 +48,15 @@ namespace WebApplication2.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Efternamn")]
             public string LastName { get; set; }
+
+            [Display(Name = "Gatuadress")]
+            public string Street { get; set; }
+
+            [Display(Name = "Stad")]
+            public string City { get; set; }
+
+            [Display(Name = "Postkod")]
+            public string Zip { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -66,8 +75,10 @@ namespace WebApplication2.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 FirstName = userDetails.FirstName,
-                LastName = userDetails.LastName
-
+                LastName = userDetails.LastName,
+                Street=userDetails.Street,
+                Zip=userDetails.Zip,
+                City=userDetails.City
             };
         }
 
@@ -88,6 +99,10 @@ namespace WebApplication2.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             _userService.SetFirstName(user, Input.FirstName);
             _userService.SetLastName(user, Input.LastName);
+            _userService.SetStreet(user, Input.Street);
+            _userService.SetZip(user, Input.Zip);
+            _userService.SetCity(user, Input.City);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
