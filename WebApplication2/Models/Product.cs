@@ -9,7 +9,6 @@ namespace WebApplication2.Models
 {
     public class Product : IModelDates
     {
-
         public int Id { get; set; }
         [Required(ErrorMessage="Please enter a product name.")]
         [MaxLength(50, ErrorMessage="Maximum 50 characters allowed.")]
