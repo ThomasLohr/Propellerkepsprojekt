@@ -2,18 +2,18 @@
 
 $(document).ready(function () {
     //create variable
-    var x = document.getElementById("myInput").value;
-    
+    var sum = 0;
     
     $(".addtocart").click(function () {
         //to number and increase to 1 on each click
-        x = parseInt(document.getElementById("myInput").value);
+        var x = parseInt(document.getElementById("myInput").value);
+        sum += x;
         $(".badge").animate({
             //show span with number
             opacity: 1
         }, 300, function () {
                 //write number of counts into span
-                $(this).text(x);
+                $(this).text(sum);
                 
         });
     });
