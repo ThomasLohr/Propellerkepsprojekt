@@ -29,7 +29,8 @@ namespace WebApplication2.Configuration
                       Gender = "Unisex",
                       Price = 399,
                       Discount = 0,
-                      Stock = 5000
+                      Stock = 5000,
+                      Category = "Djur"
                 },
                 new Product
                 {
@@ -43,7 +44,8 @@ namespace WebApplication2.Configuration
                     Gender = "Unisex",
                     Price = 399,
                     Discount = 0,
-                    Stock = 5000
+                    Stock = 5000,
+                    Category = "Djur"
                 },
                 new Product
                 {
@@ -58,7 +60,8 @@ namespace WebApplication2.Configuration
                     Gender = "Unisex",
                     Price = 499,
                     Discount = 0,
-                    Stock = 5000
+                    Stock = 5000,
+                    Category = "Människa"
                 },
                 new Product
                 {
@@ -74,7 +77,8 @@ namespace WebApplication2.Configuration
                     Gender = "Unisex",
                     Price = 599,
                     Discount = 0,
-                    Stock = 5000
+                    Stock = 5000,
+                    Category = "Speciellatillfällen"
                 },
                 new Product
                 {
@@ -89,7 +93,8 @@ namespace WebApplication2.Configuration
                     Gender = "Man",
                     Price = 10000,
                     Discount = 0,
-                    Stock = 5000
+                    Stock = 5000,
+                    Category = "Speciellatillfällen"
                 },
                 new Product
                 {
@@ -104,7 +109,8 @@ namespace WebApplication2.Configuration
                     Gender = "Kvinna",
                     Price = 10000,
                     Discount = 0,
-                    Stock = 5000
+                    Stock = 5000,
+                    Category ="Människa"
                 }
                 );
         }
