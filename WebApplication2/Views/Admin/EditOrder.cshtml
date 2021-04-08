@@ -4,17 +4,19 @@
     Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
 
-<h1>Ändra Order</h1>
-<h4>Redigerar @Html.DisplayFor(modelItem => Model.Order.Id)</h4>
+<div class="pt-3">
+    <h1>Ändra Order</h1>
+    <h4>Ordernummer: @Html.DisplayFor(modelItem => Model.Order.Id)</h4>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4" style="float:left; margin-top:10px">
         <form asp-action="EditOrder">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Order.UserId" class="control-label">Kund ID</label>
+                <label asp-for="Order.UserId" class="control-label">Användar-ID</label>
                 <input asp-for="Order.UserId" class="form-control" />
-                <span asp-validation-for="Order.Id" class="text-danger"></span>
+                <span asp-validation-for="Order.UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.CreatedDate" class="control-label">Datum för beställning</label>
@@ -22,7 +24,7 @@
                 <span asp-validation-for="Order.CreatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.ShippedDate" class="control-label">Datum skeppad</label>
+                <label asp-for="Order.ShippedDate" class="control-label">Datum skickad</label>
                 <input asp-for="Order.ShippedDate" class="form-control" />
                 <span asp-validation-for="Order.ShippedDate" class="text-danger"></span>
             </div>
@@ -36,15 +38,12 @@
                 <input type="submit" value="Spara" class="btn btn-primary" />
             </div>
         </form>
-
     </div>
     <div style="float:right; margin-left:100px">
-        <table class="table">
-            <thead>
+        <h5>Ordersammanfattning</h5>
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <th>
-                        Orderrad
-                    </th>
                     <th>
                         Produkt ID
                     </th>
@@ -54,29 +53,44 @@
                     <th>
                         Antal
                     </th>
-                    <th></th>
+                    <th>
+                        Pris
+                    </th>
                 </tr>
             </thead>
             <tbody>
+                @foreach (var item in Model.OrderProductsList)
+                {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => Model.OrderProduct.Id)
+                        @Html.DisplayFor(m => item.OrderProduct.ProductId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => Model.OrderProduct.ProductId)
+                        @Html.DisplayFor(model => item.ProductName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => Model.OrderProduct.Product.ProductName)
+                        @Html.DisplayFor(model => item.OrderProduct.Quantity)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => Model.OrderProduct.Quantity)
+                        @Html.DisplayFor(model => item.Price) Kr
                     </td>
+                </tr>
+                }
+                <tr class="table-dark" >
+                    <td colspan="3">
+                        Summa:
+                    </td>
+                    <td align="right">
+                        @Html.DisplayFor(model => model.TotalPrice) Kr
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Gå tillbaka</a>
+    <a asp-action="Orders">Gå tillbaka</a>
 </div>
 
 @section Scripts {
