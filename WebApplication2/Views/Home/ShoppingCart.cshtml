@@ -60,61 +60,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row" class="border-0">
-                                    <div class="p-2">
-                                        <img src="https://i.pinimg.com/736x/2a/0d/42/2a0d423c3d9c7507218f36c8ac862d3f.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                        <div class="ml-3 d-inline-block align-middle">
-                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">"Negative Lives" Cat Hat</a></h5><span class="text-muted font-weight-normal font-italic d-block">Kategori: Djur</span>
+                            @foreach (var product in products)
+                            {
+                                <tr>
+                                    <th scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <img src=@product.ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id" class="text-dark d-inline-block align-middle">@product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @product.Model</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </th>
-                                <td class="border-0 align-middle"><strong>$39.99</strong></td>
-                                <td class="border-0 align-middle"><strong>3</strong></td>
-                                <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <div class="p-2">
-                                        <img src="https://img.joomcdn.net/0ad7baaecbf783a56bc726da88d7aa06150a9ec1_original.jpeg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                        <div class="ml-3 d-inline-block align-middle">
-                                            <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">"I Can Fly" Prop Helmet</a></h5><span class="text-muted font-weight-normal font-italic">Kategori: Gummianka Tillbehör</span>
-                                        </div>
-                                    </div>
-                                </th>
-                                <td class="align-middle"><strong>$34.52</strong></td>
-                                <td class="align-middle"><strong>3</strong></td>
-                                <td class="align-middle">
-                                    <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <div class="p-2">
-                                        <img src="https://i.pinimg.com/originals/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                        <div class="ml-3 d-inline-block align-middle">
-                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">"The Executive" Business Cap</a></h5><span class="text-muted font-weight-normal font-italic">Kategori: Formell Klädsel</span>
-                                        </div>
-                                    </div>
-                                <td class="align-middle"><strong>$79.00</strong></td>
-                                <td class="align-middle"><strong>3</strong></td>
-                                <td class="align-middle">
-                                    <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        <th scope="row">
-                            <div class="p-2">
-                                <img src="https://i.pinimg.com/originals/0f/65/fe/0f65feb821fc13cf7241297e7a4ff956.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                <div class="ml-3 d-inline-block align-middle">
-                                    <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">"The Lincoln" Prop Top Hat</a></h5><span class="text-muted font-weight-normal font-italic">Kategori: Formell Klädsel</span>
-                                </div>
-                            </div>
-                        <td class="align-middle"><strong>$79.00</strong></td>
-                        <td class="align-middle"><strong>3</strong></td>
-                        <td class="align-middle">
-                            <a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
-                        </td>
-                        </tr>
+                                    </th>
+                                    <td class="border-0 align-middle"><strong>@product.Price kr</strong></td>
+                                    <td class="border-0 align-middle"><strong><input asp-for="OrderQty" class="form-control mr-sm-2" type="number" style="width:75px" /></strong></td>
+                                    <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

@@ -63,6 +63,13 @@ namespace WebApplication2.Controllers
         {
             ViewBag.Purshases = purchasedItems;
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
+            List<Product> productList = new List<Product>();
+            productList.Add(_productService.GetProductById(1));
+            ViewBag.Products = productList;
+            List<Order> orders = _orderService.GetAll();
+            
+            List<Product> products = ViewBag.Products;
+
             return View();
         }
 
