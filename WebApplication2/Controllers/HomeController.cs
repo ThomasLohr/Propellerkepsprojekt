@@ -12,6 +12,7 @@ using WebApplication2.Services;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Identity;
 using WebApplication2.ViewModels;
+using System.Security.Claims;
 
 namespace WebApplication2.Controllers
 {
@@ -71,6 +72,7 @@ namespace WebApplication2.Controllers
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             List<Product> productList = new List<Product>();
             productList.Add(_productService.GetProductById(1));
+            productList.Add(_productService.GetProductById(2));
             ViewBag.Products = productList;
             List<Order> orders = _orderService.GetAll();
             
@@ -80,18 +82,30 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder)
+        public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder, List<int> shoppingCartIds, List<int> shoppingCartQuantities)
         {
             //_productService.Create(product);
+            //cartOrder.OrderProduct = new OrderProduct() { Quantity = cartOrder.OrderProduct.Quantity };
+            cartOrder.Order = new Order();
+            //cartOrder.Order.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _orderService.Create(cartOrder.Order);
+            cartOrder.OrderProduct = new OrderProduct();
+            cartOrder.OrderProduct.OrderId = cartOrder.Order.Id;
+            for(int i = 1; i <= shoppingCartIds.Count; i++)
+            {
+                cartOrder.OrderProduct.ProductId = shoppingCartIds[i-1];
+                cartOrder.OrderProduct.Quantity = shoppingCartQuantities[i - 1];
+                _orderProductService.Create(cartOrder.OrderProduct);
+                cartOrder.OrderProduct.Id = 0;
+            }
+            //cartOrder.OrderProduct.ProductId = shoppingCartIds[0];
+            //_orderProductService.Create(cartOrder.OrderProduct);
+            //For populating the view after order is made
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             List<Product> productList = new List<Product>();
             productList.Add(_productService.GetProductById(1));
+            productList.Add(_productService.GetProductById(2));
             ViewBag.Products = productList;
-            cartOrder.Order = new Order();
-            cartOrder.Product = _productService.GetProductById(1);
-            //List<Order> orders = _orderService.GetAll();
-            _orderService.Create(cartOrder.Order);
-            _orderProductService.Create(cartOrder.OrderProduct);
             return View();
         }
 

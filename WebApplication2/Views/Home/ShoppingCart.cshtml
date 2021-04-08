@@ -7,7 +7,7 @@
         List<Product> products = ViewBag.Products;
 
         Order order = new Order();
-
+        List<int> cartProductIds = new List<int>();
         ApplicationUser checkUser(ApplicationUser user)
         {
             if (user != null)
@@ -41,10 +41,6 @@
             <form asp-action="ShoppingCart" method="post">
                 <div class="row">
                     <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-                        @foreach (var purschase in ViewBag.Purshases)
-                        {
-                            <h3><a href="#">@purschase.Name</a></h3>
-                        }
                         <!-- Shopping cart table -->
                         <div class="table-responsive">
                             <table class="table">
@@ -73,12 +69,12 @@
                                                     <img src=@product.ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
                                                     <div class="ml-3 d-inline-block align-middle">
                                                         <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id" class="text-dark d-inline-block align-middle">@product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @product.Model</span>
-                                                        <input type="hidden" asp-for="OrderProduct.ProductId" value="@product.Id"/>
+                                                        <input type="hidden" asp-for="shoppingCartIds" value="@product.Id"/>
                                                     </div>
                                                 </div>
                                             </th>
                                             <td class="border-0 align-middle"><strong>@product.Price kr</strong></td>
-                                            <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="OrderProduct.Quantity" type="number" style="width:75px" /></strong></td>
+                                            <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="1" type="number" style="width:75px" /></strong></td>
                                             <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
                                         </tr>
                                     }
