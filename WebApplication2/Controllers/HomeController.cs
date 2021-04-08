@@ -11,6 +11,7 @@ using WebApplication2.Models;
 using WebApplication2.Services;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Identity;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Controllers
 {
@@ -24,6 +25,7 @@ namespace WebApplication2.Controllers
         private ProductService _productService;
         private readonly UserManager<ApplicationUser> _userManager;
         private OrderService _orderService;
+        private OrderProductService _orderProductService;
 
 
 
@@ -33,6 +35,7 @@ namespace WebApplication2.Controllers
             _productService = new ProductService();
             _userManager = userManager;
             _orderService = new OrderService();
+            _orderProductService = new OrderProductService();
 
         }
 
@@ -61,7 +64,8 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        
+
+        [HttpGet]
         public async Task<IActionResult> ShoppingCartAsync()
         {
             ViewBag.Purshases = purchasedItems;
@@ -73,6 +77,19 @@ namespace WebApplication2.Controllers
             
             List<Product> products = ViewBag.Products;
 
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder)
+        {
+            //_productService.Create(product);
+            ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
+            List<Product> productList = new List<Product>();
+            productList.Add(_productService.GetProductById(1));
+            ViewBag.Products = productList;
+            List<Order> orders = _orderService.GetAll();
+            _orderService.Create(cartOrder.Order);
             return View();
         }
 

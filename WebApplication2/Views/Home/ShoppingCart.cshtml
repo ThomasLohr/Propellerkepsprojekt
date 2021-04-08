@@ -1,4 +1,4 @@
-﻿@model WebApplication2.Models.Order;
+﻿@model WebApplication2.ViewModels.OrderViewModel;
     @{
         ViewData["Title"] = "Shopping Cart";
 
@@ -37,132 +37,135 @@
 
     <div class="pb-5 py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-                    @foreach (var purschase in ViewBag.Purshases)
-                    {
-                        <h3><a href="#">@purschase.Name</a></h3>
-                    }
-                    <!-- Shopping cart table -->
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="p-2 px-3 text-uppercase">Produkt</div>
-                                    </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Pris</div>
-                                    </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Antal</div>
-                                    </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Radera</div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var product in products)
-                                {
+            <form asp-action="ShoppingCart" method="post">
+                <div class="row">
+                    <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                        @foreach (var purschase in ViewBag.Purshases)
+                        {
+                            <h3><a href="#">@purschase.Name</a></h3>
+                        }
+                        <!-- Shopping cart table -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <th scope="row" class="border-0">
-                                            <div class="p-2">
-                                                <img src=@product.ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
-                                                <div class="ml-3 d-inline-block align-middle">
-                                                    <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id" class="text-dark d-inline-block align-middle">@product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @product.Model</span>
-                                                </div>
-                                            </div>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Produkt</div>
                                         </th>
-                                        <td class="border-0 align-middle"><strong>@product.Price kr</strong></td>
-                                        <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" type="number" style="width:75px" /></strong></td>
-                                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Pris</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Antal</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Radera</div>
+                                        </th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- End -->
-                </div>
-            </div>
-            <!--Personal details-->
-            <div class="row py-5 p-4 bg-white rounded shadow-sm">
-                <div class="col-lg-6">
-                    <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Dina Uppgifter</div>
-
-                    <div class="p-4">
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">E-postadress</a></h5>
-                        <div class="input-group mb-4 border rounded-pill p-2">
-                            <input class="form-control border-0" type="text" value="@currentUser.Email" placeholder="Ex. namn@mail.com" aria-describedby="button-addon3" />
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in products)
+                                    {
+                                        <tr>
+                                            <th scope="row" class="border-0">
+                                                <div class="p-2">
+                                                    <img src=@product.ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                    <div class="ml-3 d-inline-block align-middle">
+                                                        <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id" asp-for="OrderProduct.Product.Id" class="text-dark d-inline-block align-middle">@product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @product.Model</span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="border-0 align-middle"><strong>@product.Price kr</strong></td>
+                                            <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="OrderProduct.Quantity" type="number" style="width:75px" /></strong></td>
+                                            <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
-                        <div style="display:inline-block">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Förnamn</a></h5>
-                            <div class="input-group mb-4 border rounded-pill p-2">
-                                <input class="form-control border-0" type="text" value="@currentUser.FirstName" placeholder="Ex. Lars" aria-describedby="button-addon3" />
-                            </div>
-                        </div>
-                        <div style="display:inline-block;margin-left:10px">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Efternamn</a></h5>
-                            <div class="input-group mb-4 border rounded-pill p-2">
-                                <input class="form-control border-0" type="text" value="@currentUser.LastName" placeholder="Ex. von Propellerkeps" aria-describedby="button-addon3" />
-                            </div>
-                        </div>
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Telefonnummer</a></h5>
-                        <div class="input-group mb-4 border rounded-pill p-2">
-                            <input class="form-control border-0" type="text" value="@currentUser.PhoneNumber" placeholder="Ex. 0771 793 336" aria-describedby="button-addon3" />
-                        </div>
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Leveransadress</a></h5>
-                        <div class="input-group mb-4 border rounded-pill p-2">
-                            <input class="form-control border-0" type="text" value="@currentUser.Street" placeholder="Ex. Propellergatan 16" aria-describedby="button-addon3" />
-                        </div>
-                        <div style="display:inline-block">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Postnummer</a></h5>
-                            <div class="input-group mb-4 border rounded-pill p-2">
-                                <input class="form-control border-0" type="text" value="@currentUser.Zip" placeholder="Ex. 226 56" aria-describedby="button-addon3" />
-                            </div>
-                        </div>
-                        <div style="display:inline-block;margin-left:10px">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Stad</a></h5>
-                            <div class="input-group mb-4 border rounded-pill p-2">
-                                <input class="form-control border-0" type="text" value="@currentUser.City" placeholder="Ex. Flygköping" aria-describedby="button-addon3" />
-                            </div>
-                        </div>
+                        <!-- End -->
                     </div>
                 </div>
-            </div>
-
-            <div class="py-5">
+                <!--Personal details-->
                 <div class="row py-5 p-4 bg-white rounded shadow-sm">
                     <div class="col-lg-6">
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Rabattkod</div>
+                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Dina Uppgifter</div>
+
                         <div class="p-4">
-                            <p class="font-italic mb-4">Om du har en rabattkod, vänligen skriv in den i nedan fält.</p>
+                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">E-postadress</a></h5>
                             <div class="input-group mb-4 border rounded-pill p-2">
-                                <input type="text" placeholder="Ange rabattkod" aria-describedby="button-addon3" class="form-control border-0">
-                                <div class="input-group-append border-0">
-                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Lägg till rabattkod</button>
+                                <input class="form-control border-0" type="text" value="@currentUser.Email" placeholder="Ex. namn@mail.com" aria-describedby="button-addon3" />
+                            </div>
+                            <div style="display:inline-block">
+                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Förnamn</a></h5>
+                                <div class="input-group mb-4 border rounded-pill p-2">
+                                    <input class="form-control border-0" type="text" value="@currentUser.FirstName" placeholder="Ex. Lars" aria-describedby="button-addon3" />
+                                </div>
+                            </div>
+                            <div style="display:inline-block;margin-left:10px">
+                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Efternamn</a></h5>
+                                <div class="input-group mb-4 border rounded-pill p-2">
+                                    <input class="form-control border-0" type="text" value="@currentUser.LastName" placeholder="Ex. von Propellerkeps" aria-describedby="button-addon3" />
+                                </div>
+                            </div>
+                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Telefonnummer</a></h5>
+                            <div class="input-group mb-4 border rounded-pill p-2">
+                                <input class="form-control border-0" type="text" value="@currentUser.PhoneNumber" placeholder="Ex. 0771 793 336" aria-describedby="button-addon3" />
+                            </div>
+                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Leveransadress</a></h5>
+                            <div class="input-group mb-4 border rounded-pill p-2">
+                                <input class="form-control border-0" type="text" value="@currentUser.Street" placeholder="Ex. Propellergatan 16" aria-describedby="button-addon3" />
+                            </div>
+                            <div style="display:inline-block">
+                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Postnummer</a></h5>
+                                <div class="input-group mb-4 border rounded-pill p-2">
+                                    <input class="form-control border-0" type="text" value="@currentUser.Zip" placeholder="Ex. 226 56" aria-describedby="button-addon3" />
+                                </div>
+                            </div>
+                            <div style="display:inline-block;margin-left:10px">
+                                <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Stad</a></h5>
+                                <div class="input-group mb-4 border rounded-pill p-2">
+                                    <input class="form-control border-0" type="text" value="@currentUser.City" placeholder="Ex. Flygköping" aria-describedby="button-addon3" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Ordersammanfattning</div>
-                        <div class="p-4">
-                            <p class="font-italic mb-4">Fraktkostnad och ytterligare kostnader beräknas utifrån de värden du har angett.</p>
-                            <ul class="list-unstyled mb-4">
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Summa</strong><strong>$390.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong>$10.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>$0.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom">
-                                    <strong class="text-muted">Summa (inkl. moms)</strong>
-                                    <h5 class="font-weight-bold">$400.00</h5>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#completeOrderModal">Slutför Beställning</button>
+                </div>
+
+                <div class="py-5">
+                    <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                        <div class="col-lg-6">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Rabattkod</div>
+                            <div class="p-4">
+                                <p class="font-italic mb-4">Om du har en rabattkod, vänligen skriv in den i nedan fält.</p>
+                                <div class="input-group mb-4 border rounded-pill p-2">
+                                    <input type="text" placeholder="Ange rabattkod" aria-describedby="button-addon3" class="form-control border-0">
+                                    <div class="input-group-append border-0">
+                                        <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Lägg till rabattkod</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Ordersammanfattning</div>
+                            <div class="p-4">
+                                <p class="font-italic mb-4">Fraktkostnad och ytterligare kostnader beräknas utifrån de värden du har angett.</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Summa</strong><strong>$390.00</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong>$10.00</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>$0.00</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom">
+                                        <strong class="text-muted">Summa (inkl. moms)</strong>
+                                        <h5 class="font-weight-bold">$400.00</h5>
+                                    </li>
+                                </ul>
+                                <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#completeOrderModal">Slutför Beställning</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
+
 
             <!-- Modal -->
             <div class="modal fade" id="completeOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
