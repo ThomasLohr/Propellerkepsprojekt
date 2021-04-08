@@ -32,7 +32,6 @@ namespace WebApplication2.Models
         public string Color { get; set; }
         [Required(ErrorMessage = "Please enter a stock amount.")]
         public int Stock { get; set; }
-
         public string Category { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual DateTime? CreatedDate { get; set; } = DateTime.UtcNow;

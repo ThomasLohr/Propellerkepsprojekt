@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
+using WebApplication2.Services;
 
 namespace WebApplication2
 {
@@ -38,6 +39,10 @@ namespace WebApplication2
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddScoped<OrderService>();
+            services.AddScoped<ProductService>();
+            services.AddScoped<OrderProductService>();
 
         }
 

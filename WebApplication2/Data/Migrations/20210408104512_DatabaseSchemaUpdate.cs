@@ -220,6 +220,7 @@ namespace WebApplication2.Data.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     OrderProductId = table.Column<int>(type: "int", nullable: true)
@@ -238,24 +239,24 @@ namespace WebApplication2.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", "4d9628ac-3b8c-4852-a599-c821be87749d", "Admin", "Admin" });
+                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", "0a27363f-a9cb-4797-a9fa-8a8b7707201e", "Admin", "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "FirstName", "LastLoginDate", "LastName", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Street", "TwoFactorEnabled", "UserName", "Zip" },
-                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, null, "3c9e19d6-2c19-49dd-94d6-9dda1e0d57d7", new DateTime(2021, 4, 7, 19, 0, 42, 778, DateTimeKind.Utc).AddTicks(2858), "admin@admin.com", true, null, null, null, false, null, null, "admin@admin.com", "admin@admin.com", "AQAAAAEAACcQAAAAECIdEPUUmSL28mDj4BDBHwPbvXQJ1UESdAi42/f3hEJPRBQfjNbwiO0ZhD654W0JDQ==", null, false, "", null, false, "admin@admin.com", null });
+                values: new object[] { "a18be9c0-aa65-4af8-bd17-00bd9344e575", 0, null, "6349b703-6bfc-43c7-ae6a-293a2a3685a6", new DateTime(2021, 4, 8, 10, 45, 11, 64, DateTimeKind.Utc).AddTicks(982), "admin@admin.com", true, null, null, null, false, null, null, "admin@admin.com", "admin@admin.com", "AQAAAAEAACcQAAAAEFV70kO7m9t5y3beaW8d+ePnYvDUxOTrELHXhU29dtrfpJm9qjYn9Uc08pTG3ika9w==", null, false, "", null, false, "admin@admin.com", null });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Color", "CreatedDate", "Discount", "Gender", "ImageUrl", "Model", "ModifiedDate", "OrderProductId", "Price", "ProductDescription", "ProductName", "Size", "Stock" },
+                columns: new[] { "Id", "Category", "Color", "CreatedDate", "Discount", "Gender", "ImageUrl", "Model", "ModifiedDate", "OrderProductId", "Price", "ProductDescription", "ProductName", "Size", "Stock" },
                 values: new object[,]
                 {
-                    { 1, "Multifärgad", new DateTime(2021, 4, 7, 19, 0, 42, 764, DateTimeKind.Utc).AddTicks(9309), 0m, "Unisex", "https://cdn11.bigcommerce.com/s-27y5anms1z/images/stencil/728x728/products/64957/30204/126988__95020.1583560155.jpg?c=2", "Hund", null, null, 399m, "Elegant, multifärgad propellerkeps till din hund eller väldigt håriga respektive.", "Propellerkeps Hund", "XL", 5000 },
-                    { 2, "Multifärgad", new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1858), 0m, "Unisex", "https://i.etsystatic.com/5376657/r/il/4dead6/1511480960/il_570xN.1511480960_7c63.jpg", "Katt", null, null, 399m, "Elegant, multifärgad propellerkeps till din katt eller väldigt håriga respektive.", "Propellerkeps Katt", "XS", 5000 },
-                    { 3, "Multifärgad", new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1894), 0m, "Unisex", "https://i.pinimg.com/474x/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg", "Standard", null, null, 499m, "Oavsett om du tuggar qualudes på Wall Street med trippla telefoner i öronen eller klickar                     'Köp' på Avanza så visar denna modell att du är nästa Warren Buffet.", "Propellerkeps Affärsperson", "M", 5000 },
-                    { 4, "Svart", new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1901), 0m, "Unisex", "https://images-na.ssl-images-amazon.com/images/I/615G86JGkpL._AC_SL1001_.jpg", "Hjälm", null, null, 599m, "Är du en gummianka med medelsålderskris? Då är den här modellen för dig. Fem-växlad, highway-to-hell hjälm som visar damerna på Sweden Rock festival att du fortfarande är viril och har ett outömligt förråd av gummi. OBS! Pilotbrillor ingår ej.", "Propellerkeps Gummianka", "S", 5000 },
-                    { 5, "Multifärgad", new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1906), 0m, "Man", "https://i.imgflip.com/4/3spz10.jpg", "President", null, null, 10000m, "Alla säger att denna propellerkeps är bäst. Jag har många vänner, alla vänner och de säger miljarder gånger att denna propellerkeps är det bästa som har hänt dem.", "Propellerkeps Bäst", "5XL", 5000 },
-                    { 6, "Multifärgad", new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1910), 0m, "Kvinna", "https://ih1.redbubble.net/image.745680506.6038/st,small,507x507-pad,600x600,f8f8f8.u2.jpg", "Sport", null, null, 10000m, "Läser du till systemutvecklare hos Newton i Malmö? Då vet du att du har nått zenith i ditt liv. Det blir inte bättre än så här, förutom med denna keps! Köp den nu och sälla dig till legenderna som tar examen 2022.", "Propellerkeps Peak Performance", "L", 5000 }
+                    { 1, "Djur", "Multifärgad", new DateTime(2021, 4, 8, 10, 45, 11, 49, DateTimeKind.Utc).AddTicks(5818), 0m, "Unisex", "https://cdn11.bigcommerce.com/s-27y5anms1z/images/stencil/728x728/products/64957/30204/126988__95020.1583560155.jpg?c=2", "Hund", null, null, 399m, "Elegant, multifärgad propellerkeps till din hund eller väldigt håriga respektive.", "Propellerkeps Hund", "XL", 5000 },
+                    { 2, "Djur", "Multifärgad", new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7098), 0m, "Unisex", "https://i.etsystatic.com/5376657/r/il/4dead6/1511480960/il_570xN.1511480960_7c63.jpg", "Katt", null, null, 399m, "Elegant, multifärgad propellerkeps till din katt eller väldigt håriga respektive.", "Propellerkeps Katt", "XS", 5000 },
+                    { 3, "Människa", "Multifärgad", new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7123), 0m, "Unisex", "https://i.pinimg.com/474x/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg", "Standard", null, null, 499m, "Oavsett om du tuggar qualudes på Wall Street med trippla telefoner i öronen eller klickar                     'Köp' på Avanza så visar denna modell att du är nästa Warren Buffet.", "Propellerkeps Affärsperson", "M", 5000 },
+                    { 4, "Speciellatillfällen", "Svart", new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7132), 0m, "Unisex", "https://images-na.ssl-images-amazon.com/images/I/615G86JGkpL._AC_SL1001_.jpg", "Hjälm", null, null, 599m, "Är du en gummianka med medelsålderskris? Då är den här modellen för dig. Fem-växlad, highway-to-hell hjälm som visar damerna på Sweden Rock festival att du fortfarande är viril och har ett outömligt förråd av gummi. OBS! Pilotbrillor ingår ej.", "Propellerkeps Gummianka", "S", 5000 },
+                    { 5, "Speciellatillfällen", "Multifärgad", new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7136), 0m, "Man", "https://i.imgflip.com/4/3spz10.jpg", "President", null, null, 10000m, "Alla säger att denna propellerkeps är bäst. Jag har många vänner, alla vänner och de säger miljarder gånger att denna propellerkeps är det bästa som har hänt dem.", "Propellerkeps Bäst", "5XL", 5000 },
+                    { 6, "Människa", "Multifärgad", new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7140), 0m, "Kvinna", "https://ih1.redbubble.net/image.745680506.6038/st,small,507x507-pad,600x600,f8f8f8.u2.jpg", "Sport", null, null, 10000m, "Läser du till systemutvecklare hos Newton i Malmö? Då vet du att du har nått zenith i ditt liv. Det blir inte bättre än så här, förutom med denna keps! Köp den nu och sälla dig till legenderna som tar examen 2022.", "Propellerkeps Peak Performance", "L", 5000 }
                 });
 
             migrationBuilder.InsertData(
@@ -266,12 +267,12 @@ namespace WebApplication2.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "CreatedDate", "ModifiedDate", "OrderSent", "ShippedDate", "UserId" },
-                values: new object[] { 1, new DateTime(2021, 4, 7, 19, 0, 42, 769, DateTimeKind.Utc).AddTicks(8528), null, true, new DateTime(2021, 4, 7, 19, 0, 42, 770, DateTimeKind.Utc).AddTicks(730), "a18be9c0-aa65-4af8-bd17-00bd9344e575" });
+                values: new object[] { 1, new DateTime(2021, 4, 8, 10, 45, 11, 54, DateTimeKind.Utc).AddTicks(6334), null, true, new DateTime(2021, 4, 8, 10, 45, 11, 54, DateTimeKind.Utc).AddTicks(9382), "a18be9c0-aa65-4af8-bd17-00bd9344e575" });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "CreatedDate", "ModifiedDate", "OrderSent", "ShippedDate", "UserId" },
-                values: new object[] { 2, new DateTime(2021, 4, 7, 19, 0, 42, 770, DateTimeKind.Utc).AddTicks(1552), null, false, null, "a18be9c0-aa65-4af8-bd17-00bd9344e575" });
+                values: new object[] { 2, new DateTime(2021, 4, 8, 10, 45, 11, 55, DateTimeKind.Utc).AddTicks(584), null, false, null, "a18be9c0-aa65-4af8-bd17-00bd9344e575" });
 
             migrationBuilder.InsertData(
                 table: "OrderProduct",

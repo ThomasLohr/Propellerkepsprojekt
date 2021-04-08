@@ -10,7 +10,7 @@ using WebApplication2.Data;
 namespace WebApplication2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210407190044_DatabaseSchemaUpdate")]
+    [Migration("20210408104512_DatabaseSchemaUpdate")]
     partial class DatabaseSchemaUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
-                            ConcurrencyStamp = "4d9628ac-3b8c-4852-a599-c821be87749d",
+                            ConcurrencyStamp = "0a27363f-a9cb-4797-a9fa-8a8b7707201e",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         });
@@ -271,14 +271,14 @@ namespace WebApplication2.Data.Migrations
                         {
                             Id = "a18be9c0-aa65-4af8-bd17-00bd9344e575",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3c9e19d6-2c19-49dd-94d6-9dda1e0d57d7",
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 778, DateTimeKind.Utc).AddTicks(2858),
+                            ConcurrencyStamp = "6349b703-6bfc-43c7-ae6a-293a2a3685a6",
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 64, DateTimeKind.Utc).AddTicks(982),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@admin.com",
                             NormalizedUserName = "admin@admin.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECIdEPUUmSL28mDj4BDBHwPbvXQJ1UESdAi42/f3hEJPRBQfjNbwiO0ZhD654W0JDQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFV70kO7m9t5y3beaW8d+ePnYvDUxOTrELHXhU29dtrfpJm9qjYn9Uc08pTG3ika9w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -319,15 +319,15 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 769, DateTimeKind.Utc).AddTicks(8528),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 54, DateTimeKind.Utc).AddTicks(6334),
                             OrderSent = true,
-                            ShippedDate = new DateTime(2021, 4, 7, 19, 0, 42, 770, DateTimeKind.Utc).AddTicks(730),
+                            ShippedDate = new DateTime(2021, 4, 8, 10, 45, 11, 54, DateTimeKind.Utc).AddTicks(9382),
                             UserId = "a18be9c0-aa65-4af8-bd17-00bd9344e575"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 770, DateTimeKind.Utc).AddTicks(1552),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 55, DateTimeKind.Utc).AddTicks(584),
                             OrderSent = false,
                             UserId = "a18be9c0-aa65-4af8-bd17-00bd9344e575"
                         });
@@ -378,6 +378,9 @@ namespace WebApplication2.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -437,8 +440,9 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Category = "Djur",
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 764, DateTimeKind.Utc).AddTicks(9309),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 49, DateTimeKind.Utc).AddTicks(5818),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://cdn11.bigcommerce.com/s-27y5anms1z/images/stencil/728x728/products/64957/30204/126988__95020.1583560155.jpg?c=2",
@@ -452,8 +456,9 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = 2,
+                            Category = "Djur",
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1858),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7098),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://i.etsystatic.com/5376657/r/il/4dead6/1511480960/il_570xN.1511480960_7c63.jpg",
@@ -467,8 +472,9 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = 3,
+                            Category = "Människa",
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1894),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7123),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://i.pinimg.com/474x/59/d7/54/59d754c8a1d6f57dc8ddc31b49371650.jpg",
@@ -482,8 +488,9 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = 4,
+                            Category = "Speciellatillfällen",
                             Color = "Svart",
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1901),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7132),
                             Discount = 0m,
                             Gender = "Unisex",
                             ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/615G86JGkpL._AC_SL1001_.jpg",
@@ -497,8 +504,9 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = 5,
+                            Category = "Speciellatillfällen",
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1906),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7136),
                             Discount = 0m,
                             Gender = "Man",
                             ImageUrl = "https://i.imgflip.com/4/3spz10.jpg",
@@ -512,8 +520,9 @@ namespace WebApplication2.Data.Migrations
                         new
                         {
                             Id = 6,
+                            Category = "Människa",
                             Color = "Multifärgad",
-                            CreatedDate = new DateTime(2021, 4, 7, 19, 0, 42, 767, DateTimeKind.Utc).AddTicks(1910),
+                            CreatedDate = new DateTime(2021, 4, 8, 10, 45, 11, 50, DateTimeKind.Utc).AddTicks(7140),
                             Discount = 0m,
                             Gender = "Kvinna",
                             ImageUrl = "https://ih1.redbubble.net/image.745680506.6038/st,small,507x507-pad,600x600,f8f8f8.u2.jpg",

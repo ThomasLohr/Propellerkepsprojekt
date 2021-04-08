@@ -10,7 +10,7 @@ namespace WebApplication2.Services
 {
     public class OrderProductService
     {
-        private ApplicationDbContext _ctx;
+        private ApplicationDbContext _ctx = null;
         public OrderProductService()
         {
             _ctx = new ApplicationDbContext();
@@ -42,4 +42,4 @@ namespace WebApplication2.Services
             return orderProductInfo;
         }
     }
-    }
+}
