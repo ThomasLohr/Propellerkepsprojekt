@@ -23,6 +23,7 @@ namespace WebApplication2.Controllers
         private List<Product> purchasedItems = new List<Product>();
         private ProductService _productService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private OrderService _orderService;
 
 
 
@@ -31,6 +32,8 @@ namespace WebApplication2.Controllers
             _logger = logger;
             _productService = new ProductService();
             _userManager = userManager;
+            _orderService = new OrderService();
+
         }
 
         public IActionResult Index()
