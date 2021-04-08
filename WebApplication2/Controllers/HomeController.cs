@@ -16,7 +16,7 @@ namespace WebApplication2.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        
+
         private List<Product> products = new List<Product>();
 
         private List<Product> purchasedItems = new List<Product>();
@@ -40,11 +40,10 @@ namespace WebApplication2.Controllers
             return View(_productService.GetProductById(id));
         }
 
-        public IActionResult Products()
+        public IActionResult Products(string category)
         {
 
-
-            return View(_productService.GetAll()); ;
+            return View(_productService.SortByCategory(category));
         }
 
         public IActionResult Login()
@@ -55,10 +54,10 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        
+
         public IActionResult ShoppingCart()
         {
-            
+
             return View();
         }
 
@@ -66,14 +65,14 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-        
-      
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        
+
         public async Task<IActionResult> Search(string result)
         {
             var product = _productService.SearchProducts(result);
