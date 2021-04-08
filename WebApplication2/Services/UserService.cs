@@ -30,7 +30,7 @@ namespace WebApplication2.Services
             return userByName;
         }
 
-        public List<ApplicationUser> GetAllusers()
+        public List<ApplicationUser> GetAll()
         {
             var listOfAllUsers = _userRepository.ReadUsers();
             return listOfAllUsers;

@@ -33,8 +33,18 @@ namespace WebApplication2.Controllers
 
         public IActionResult Index()
         {
+            var viewModel = new AdminViewModel();
 
-            return View();
+            viewModel.Orders = _orderService.GetAll();
+            viewModel.OrderProducts = _orderProductService.GetAll();
+            viewModel.Products = _productService.GetAll();
+
+            viewModel.NumberOfOrders = viewModel.Orders.Count();
+            viewModel.NumberOfOrdersSent = viewModel.Orders.Count(o => o.OrderSent);
+            viewModel.NumberOfProducts = viewModel.Products.Count();
+            viewModel.ProductTotalStock = viewModel.Products.Sum(p => p.Stock);
+
+            return View(viewModel);
         }
 
         // PRODUCTS
@@ -145,19 +155,21 @@ namespace WebApplication2.Controllers
 
         // USERS
 
-        public IActionResult Users(string searchString)
+        public IActionResult Users(string searchId)
         {
+            var foundUser = new List<ApplicationUser>();
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchId))
             {
-                var foundUser = new List<ApplicationUser>();
+                foundUser.Add(_userService.GetUserById(searchId));
 
-                foundUser.Add(_userService.GetUserByName(searchString));
-
+                if (foundUser.Any())
                 return View(foundUser);
             }
 
-            return View(_userService.GetAllusers());
+            foundUser = _userService.GetAll();
+
+            return View(foundUser);
         }
 
         public IActionResult EditUser(string Id)

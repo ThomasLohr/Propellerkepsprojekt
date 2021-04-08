@@ -1,27 +1,59 @@
-﻿
+﻿@model WebApplication2.ViewModels.AdminViewModel
+
 @{
-    ViewData["Title"] = "Admin kontrollpanel";
+    ViewData["Title"] = "Admin Kontrollpanel";
     @* Layout = "~/Views/Shared/_Layout.cshtml";*@
-Layout = "_NavbarLayout";
+    Layout = "_NavbarLayout";
 
 }
 
-<h1>Admin kontrollpanel</h1>
-<a asp-controller="Admin" asp-action="Orders">
-    <input type="button" style='width:300px;height:200px;font-size:30px;margin-top:20px' class="btn btn-primary" value="Ordrar" />
-</a>
-<a asp-controller="Admin" asp-action="Users">
-    <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Användare" />
-</a>
-<a asp-controller="Admin" asp-action="Products">
-    <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Produkter" />
-</a>
+<div class="pt-3">
+    <h1>Admin Kontrollpanel</h1>
+    <a asp-controller="Admin" asp-action="Orders">
+        <input type="button" style='width:300px;height:200px;font-size:30px;margin-top:20px' class="btn btn-primary" value="Ordrar" />
+    </a>
+    <a asp-controller="Admin" asp-action="Users">
+        <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Användare" />
+    </a>
+    <a asp-controller="Admin" asp-action="Products">
+        <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Produkter" />
+    </a>
+</div>
 
-
-    <tr>
-
-        <th scope="col" class="border-0 bg-light">
-            <div class="p-2 px-3 text-uppercase" style="margin-top:250px">Produktinformation</div>
-        </th>
-
-    </tr>
+<div class="pt-5">
+    <h5>Snabbstatistik</h5>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Antal Order
+                </th>
+                <th>
+                    Skickade Order
+                </th>
+                <th>
+                    Produktsortiment
+                </th>
+                <th>
+                    Totalt Lagersaldo
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-light">
+                <td class="text-align-vertical-middle">
+                    <span title="Total number of confirmed orders">@Html.DisplayFor(modelItem => Model.NumberOfOrders)</span>
+                </td>
+                <td class="text-align-vertical-middle">
+                    <span title="Total number of orders shipped to customer">@Html.DisplayFor(modelItem => Model.NumberOfOrdersSent)</span>
+                </td>
+                <td class="text-align-vertical-middle">
+                    <span title="Total variety of products in stock.">@Html.DisplayFor(modelItem => Model.NumberOfProducts)</span>
+                </td>
+                <td class="text-align-vertical-middle">
+                    <span title="Total quantity of products in stock.">@Html.DisplayFor(modelItem => Model.ProductTotalStock)</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
