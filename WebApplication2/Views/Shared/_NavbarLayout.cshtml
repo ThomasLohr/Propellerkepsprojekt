@@ -41,8 +41,9 @@
                                         <a asp-controller="Home" asp-action="Products">Produkter</a>
                                         <ul class="submenu">
                                             <li><a asp-controller="Home" asp-action="Products">Alla produkter</a></li>
-                                            <li>
-                                            </li>
+                                            <li><a asp-controller="Home" asp-action="Products" asp-route-category="Djur">För djur</a></li>
+                                            <li><a asp-controller="Home" asp-action="Products" asp-route-category="Människa">För människor</a></li>
+                                            <li><a asp-controller="Home" asp-action="Products" asp-route-category="Speciellatillfällen">För speciella tillfällen</a></li>
                                         </ul>
                                     <li class="nav-item">
                                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AboutUs">Om oss</a>
@@ -62,11 +63,11 @@
                                 <li>
                                     <a>
                                         <form class="form-inline my-2 my-lg-0" asp-controller="Home" asp-action="Search" method="get">
-                                                <input class="form-control mr-sm-2" type="text" name="Result" placeholder="Sök produkt..." />
-                                                <input class="btn btn-primary" type="submit" value="Sök">
+                                            <input class="form-control mr-sm-2" type="text" name="Result" placeholder="Sök produkt..." />
+                                            <input class="btn btn-primary" type="submit" value="Sök">
                                         </form>
                                     </a>
-                              
+
                                 </li>
                                 <li>
                                     <a><span class="flaticon-user"></span></a>
@@ -92,12 +93,11 @@
 
                                 <li>
                                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="ShoppingCart">
-                                        <span class="flaticon-shopping-cart"></span>
+                                        <span class="flaticon-shopping-cart">   <span class="badge" id="lblCartCount">  </span> </span>
+                                        <i style="font-size:18px"></i>
                                     </a>
                                 </li>
-
                             </ul>
-
                         </div>
                     </div>
                 </div>

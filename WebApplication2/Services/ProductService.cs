@@ -45,6 +45,23 @@ namespace WebApplication2.Services
             _ctx.SaveChanges();
         }
 
+        public List<Product> SortByCategory(string category)
+        {
+            if (category == "Djur")
+            {
+                return _ctx.Products.Where(p => p.Category.Equals(category)).ToList();
+            }
+            else if (category == "Människa")
+            {
+                return _ctx.Products.Where(p => p.Category.Equals(category)).ToList();
+            }
+            else if (category == "Speciellatillfällen")
+            {
+                return _ctx.Products.Where(p => p.Category.Equals(category)).ToList();
+            }
+            return GetAll();
+        }
+
         public IQueryable<Product> SearchProducts(string keyWord)
         {
             // Get all products from DB and save them to an IQueryable

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Services
 {
@@ -24,6 +25,22 @@ namespace WebApplication2.Services
         {
             return _ctx.OrderProduct.FirstOrDefault(o => o.Id.Equals(id));
         }
+
+        public List<OrderViewModel> GetOrderProductByOrderId(int id)
+        {
+
+            var orderProductInfo = (from OrderProduct in _ctx.OrderProduct
+                        where OrderProduct.OrderId == id
+                        join Product in _ctx.Products on OrderProduct.ProductId equals Product.Id
+                        select new OrderViewModel 
+                        { 
+                            OrderProduct = OrderProduct, 
+                            ProductName = Product.ProductName, 
+                            Price = Product.Price * OrderProduct.Quantity,
+                        }).ToList();
+
+            return orderProductInfo;
+        }
         
         public void Create(OrderProduct orderProduct)
         {
@@ -31,4 +48,4 @@ namespace WebApplication2.Services
             _ctx.SaveChanges();
         }
     }
-}
+    }

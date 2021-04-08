@@ -68,5 +68,33 @@ namespace WebApplication2.Services
             _userRepository.DeleteUser(user);
         }
 
+
+        public void SetFirstName(ApplicationUser user, string firstName)
+        {
+            user.FirstName = firstName;
+            UpdateUser(user);
+        }
+
+        public void SetLastName(ApplicationUser user, string lastName)
+        {
+            user.LastName = lastName;
+            UpdateUser(user);
+        }
+
+        public void SetStreet(ApplicationUser user, string street)
+        {
+            user.Street = street;
+            UpdateUser(user);
+        }        
+        public void SetZip(ApplicationUser user, string zip)
+        {
+            user.Zip = zip;
+            UpdateUser(user);
+        }        
+        public void SetCity(ApplicationUser user, string city)
+        {
+            user.City = city;
+            UpdateUser(user);
+        }
     }
 }

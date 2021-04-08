@@ -9,7 +9,6 @@ namespace WebApplication2.Models
 {
     public class Product : IModelDates
     {
-
         public int Id { get; set; }
         [Required(ErrorMessage="Please enter a product name.")]
         [MaxLength(50, ErrorMessage="Maximum 50 characters allowed.")]
@@ -33,6 +32,8 @@ namespace WebApplication2.Models
         public string Color { get; set; }
         [Required(ErrorMessage = "Please enter a stock amount.")]
         public int Stock { get; set; }
+
+        public string Category { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual DateTime? CreatedDate { get; set; } = DateTime.UtcNow;
         public virtual DateTime? ModifiedDate { get; set; }
