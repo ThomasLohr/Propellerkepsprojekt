@@ -12,7 +12,7 @@ namespace WebApplication2.Models
         public Order Order { get; set; }
         public int OrderId { get; set; }
 
-        public Product Product { get; set; }
+        public ICollection<Product> Products { get; set; }
         public int ProductId { get; set; }
 
         public int Quantity { get; set; }

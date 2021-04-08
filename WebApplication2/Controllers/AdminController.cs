@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,18 +89,41 @@ namespace WebApplication2.Controllers
         public IActionResult EditOrder(int Id)
         {
 
-            OrderViewModel orderViewModel = new OrderViewModel();
+            var orderViewModel = new OrderViewModel();
 
             orderViewModel.Order = _orderService.GetOrderById(Id);
-            orderViewModel.OrderProduct = _orderProductService.GetOrderProductById(Id);
+            orderViewModel.OrderProductsList = _orderProductService.GetOrderProductByOrderId(Id);
+            orderViewModel.TotalPrice = orderViewModel.OrderProductsList.Sum(op => op.Price);
 
             return View(orderViewModel);
         }
 
         [HttpPost]
-        public IActionResult EditOrder(Order order)
+        public IActionResult EditOrder(int id, OrderViewModel orderViewModel)
         {
-            _orderService.Update(order);
+            orderViewModel.Order.Id = id;
+
+            //if (ModelState.IsValid)
+            //{
+            //    Order orderFromView = _context.Orders
+            //                            .Where(o => o.Id == model.Order.Id)
+            //                            .SingleOrDefault();
+
+            //    orderFromView.Id = model.Order.Id;
+            //    orderFromView.UserId = model.Order.UserId;
+            //    orderFromView.ShippedDate = model.Order.ShippedDate;
+            //    orderFromView.OrderSent = model.Order.OrderSent;
+
+            //    _context.Entry(orderFromView).State = EntityState.Modified;
+            //    _context.SaveChanges();
+
+            //    //Include("person")
+
+            //return RedirectToAction("Orders");
+            //}
+            //return View(model);
+
+            _orderService.Update(orderViewModel.Order);
             return RedirectToAction("Orders");
         }
         public IActionResult RemoveOrder(int Id)

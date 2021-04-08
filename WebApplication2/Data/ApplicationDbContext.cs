@@ -46,7 +46,7 @@ namespace WebApplication2.Data
 
             builder.Entity<Order>().HasMany(op => op.OrderProducts).WithOne(o => o.Order);
             builder.Entity<Order>().HasOne(u => u.User).WithMany(o => o.Orders);
-            builder.Entity<OrderProduct>().HasOne(p => p.Product).WithOne(op => op.OrderProduct);
+            builder.Entity<OrderProduct>().HasMany(p => p.Products).WithOne(op => op.OrderProduct);
 
             // Set default Admin guid and assign it to role
             const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
