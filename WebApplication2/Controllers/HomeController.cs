@@ -10,6 +10,7 @@ using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Services;
 using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication2.Controllers
 {
@@ -21,13 +22,15 @@ namespace WebApplication2.Controllers
 
         private List<Product> purchasedItems = new List<Product>();
         private ProductService _productService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
 
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _productService = new ProductService();
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -56,9 +59,10 @@ namespace WebApplication2.Controllers
             return View();
         }
         
-        public IActionResult ShoppingCart()
+        public async Task<IActionResult> ShoppingCartAsync()
         {
             ViewBag.Purshases = purchasedItems;
+            ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             return View();
         }
 
