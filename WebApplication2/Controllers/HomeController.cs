@@ -88,8 +88,11 @@ namespace WebApplication2.Controllers
             List<Product> productList = new List<Product>();
             productList.Add(_productService.GetProductById(1));
             ViewBag.Products = productList;
-            List<Order> orders = _orderService.GetAll();
+            cartOrder.Order = new Order();
+            cartOrder.Product = _productService.GetProductById(1);
+            //List<Order> orders = _orderService.GetAll();
             _orderService.Create(cartOrder.Order);
+            _orderProductService.Create(cartOrder.OrderProduct);
             return View();
         }
 

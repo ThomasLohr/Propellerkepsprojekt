@@ -6,6 +6,8 @@
 
         List<Product> products = ViewBag.Products;
 
+        Order order = new Order();
+
         ApplicationUser checkUser(ApplicationUser user)
         {
             if (user != null)
@@ -26,7 +28,6 @@
             }
         }
     }
-
     <style>
         body {
             min-height: 100vh;
@@ -71,7 +72,8 @@
                                                 <div class="p-2">
                                                     <img src=@product.ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
                                                     <div class="ml-3 d-inline-block align-middle">
-                                                        <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id" asp-for="OrderProduct.Product.Id" class="text-dark d-inline-block align-middle">@product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @product.Model</span>
+                                                        <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id" class="text-dark d-inline-block align-middle">@product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @product.Model</span>
+                                                        <input type="hidden" asp-for="OrderProduct.ProductId" value="@product.Id"/>
                                                     </div>
                                                 </div>
                                             </th>
