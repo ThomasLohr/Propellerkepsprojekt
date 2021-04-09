@@ -1,13 +1,13 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Produkt";
     Layout = "_NavbarLayout";
 }
 
-@model Product 
-
-
-<!--Section: Block Content-->
+@model Product
 
 <div class="container">
     <div class="row">
@@ -57,7 +57,7 @@
                         </tr>
                         <tr>
                             <td class="pl-0">
-                                <div class="def-number-input number-input safari_only mb-0" >
+                                <div class="def-number-input number-input safari_only mb-0">
                                     <input class="quantity" id="myInput" min="0" name="quantity" value="1" type="number">
                                 </div>
                             </td>
@@ -68,24 +68,26 @@
                                                checked>
                                         <label class="form-check-label small text-uppercase card-link-secondary"
                                                for="small">@Model.Gender</label>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <button type="button" class="btn btn-primary btn-md mr-1 mb-2 addtocart">Köp</button>
-            <button type="button" class="btn btn-light btn-md mr-1 mb-2 addtocart">
-                <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
-            </button>
-            <div>
-                <a asp-action="Products">Gå tillbaka</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-primary btn-md mr-1 mb-2 addtocart">Köp</button>
+                <button type="button" class="btn btn-light btn-md mr-1 mb-2 addtocart">
+                    <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
+                </button>
+                <div>
+                    <a asp-action="Products">Gå tillbaka</a>
+                </div>
+                <div>
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@Model.Id">Ändra produkt</a>
+                    }
+                </div>
             </div>
         </div>
-
     </div>
-
-</div>
-
-<!--Section: Block Content-->
