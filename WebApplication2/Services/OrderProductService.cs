@@ -41,5 +41,11 @@ namespace WebApplication2.Services
 
             return orderProductInfo;
         }
+        
+        public void Create(OrderProduct orderProduct)
+        {
+            _ctx.OrderProduct.Add(orderProduct);
+            _ctx.SaveChanges();
+        }
     }
 }
