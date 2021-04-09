@@ -25,7 +25,7 @@ namespace WebApplication2.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=PropStoreDB; Trusted_Connection=True; MultipleActiveResultSets=true; Pooling=false");
+                optionsBuilder.UseSqlServer("Server=tcp:ourfantasticwebshopdatabaseserver.database.windows.net,1433;Initial Catalog=group5-db1;Persist Security Info=False;User ID=superuser;Password=SuperMario1337;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
         public DbSet<Order> Orders { get; set; }
