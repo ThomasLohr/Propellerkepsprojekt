@@ -3,43 +3,85 @@
     Layout = "_NavbarLayout";
 }
 
+@section Scripts{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+    <script src="~/js/SendDeliverMessage.js"></script>
+}
 
-    <div class="grid-container pt-2">
-        <div class="info-banner solid">
-            <p class="info-text pulse">STÖRST I NORDEN | LEVERANS NÄRA DIG | PRISVÄRT FÖR ALLA</p>
-        </div>
-        <div class="left-banner solid" id="ytplayer">
-            <iframe id="ytplayer" class="responsive-iframe"
-                    src="https://www.youtube.com/watch?v=NxhzahiQshQ" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-            </iframe>
-        </div>
-        <div class="right-banner solid">
-            <img src="~/images/salesoffer1.png" class="startpage-img" />
-        </div>
-        <div class="mid-banner"></div>
-        <div class="bottom-banner solid">
-            <img src="~/images/happyeaster.png" class="startpage-img" />
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-2">User</div>
+        <div class="col-4"><input type="text" id="userInput" /></div>
+    </div>
+    <div class="row">
+        <div class="col-2">Message</div>
+        <div class="col-4"><input type="text" id="messageInput" /></div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">
+            <input type="button" id="sendButton" value="Send Message" />
         </div>
     </div>
-    <script>
-        // Load the IFrame Player API code asynchronously.
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/player_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+</div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
 
-        // Replace the 'ytplayer' element with an <iframe> and
-        // YouTube player after the API code downloads.
-        var player;
-        function onYouTubePlayerAPIReady() {
-            player = new YT.Player('ytplayer', {
-                height: '295',
-                width: '640',
-                videoId: 'NxhzahiQshQ'
-            });
-        }
-    </script>
+
+
+
+
+
+
+
+
+
+<div class="grid-container pt-2">
+    <div class="info-banner solid">
+        <p class="info-text pulse">STÖRST I NORDEN | LEVERANS NÄRA DIG | PRISVÄRT FÖR ALLA</p>
+    </div>
+    <div class="left-banner solid" id="ytplayer">
+        <iframe id="ytplayer" class="responsive-iframe"
+                src="https://www.youtube.com/watch?v=NxhzahiQshQ"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+    </div>
+    <div class="right-banner solid">
+        <img src="~/images/salesoffer1.png" class="startpage-img" />
+    </div>
+    <div class="mid-banner"></div>
+    <div class="bottom-banner solid">
+        <img src="~/images/happyeaster.png" class="startpage-img" />
+    </div>
+</div>
+<script>
+    // Load the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/player_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Replace the 'ytplayer' element with an <iframe> and
+    // YouTube player after the API code downloads.
+    var player;
+    function onYouTubePlayerAPIReady() {
+        player = new YT.Player('ytplayer', {
+            height: '295',
+            width: '640',
+            videoId: 'NxhzahiQshQ'
+        });
+    }
+</script>

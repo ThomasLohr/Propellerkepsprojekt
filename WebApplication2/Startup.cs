@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Services;
+using Microsoft.AspNetCore.SignalR;
+using WebApplication2.Hubs;
 
 namespace WebApplication2
 {
@@ -30,6 +32,7 @@ namespace WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -73,6 +76,7 @@ namespace WebApplication2
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapRazorPages();
             });
         }
