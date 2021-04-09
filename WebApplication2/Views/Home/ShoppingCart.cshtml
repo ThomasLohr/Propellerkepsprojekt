@@ -166,15 +166,12 @@
                                     <h5 class="font-weight-bold">$400.00</h5>
                                 </li>
                             </ul>
-                            <input hidden id="messageInput" value="En ny order blev precis lagd!"/>
                             <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#completeOrderModal" id="sendOrderButton">Slutför Beställning</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-
-
         <!-- Modal -->
         <div class="modal fade" id="completeOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -189,7 +186,9 @@
                         <p>Tack för din beställning! En orderbekräftelse skickas till &lt;användares e-mail&gt;.</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" onclick="javascript:window.location='/Home/Index'" data-dismiss="modal">Close</button>
+
+                        <a class="btn btn-primary" asp-controller="Home" asp-action="Index" >Close</a>
+                        @*<button type="button" class="btn btn-secondary" onclick="javascript:window.location='/Home/Index'" data-dismiss="modal">Close</button>*@
                     </div>
                 </div>
             </div>
