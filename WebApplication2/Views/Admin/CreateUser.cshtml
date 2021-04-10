@@ -4,11 +4,10 @@
     ViewData["Title"] = "Lägg till ny användare";
     Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
-
-<h1>Lägg till användare</h1>
-
-<h4>Användare</h4>
-<hr />
+<div class="pt-3">
+    <h1>Lägg till användare</h1>
+    <hr />
+</div>
 <form asp-action="CreateUser" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-row">

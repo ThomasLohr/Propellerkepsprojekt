@@ -4,74 +4,74 @@
     ViewData["Title"] = "Användare";
     Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
-
-<h1>Användare</h1>
-
-<div class="container overflow-hidden">
-    <div class="float-left">
-        <p>
-            <a asp-action="CreateUser" class="btn btn-primary">Lägg till användare</a>
-        </p>
-    </div>
-    <div class="float-right">
-        <form class="form-inline my-2 my-lg-0" asp-controller="Admin" asp-action="Users" method="get">
-            <input class="form-control mr-sm-2" type="text" name="searchId" placeholder="Sök användar-ID..." />
-            <input class="btn btn-primary" type="submit" value="Sök">
-        </form>
-        <br />
-    </div>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    E-Post
-                </th>
-                <th>
-                    Telefon
-                </th>
-                <th>
-                    Inloggad
-                </th>
-                <th>
-                    Registrerad
-                </th>
-                <th>
-                    Modifierad
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td class="text-align-vertical-middle" width="200">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td class="text-align-vertical-middle">
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td class="text-align-vertical-middle">
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-                    <td class="text-align-vertical-middle">
-                        @Html.DisplayFor(modelItem => item.LastLoginDate)
-                    </td>
-                    <td class="text-align-vertical-middle" width="90">
-                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td class="text-align-vertical-middle" width="90">
-                        @Html.DisplayFor(modelItem => item.ModifiedDate)
-                    </td>
-                    <td style="width: 150px">
-                        <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
-                        <a asp-action="RemoveUser" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="pt-3">
+    <h1>Användare</h1>
 </div>
+    <div class="container overflow-hidden">
+        <div class="float-left">
+            <p>
+                <a asp-action="CreateUser" class="btn btn-primary">Lägg till användare</a>
+            </p>
+        </div>
+        <div class="float-right">
+            <form class="form-inline my-2 my-lg-0" asp-controller="Admin" asp-action="Users" method="get">
+                <input class="form-control mr-sm-2" type="text" name="searchId" placeholder="Sök användar-ID..." />
+                <input class="btn btn-primary" type="submit" value="Sök">
+            </form>
+            <br />
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        E-Post
+                    </th>
+                    <th>
+                        Telefon
+                    </th>
+                    <th>
+                        Inloggad
+                    </th>
+                    <th>
+                        Registrerad
+                    </th>
+                    <th>
+                        Modifierad
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-align-vertical-middle" width="200">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class="text-align-vertical-middle">
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td class="text-align-vertical-middle">
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td class="text-align-vertical-middle">
+                            @Html.DisplayFor(modelItem => item.LastLoginDate)
+                        </td>
+                        <td class="text-align-vertical-middle" width="90">
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td class="text-align-vertical-middle" width="90">
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </td>
+                        <td style="width: 150px">
+                            <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
+                            <a asp-action="RemoveUser" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
