@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Identity;
 using WebApplication2.ViewModels;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace WebApplication2.Controllers
@@ -30,6 +29,7 @@ namespace WebApplication2.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private OrderService _orderService;
         private OrderProductService _orderProductService;
+        private SessionService _sessionService;
 
 
 
@@ -43,13 +43,14 @@ namespace WebApplication2.Controllers
             _userManager = userManager;
             _orderService = new OrderService();
             _orderProductService = new OrderProductService();
+            _sessionService = new SessionService();
 
         }
 
 
         public IActionResult Index()
         {
-            var name = HttpContext.Session.GetString("Name");
+            var name = HttpContext.Session.GetString("Product");
             if (name != null)
             {
                 var convertedProduct = JsonSerializer.Deserialize<List<Product>>(name);
@@ -67,15 +68,16 @@ namespace WebApplication2.Controllers
             products.Add(_productService.GetProductById(4));
 
             HttpContext.Session.SetString("Name", JsonSerializer.Serialize(products));
+            HttpContext.Session.CommitAsync();
             return RedirectToAction("Index");
         }
 
 
         public IActionResult Product(int id)
         {
-
             return View(_productService.GetProductById(id));
         }
+
 
         public IActionResult Products(string category)
         {
@@ -92,21 +94,36 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> ShoppingCartAsync()
+        public IActionResult ShoppingCart()
         {
-            ViewBag.Purshases = purchasedItems;
-            ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
-            List<Product> productList = new List<Product>();
-            productList.Add(_productService.GetProductById(1));
-            productList.Add(_productService.GetProductById(2));
-            ViewBag.Products = productList;
-            List<Order> orders = _orderService.GetAll();
+            var products = HttpContext.Session.GetString("Product");
+            if (products != null)
+            {
+                var convertedList = JsonSerializer.Deserialize<List<Product>>(products);
+                return View(convertedList);
 
-            List<Product> products = ViewBag.Products;
-
+            }
             return View();
         }
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> ShoppingCartAsync()
+        //{
+        //    ViewBag.Purshases = purchasedItems;
+        //    ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
+        //    List<Product> productList = new List<Product>();
+        //    productList.Add(_productService.GetProductById(1));
+        //    productList.Add(_productService.GetProductById(2));
+        //    ViewBag.Products = productList;
+        //    List<Order> orders = _orderService.GetAll();
+
+        //    List<Product> products = ViewBag.Products;
+
+        //    return View();
+        //}
 
         [HttpPost]
         public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder, List<int> shoppingCartIds, List<int> shoppingCartQuantities)
@@ -139,6 +156,16 @@ namespace WebApplication2.Controllers
         public IActionResult AboutUs()
         {
             return View();
+        }
+
+
+        public IActionResult AddToCart(int id)
+        {
+
+            _sessionService.AddToList(_productService.GetProductById(id));
+
+            HttpContext.Session.SetString("Product", JsonSerializer.Serialize(SessionService.Products));
+            return Redirect($"Product/{id}");
         }
 
 

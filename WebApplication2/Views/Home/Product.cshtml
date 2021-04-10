@@ -75,10 +75,13 @@
                     </tbody>
                 </table>
             </div>
+            <form method="post" asp-action="AddToCart">
+            <input hidden asp-for="Id" class="form-control" />
             <button type="button" class="btn btn-primary btn-md mr-1 mb-2 addtocart">Köp</button>
-            <button type="button" class="btn btn-light btn-md mr-1 mb-2 addtocart">
+            <button type="submit" class="btn btn-light btn-md mr-1 mb-2 addtocart">
                 <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
             </button>
+            </form>
             <div>
                 <a asp-action="Products">Gå tillbaka</a>
             </div>
