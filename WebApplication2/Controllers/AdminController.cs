@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
@@ -22,15 +23,12 @@ namespace WebApplication2.Controllers
 
         // Services
         private ProductService _productService;
-        private OrderService _orderService;
         private OrderProductService _orderProductService;
-        private UserService _userService;
 
         // Repositories from generic repository class
         private IGenericRepository<Order> _orderRepository = null;
         private IGenericRepository<Product> _productRepository = null;
         private IGenericRepository<OrderProduct> _orderProductRepository = null;
-        private IGenericRepository<ApplicationUser> _userRepository = null;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -46,10 +44,7 @@ namespace WebApplication2.Controllers
             _userManager = userManager;
 
             // Services
-            _productService = new ProductService();
-            _orderService = new OrderService();
             _orderProductService = new OrderProductService();
-            _userService = new UserService();
     }
 
         public IActionResult Index()
@@ -156,40 +151,59 @@ namespace WebApplication2.Controllers
 
         // USERS
 
-        public IActionResult Users(string searchId)
+        public IActionResult Users(string searchId, string errorMessage)
         {
+            ViewBag.Error = errorMessage;
+
+            return View(_userManager.Users.ToList());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Users(string searchId)
+        {
+
             var foundUser = new List<ApplicationUser>();
 
             if (!string.IsNullOrEmpty(searchId))
             {
-                foundUser.Add(_userService.GetUserById(searchId));
-
-                if (foundUser.Any())
-                return View(foundUser);
+                if (_userManager.Users.Any(u => u.Id.Equals(searchId)))
+                {
+                    foundUser.Add(await _userManager.FindByIdAsync(searchId));
+                    return View(foundUser);
+                }
             }
-
-            foundUser = _userService.GetAll();
-
-            return View(foundUser);
-        }
-
-        public IActionResult EditUser(string Id)
-        {
-            return View(_userService.GetUserById(Id));
-        }
-
-        [HttpPost]
-        public IActionResult EditUser(ApplicationUser user)
-        {
-            _userService.UpdateUser(user);
 
             return RedirectToAction("Users");
         }
 
-        [HttpPost]
-        public IActionResult CreateUser(ApplicationUser user)
+        public async Task<IActionResult> EditUser(string Id)
         {
-            _userService.Create(user);
+            return View(await _userManager.FindByIdAsync(Id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(string Id, ApplicationUser editUser)
+        {
+
+            var user = await _userManager.FindByIdAsync(Id);
+
+            user.FirstName = editUser.FirstName;
+            user.LastName = editUser.LastName;
+            user.Email = editUser.Email;
+            user.PhoneNumber = editUser.PhoneNumber;
+            user.Street = editUser.Street;
+            user.Zip = editUser.Zip;
+            user.City = editUser.City;
+
+            await _userManager.UpdateAsync(user);
+         
+            return RedirectToAction("Users");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(ApplicationUser user)
+        {
+            await _userManager.CreateAsync(user);
             return View();
         }
 
@@ -199,10 +213,24 @@ namespace WebApplication2.Controllers
             return View();
         }
 
-        public IActionResult RemoveUser(string Id)
+
+        public async Task<IActionResult> RemoveUser(string Id)
         {
-            _userService.RemoveById(Id);
-            return RedirectToAction("Users");
+            //user = await _userManager.FindByIdAsync(Id);
+
+            var exmsg = "";
+
+            try
+            {
+                var user = await _userManager.FindByIdAsync(Id);
+                await _userManager.DeleteAsync(user);
+            }
+            catch (Exception ex)
+            {
+                exmsg = ex.GetBaseException().Message;
+            }
+
+            return RedirectToAction("Users", new { errorMessage = exmsg });
         }
     }
 }

@@ -14,11 +14,14 @@
         </p>
     </div>
     <div class="float-right">
-        <form class="form-inline my-2 my-lg-0" asp-controller="Admin" asp-action="Users" method="get">
+        <form class="form-inline my-2 my-lg-0" asp-controller="Admin" asp-action="Users" method="post">
             <input class="form-control mr-sm-2" type="text" name="searchId" placeholder="Sök användar-ID..." />
             <input class="btn btn-primary" type="submit" value="Sök">
         </form>
         <br />
+    </div>
+    <div class="float-sm-right">
+        <p class="text-warning">@ViewBag.Error</p>
     </div>
     <table class="table">
         <thead class="thead-dark">
