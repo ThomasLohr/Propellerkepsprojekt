@@ -11542,3 +11542,13 @@ input:focus {
     width: 300px;
     overflow: hidden;
 }
+body {
+    height: auto;
+    overflow-x: auto
+    
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
+}

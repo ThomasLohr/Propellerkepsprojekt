@@ -43,6 +43,8 @@ namespace WebApplication2
             services.AddScoped<OrderService>();
             services.AddScoped<ProductService>();
             services.AddScoped<OrderProductService>();
+            services.AddSession();
+            services.AddMvc();
 
         }
 
@@ -64,6 +66,7 @@ namespace WebApplication2
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();

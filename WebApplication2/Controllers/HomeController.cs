@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Identity;
 using WebApplication2.ViewModels;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace WebApplication2.Controllers
 {
@@ -40,10 +43,24 @@ namespace WebApplication2.Controllers
 
         }
 
+        
         public IActionResult Index()
         {
-            return View();
+            string name = HttpContext.Session.GetString("Name");
+            return View(model: name);
         }
+
+        public IActionResult SaveName(string name)
+        {
+            List<string> products = new List<string>();
+
+            products.Add(name);
+
+            HttpContext.Session.SetString("Name", JsonSerializer.Serialize(name));
+            return RedirectToAction("Index");
+        }
+        
+
         public IActionResult Product(int id)
         {
 
