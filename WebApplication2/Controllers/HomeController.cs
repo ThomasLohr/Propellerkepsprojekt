@@ -33,6 +33,9 @@ namespace WebApplication2.Controllers
 
 
 
+
+
+
         public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
@@ -43,23 +46,30 @@ namespace WebApplication2.Controllers
 
         }
 
-        
+
         public IActionResult Index()
         {
-            string name = HttpContext.Session.GetString("Name");
+            var name = HttpContext.Session.GetString("Name");
+            if (name != null)
+            {
+                var convertedProduct = JsonSerializer.Deserialize<List<Product>>(name);
+                return View(convertedProduct);
+            }
             return View(model: name);
         }
 
-        public IActionResult SaveName(string name)
+        public IActionResult SaveName()
         {
-            List<string> products = new List<string>();
+            List<Product> products = new List<Product>();
+            products.Add(_productService.GetProductById(1));
+            products.Add(_productService.GetProductById(2));
+            products.Add(_productService.GetProductById(3));
+            products.Add(_productService.GetProductById(4));
 
-            products.Add(name);
-
-            HttpContext.Session.SetString("Name", JsonSerializer.Serialize(name));
+            HttpContext.Session.SetString("Name", JsonSerializer.Serialize(products));
             return RedirectToAction("Index");
         }
-        
+
 
         public IActionResult Product(int id)
         {
@@ -92,7 +102,7 @@ namespace WebApplication2.Controllers
             productList.Add(_productService.GetProductById(2));
             ViewBag.Products = productList;
             List<Order> orders = _orderService.GetAll();
-            
+
             List<Product> products = ViewBag.Products;
 
             return View();
@@ -108,9 +118,9 @@ namespace WebApplication2.Controllers
             _orderService.Create(cartOrder.Order);
             cartOrder.OrderProduct = new OrderProduct();
             cartOrder.OrderProduct.OrderId = cartOrder.Order.Id;
-            for(int i = 1; i <= shoppingCartIds.Count; i++)
+            for (int i = 1; i <= shoppingCartIds.Count; i++)
             {
-                cartOrder.OrderProduct.ProductId = shoppingCartIds[i-1];
+                cartOrder.OrderProduct.ProductId = shoppingCartIds[i - 1];
                 cartOrder.OrderProduct.Quantity = shoppingCartQuantities[i - 1];
                 _orderProductService.Create(cartOrder.OrderProduct);
                 cartOrder.OrderProduct.Id = 0;
