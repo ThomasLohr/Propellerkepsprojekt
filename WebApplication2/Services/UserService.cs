@@ -8,93 +8,42 @@ using WebApplication2.Repositories;
 
 namespace WebApplication2.Services
 {
-
-    // All methods for getting User data from DB goes here
-
     public class UserService
     {
-        private IUserRepository _userRepository = null;
+        private GenericRepository<ApplicationUser>_userRepository = null;
 
         public UserService()
         {
-            _userRepository = new UserRepository();
-        }
-
-        public ApplicationUser GetUserByName(string Name)
-        {
-
-            var listOfAllUsers = _userRepository.ReadUsers();
-
-            var userByName = listOfAllUsers.FirstOrDefault(u => u.FirstName.Contains(Name));
-
-            return userByName;
-        }
-
-        public List<ApplicationUser> GetAll()
-        {
-            var listOfAllUsers = _userRepository.ReadUsers();
-            return listOfAllUsers;
-        }
-
-        public void SaveUsers(List<ApplicationUser> users)
-        {
-            _userRepository.SaveUsers(users);
-        }
-
-        public ApplicationUser GetUserById(string id)
-        {
-            var userById = _userRepository.ReadUsers();
-            
-            var user = userById.FirstOrDefault(p => p.Id.Equals(id));
-
-            return user;
-        }
-
-        public void UpdateUser(ApplicationUser user)
-        {
-            _userRepository.UpdateUser(user);
-        }
-
-        public void Create(ApplicationUser user)
-        {
-            _userRepository.AddUser(user);
-
-        }
-
-        public void RemoveById(string Id)
-        {
-            var user = _userRepository.ReadUsers().FirstOrDefault(p => p.Id.Equals(Id));
-
-            _userRepository.DeleteUser(user);
+            _userRepository = new GenericRepository<ApplicationUser>();
         }
 
 
         public void SetFirstName(ApplicationUser user, string firstName)
         {
             user.FirstName = firstName;
-            UpdateUser(user);
+            _userRepository.Update(user);
         }
 
         public void SetLastName(ApplicationUser user, string lastName)
         {
             user.LastName = lastName;
-            UpdateUser(user);
+            _userRepository.Update(user);
         }
 
         public void SetStreet(ApplicationUser user, string street)
         {
             user.Street = street;
-            UpdateUser(user);
+            _userRepository.Update(user);
         }        
         public void SetZip(ApplicationUser user, string zip)
         {
             user.Zip = zip;
-            UpdateUser(user);
+            _userRepository.Update(user);
         }        
         public void SetCity(ApplicationUser user, string city)
         {
             user.City = city;
-            UpdateUser(user);
+            _userRepository.Update(user);
         }
     }
 }
