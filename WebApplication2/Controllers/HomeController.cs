@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Identity;
 using WebApplication2.ViewModels;
 using System.Security.Claims;
+using WebApplication2.Repositories;
 
 namespace WebApplication2.Controllers
 {
@@ -20,24 +21,37 @@ namespace WebApplication2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        // Dummy lists of products for shopping cart
         private List<Product> products = new List<Product>();
-
         private List<Product> purchasedItems = new List<Product>();
+
+        // Services
         private ProductService _productService;
-        private readonly UserManager<ApplicationUser> _userManager;
         private OrderService _orderService;
         private OrderProductService _orderProductService;
 
+        // Repositories from generic repository class
+        private IGenericRepository<Order> _orderRepository = null;
+        private IGenericRepository<Product> _productRepository = null;
+        private IGenericRepository<OrderProduct> _orderProductRepository = null;
 
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
-            _productService = new ProductService();
+
+            // Repositories
+            _orderRepository = new GenericRepository<Order>();
+            _productRepository = new GenericRepository<Product>();
+            _orderProductRepository = new GenericRepository<OrderProduct>();
+
             _userManager = userManager;
+
+            // Services
+            _productService = new ProductService();
             _orderService = new OrderService();
             _orderProductService = new OrderProductService();
-
         }
 
         public IActionResult Index()
@@ -47,7 +61,7 @@ namespace WebApplication2.Controllers
         public IActionResult Product(int id)
         {
 
-            return View(_productService.GetProductById(id));
+            return View(_productRepository.GetById(id));
         }
 
         public IActionResult Products(string category)
@@ -127,7 +141,9 @@ namespace WebApplication2.Controllers
 
             if (product != null)
             {
-                ViewBag.searchResult = $"Visar alla resultat som matchar <b>{result}</b>.";
+                var resultCount = product.Count();
+
+                ViewBag.searchResult = $"Visar {resultCount} resultat som matchar <b>{result}</b>.";
 
                 return View(await product.ToListAsync());
             }

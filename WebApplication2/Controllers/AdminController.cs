@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,28 +18,47 @@ namespace WebApplication2.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        
+        private readonly ILogger<AdminController> _logger;
+
+        // Services
         private ProductService _productService;
-        private UserService _userService;
         private OrderService _orderService;
         private OrderProductService _orderProductService;
-        private readonly ApplicationDbContext _context;
-        public AdminController(ApplicationDbContext context)
+        private UserService _userService;
+
+        // Repositories from generic repository class
+        private IGenericRepository<Order> _orderRepository = null;
+        private IGenericRepository<Product> _productRepository = null;
+        private IGenericRepository<OrderProduct> _orderProductRepository = null;
+        private IGenericRepository<ApplicationUser> _userRepository = null;
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public AdminController(ILogger<AdminController> logger, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+            _logger = logger;
+
+            // Repositories
+            _orderRepository = new GenericRepository<Order>();
+            _productRepository = new GenericRepository<Product>();
+            _orderProductRepository = new GenericRepository<OrderProduct>();
+
+            _userManager = userManager;
+
+            // Services
             _productService = new ProductService();
-            _userService = new UserService();
             _orderService = new OrderService();
             _orderProductService = new OrderProductService();
-        }
+            _userService = new UserService();
+    }
 
         public IActionResult Index()
         {
             var viewModel = new AdminViewModel();
 
-            viewModel.Orders = _orderService.GetAll();
-            viewModel.OrderProducts = _orderProductService.GetAll();
-            viewModel.Products = _productService.GetAll();
+            viewModel.Orders = _orderRepository.GetAll();
+            viewModel.OrderProducts = _orderProductRepository.GetAll();
+            viewModel.Products = _productRepository.GetAll();
 
             viewModel.NumberOfOrders = viewModel.Orders.Count();
             viewModel.NumberOfOrdersSent = viewModel.Orders.Count(o => o.OrderSent);
@@ -51,33 +72,33 @@ namespace WebApplication2.Controllers
 
         public IActionResult Products()
         {
-            return View(_productService.GetAll());
+            return View(_productRepository.GetAll());
         }
 
         [HttpGet]
         public IActionResult EditProduct(int Id)
         {
             
-            return View(_productService.GetProductById(Id));
+            return View(_productRepository.GetById(Id));
         }
 
         [HttpPost]
         public IActionResult EditProduct(Product product)
         {
-            _productService.Update(product);
+            _productRepository.Update(product);
             return RedirectToAction("Products");
         }
 
 
         public IActionResult RemoveProduct(int Id)
         {
-            _productService.RemoveById(Id);
+            _productRepository.Delete(Id);
             return RedirectToAction("Products");
         }
         [HttpPost]
         public IActionResult CreateProduct(Product product)
         {
-            _productService.Create(product);
+            _productRepository.Insert(product);
             return View();
         }   
 
@@ -92,7 +113,7 @@ namespace WebApplication2.Controllers
         public IActionResult Orders()
         {
 
-            return View(_orderService.GetAll());
+            return View(_orderRepository.GetAll());
         }
 
         [HttpGet]
@@ -101,7 +122,7 @@ namespace WebApplication2.Controllers
 
             var orderViewModel = new OrderViewModel();
 
-            orderViewModel.Order = _orderService.GetOrderById(Id);
+            orderViewModel.Order = _orderRepository.GetById(Id);
             orderViewModel.OrderProductsList = _orderProductService.GetOrderProductByOrderId(Id);
             orderViewModel.TotalPrice = orderViewModel.OrderProductsList.Sum(op => op.Price);
 
@@ -113,37 +134,17 @@ namespace WebApplication2.Controllers
         {
             orderViewModel.Order.Id = id;
 
-            //if (ModelState.IsValid)
-            //{
-            //    Order orderFromView = _context.Orders
-            //                            .Where(o => o.Id == model.Order.Id)
-            //                            .SingleOrDefault();
-
-            //    orderFromView.Id = model.Order.Id;
-            //    orderFromView.UserId = model.Order.UserId;
-            //    orderFromView.ShippedDate = model.Order.ShippedDate;
-            //    orderFromView.OrderSent = model.Order.OrderSent;
-
-            //    _context.Entry(orderFromView).State = EntityState.Modified;
-            //    _context.SaveChanges();
-
-            //    //Include("person")
-
-            //return RedirectToAction("Orders");
-            //}
-            //return View(model);
-
-            _orderService.Update(orderViewModel.Order);
+            _orderRepository.Update(orderViewModel.Order);
             return RedirectToAction("Orders");
         }
         public IActionResult RemoveOrder(int Id)
         {
-            _orderService.RemoveById(Id);
+            _orderRepository.Delete(Id);
             return RedirectToAction("Orders");
         }
         public IActionResult CreateOrder(Order order)
         {
-            _orderService.Create(order);
+            _orderRepository.Insert(order);
             return View();
         }
 
