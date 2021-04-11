@@ -17,7 +17,6 @@ namespace WebApplication2.Services
             _userRepository = new GenericRepository<ApplicationUser>();
         }
 
-
         public void SetFirstName(ApplicationUser user, string firstName)
         {
             user.FirstName = firstName;

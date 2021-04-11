@@ -19,34 +19,6 @@ namespace WebApplication2.Services
             _productRepository = new GenericRepository<Product>();
         }
 
-        public List<Product> GetAll()
-        {
-            return _ctx.Products.ToList();
-        }
-
-        public Product GetProductById(int id)
-        {
-            return _ctx.Products.FirstOrDefault(p => p.Id.Equals(id));
-        }
-        public void Create(Product product)
-        {
-            _ctx.Products.Add(product);
-            _ctx.SaveChanges();
-        }
-
-        public void Update(Product product)
-        {
-            _ctx.Products.Update(product);
-            _ctx.SaveChanges();
-        }
-
-        public void RemoveById(int Id)
-        {
-            var productToRemove = _ctx.Products.FirstOrDefault(p => p.Id.Equals(Id));
-            _ctx.Products.Remove(productToRemove);
-            _ctx.SaveChanges();
-        }
-
         public IEnumerable<Product> SortByCategory(string category)
         {
             if (category == "Djur")
