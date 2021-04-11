@@ -125,10 +125,11 @@ namespace WebApplication2.Controllers
             //_orderProductService.Create(cartOrder.OrderProduct);
             //For populating the view after order is made
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
-            List<Product> productList = new List<Product>();
-            productList.Add(_productRepository.GetById(1));
-            productList.Add(_productRepository.GetById(2));
-            ViewBag.Products = productList;
+            //List<Product> productList = new List<Product>();
+            //productList.Add(_productRepository.GetById(cartOrder.OrderProduct.ProductId));
+            //productList.Add(_productRepository.GetById(cart));
+            //ViewBag.Products = productList;
+            HttpContext.Session.Clear();
             return View();
         }
 

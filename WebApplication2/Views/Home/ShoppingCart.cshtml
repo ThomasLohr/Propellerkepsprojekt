@@ -68,23 +68,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for(int i = 0; i < products.Count; i++)
-                                //@foreach (var product in products)
+
+                                @if (products != null)
                                 {
-                                    <tr>
-                                        <th scope="row" class="border-0">
-                                            <div class="p-2">
-                                                <img src=@products[i].ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
-                                                <div class="ml-3 d-inline-block align-middle">
-                                                    <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@products[i].Id" class="text-dark d-inline-block align-middle">@products[i].ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @products[i].Model</span>
-                                                    <input type="hidden" asp-for="shoppingCartIds" value="@products[i].Id" />
+
+                                    @for (int i = 0; i < products.Count; i++)
+                                    //@foreach (var product in products)
+                                    {
+                                        <tr>
+                                            <th scope="row" class="border-0">
+                                                <div class="p-2">
+                                                    <img src=@products[i].ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                    <div class="ml-3 d-inline-block align-middle">
+                                                        <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@products[i].Id" class="text-dark d-inline-block align-middle">@products[i].ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @products[i].Model</span>
+                                                        <input type="hidden" asp-for="shoppingCartIds" value="@products[i].Id" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </th>
-                                        <td class="border-0 align-middle"><strong>@products[i].Price kr</strong></td>
-                                        <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
-                                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                                    </tr>
+                                            </th>
+                                            <td class="border-0 align-middle"><strong>@products[i].Price kr</strong></td>
+                                            <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
+                                            <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>
@@ -165,33 +170,32 @@
                                     <h5 class="font-weight-bold">$400.00</h5>
                                 </li>
                             </ul>
-                            <button type="submit" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#completeOrderModal" id="sendOrderButton">Slutför Beställning</button>
+                            <button type="button" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#completeOrderModal" id="sendOrderButton">Slutför Beställning</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-        <!-- Modal -->
         <div class="modal fade" id="completeOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">BESTÄLLNING SKICKAD</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Tack för din beställning!</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Tack för din beställning! En orderbekräftelse skickas till &lt;användares e-mail&gt;.</p>
+                        <p>En orderbekräftelse kommer skickas till dig så fort du bekräftat ordern!</p>
                     </div>
                     <div class="modal-footer">
-
-                        <a class="btn btn-primary" asp-controller="Home" asp-action="Index" >Close</a>
-                        @*<button type="button" class="btn btn-secondary" onclick="javascript:window.location='/Home/Index'" data-dismiss="modal">Close</button>*@
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Ångra">Ångra</button>
+                        <button type="submit" class="btn btn-success">Tryck för att bekräfta din order</button>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
+        <!-- Modal -->
 
     </div>
 </div>
