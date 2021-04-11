@@ -17,9 +17,9 @@ namespace WebApplication2.Api
     {
         private GenericRepository<Order> _orderRepository = null;
 
-        public OrdersController(GenericRepository<Order> orderRepository)
+        public OrdersController()
         {
-            _orderRepository = orderRepository;
+            _orderRepository = new GenericRepository<Order>();
         }
 
         [HttpGet]

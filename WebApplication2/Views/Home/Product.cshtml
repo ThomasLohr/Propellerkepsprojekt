@@ -48,37 +48,42 @@
                 </table>
             </div>
             <hr>
-            <div class="table-responsive mb-2">
-                <table class="table table-sm table-borderless">
-                    <tbody>
-                        <tr>
-                            <td class="pl-0 pb-0 w-25">Antal</td>
-                            <td class="pb-0">Storlek: @Model.Size</td>
-                        </tr>
-                        <tr>
-                            <td class="pl-0">
-                                <div class="def-number-input number-input safari_only mb-0">
-                                    <input class="quantity" id="myInput" min="0" name="quantity" value="1" type="number">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="mt-1">
-                                    <div class="form-check form-check-inline pl-0">
-                                        <input type="radio" class="form-check-input" id="small" name="materialExampleRadios"
-                                               checked>
-                                        <label class="form-check-label small text-uppercase card-link-secondary"
-                                               for="small">@Model.Gender</label>
-                                        </div>
+            <form asp-controller="Home" asp-action="AddToCart">
+
+                <div class="table-responsive mb-2">
+                    <table class="table table-sm table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="pl-0 pb-0 w-25">Antal</td>
+                                <td class="pb-0">Storlek: @Model.Size</td>
+                            </tr>
+                            <tr>
+
+                                <td class="pl-0">
+                                    <div class="def-number-input number-input safari_only mb-0">
+                                        <input class="quantity" id="myInput" min="0" name="Quantity" value="1" type="number" >
                                     </div>
                                 </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <button type="button" class="btn btn-primary btn-md mr-1 mb-2 addtocart">Köp</button>
-                <button type="button" class="btn btn-light btn-md mr-1 mb-2 addtocart">
-                    <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
-                </button>
+                                <td>
+                                    <div class="mt-1">
+                                        <div class="form-check form-check-inline pl-0">
+                                            <input type="radio" class="form-check-input" id="small" name="materialExampleRadios"
+                                                   checked>
+                                            <label class="form-check-label small text-uppercase card-link-secondary"
+                                                   for="small">@Model.Gender</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <input type="hidden" name="ProductId" value="@Model.Id" />
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2 addtocart">Köp</button>
+                    <button type="submit" class="btn btn-light btn-md mr-1 mb-2 addtocart">
+                        <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
+                    </button>
+                </form>
                 <div>
                     <a asp-action="Products">Gå tillbaka</a>
                 </div>
