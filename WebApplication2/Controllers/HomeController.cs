@@ -89,15 +89,18 @@ namespace WebApplication2.Controllers
             //Sessiondata Testing
             Cart shoppingcartz = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
             List<Product> productList = new List<Product>();
-            if(shoppingcartz != null)
+            if (shoppingcartz != null)
             {
-                foreach(var products in shoppingcartz.Products)
+                foreach (var products in shoppingcartz.Products)
                 {
                     productList.Add(_productRepository.GetById(products.ProductId));
                 }
             }
             ViewBag.ShoppingCart = productList;
-            ViewBag.ShoppingQuantities = shoppingcartz.Products;
+            if (shoppingcartz != null)
+            {
+                ViewBag.ShoppingQuantities = shoppingcartz.Products;
+            }
             return View();
         }
 
@@ -111,9 +114,9 @@ namespace WebApplication2.Controllers
             _orderRepository.Insert(cartOrder.Order);
             cartOrder.OrderProduct = new OrderProduct();
             cartOrder.OrderProduct.OrderId = cartOrder.Order.Id;
-            for(int i = 1; i <= shoppingCartIds.Count; i++)
+            for (int i = 1; i <= shoppingCartIds.Count; i++)
             {
-                cartOrder.OrderProduct.ProductId = shoppingCartIds[i-1];
+                cartOrder.OrderProduct.ProductId = shoppingCartIds[i - 1];
                 cartOrder.OrderProduct.Quantity = shoppingCartQuantities[i - 1];
                 _orderProductRepository.Insert(cartOrder.OrderProduct);
                 cartOrder.OrderProduct.Id = 0;
@@ -168,7 +171,7 @@ namespace WebApplication2.Controllers
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
 
-            return RedirectToAction("Index", "Home");
+            return Redirect($"/Home/Product/{shoppingcartProduct.ProductId}");
 
         }
 
