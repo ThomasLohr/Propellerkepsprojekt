@@ -43,7 +43,6 @@ namespace WebApplication2
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            services.AddScoped<OrderService>();
             services.AddScoped<ProductService>();
             services.AddScoped<OrderProductService>();
 
