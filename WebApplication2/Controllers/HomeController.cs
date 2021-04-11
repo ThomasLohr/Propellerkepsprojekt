@@ -110,7 +110,7 @@ namespace WebApplication2.Controllers
             //_productService.Create(product);
             //cartOrder.OrderProduct = new OrderProduct() { Quantity = cartOrder.OrderProduct.Quantity };
             cartOrder.Order = new Order();
-            //cartOrder.Order.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            cartOrder.Order.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             _orderRepository.Insert(cartOrder.Order);
             cartOrder.OrderProduct = new OrderProduct();
             cartOrder.OrderProduct.OrderId = cartOrder.Order.Id;

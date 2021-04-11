@@ -175,10 +175,12 @@
 
                                 if (products.Count != 0)
                                 {
+                                    <!----If cart is not empty----->
                                     <button type="button" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#completeOrderModal" id="sendOrderButton">Slutför Beställning</button>
                                 }
                                 else
                                 {
+                                    <!----if cart is empty--------->
                                     <button type="button" class="btn btn-dark rounded-pill py-2 btn-block" data-toggle="modal" data-target="#emptyCartModal">Slutför Beställning</button>
                                 }
                             }
@@ -186,7 +188,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-------------------Sends this modal on orderconfirmation---------------------------->
             <div class="modal fade" id="completeOrderModal" tabindex="-1" role="dialog" aria-labelledby="completeOrderModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -207,7 +209,7 @@
                 </div>
             </div>
 
-
+            <!-------------------Sends this modal if the cart is empty---------------------------->
             <div class="modal fade" id="emptyCartModal" tabindex="-1" role="dialog" aria-labelledby="emptyCartModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
