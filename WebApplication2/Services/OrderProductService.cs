@@ -16,16 +16,6 @@ namespace WebApplication2.Services
             _ctx = new ApplicationDbContext();
         }
 
-        public List<OrderProduct> GetAll()
-        {
-            return _ctx.OrderProduct.ToList();
-        }
-
-        public OrderProduct GetOrderProductById(int id)
-        {
-            return _ctx.OrderProduct.FirstOrDefault(o => o.Id.Equals(id));
-        }
-
         public List<OrderViewModel> GetOrderProductByOrderId(int id)
         {
 
@@ -40,12 +30,6 @@ namespace WebApplication2.Services
                         }).ToList();
 
             return orderProductInfo;
-        }
-        
-        public void Create(OrderProduct orderProduct)
-        {
-            _ctx.OrderProduct.Add(orderProduct);
-            _ctx.SaveChanges();
         }
     }
 }

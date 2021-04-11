@@ -27,8 +27,6 @@ namespace WebApplication2.Controllers
 
         // Services
         private ProductService _productService;
-        private OrderService _orderService;
-        private OrderProductService _orderProductService;
 
         // Repositories from generic repository class
         private IGenericRepository<Order> _orderRepository = null;
@@ -50,8 +48,6 @@ namespace WebApplication2.Controllers
 
             // Services
             _productService = new ProductService();
-            _orderService = new OrderService();
-            _orderProductService = new OrderProductService();
         }
 
         public IActionResult Index()
@@ -85,10 +81,10 @@ namespace WebApplication2.Controllers
             ViewBag.Purshases = purchasedItems;
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             List<Product> productList = new List<Product>();
-            productList.Add(_productService.GetProductById(1));
-            productList.Add(_productService.GetProductById(2));
+            productList.Add(_productRepository.GetById(1));
+            productList.Add(_productRepository.GetById(2));
             ViewBag.Products = productList;
-            List<Order> orders = _orderService.GetAll();
+            var orders = _orderRepository.GetAll();
             
             List<Product> products = ViewBag.Products;
 
@@ -102,14 +98,14 @@ namespace WebApplication2.Controllers
             //cartOrder.OrderProduct = new OrderProduct() { Quantity = cartOrder.OrderProduct.Quantity };
             cartOrder.Order = new Order();
             //cartOrder.Order.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            _orderService.Create(cartOrder.Order);
+            _orderRepository.Insert(cartOrder.Order);
             cartOrder.OrderProduct = new OrderProduct();
             cartOrder.OrderProduct.OrderId = cartOrder.Order.Id;
             for(int i = 1; i <= shoppingCartIds.Count; i++)
             {
                 cartOrder.OrderProduct.ProductId = shoppingCartIds[i-1];
                 cartOrder.OrderProduct.Quantity = shoppingCartQuantities[i - 1];
-                _orderProductService.Create(cartOrder.OrderProduct);
+                _orderProductRepository.Insert(cartOrder.OrderProduct);
                 cartOrder.OrderProduct.Id = 0;
             }
             //cartOrder.OrderProduct.ProductId = shoppingCartIds[0];
@@ -117,8 +113,8 @@ namespace WebApplication2.Controllers
             //For populating the view after order is made
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             List<Product> productList = new List<Product>();
-            productList.Add(_productService.GetProductById(1));
-            productList.Add(_productService.GetProductById(2));
+            productList.Add(_productRepository.GetById(1));
+            productList.Add(_productRepository.GetById(2));
             ViewBag.Products = productList;
             return View();
         }
