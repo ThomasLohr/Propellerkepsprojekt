@@ -4,42 +4,41 @@
     ViewData["Title"] = "Skapa order";
     Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
-
-<h1>Skapa Order</h1>
-
-<h4>Order</h4>
-<hr />
-<form asp-action="CreateOrder" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label asp-for="UserId" class="control-label">Användare</label>
-            <input asp-for="UserId" class="form-control" />
-            <span asp-validation-for="UserId" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-6">
-            <label asp-for="ShippedDate" class="control-label">Skickad</label>
-            <input asp-for="ShippedDate" class="form-control" />
-            <span asp-validation-for="ShippedDate" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label asp-for="OrderSent" class="control-label">Order Skickad</label>
-            <input asp-for="OrderSent" class="form-control" />
-            <span asp-validation-for="OrderSent" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Spara ändringar" class="btn btn-primary" />
-    </div>
-</form>
-
-
-<div>
-    <a asp-action="Orders">Gå tillbaka</a>
+<div class="pt-3">
+    <h1>Skapa Order</h1>
 </div>
+    <hr />
+    <form asp-action="CreateOrder" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="UserId" class="control-label">Användare</label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="ShippedDate" class="control-label">Skickad</label>
+                <input asp-for="ShippedDate" class="form-control" />
+                <span asp-validation-for="ShippedDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="OrderSent" class="control-label">Order Skickad</label>
+                <input asp-for="OrderSent" class="form-control" />
+                <span asp-validation-for="OrderSent" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Spara ändringar" class="btn btn-primary" />
+        </div>
+    </form>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+    <div>
+        <a asp-action="Orders">Gå tillbaka</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
