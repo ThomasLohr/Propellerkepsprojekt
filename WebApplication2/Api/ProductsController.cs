@@ -17,9 +17,9 @@ namespace WebApplication2.Api
     {
         private GenericRepository<Product> _productRepository = null;
 
-        public ProductsController(GenericRepository<Product> productRepository)
+        public ProductsController()
         {
-            _productRepository = productRepository;
+            _productRepository = new GenericRepository<Product>();
         }
 
         [HttpGet]
