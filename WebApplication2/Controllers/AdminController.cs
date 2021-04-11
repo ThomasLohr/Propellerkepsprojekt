@@ -22,7 +22,6 @@ namespace WebApplication2.Controllers
         private readonly ILogger<AdminController> _logger;
 
         // Services
-        private ProductService _productService;
         private OrderProductService _orderProductService;
 
         // Repositories from generic repository class
@@ -166,6 +165,8 @@ namespace WebApplication2.Controllers
 
             if (!string.IsNullOrEmpty(searchId))
             {
+                searchId.Trim();
+
                 if (_userManager.Users.Any(u => u.Id.Equals(searchId)))
                 {
                     foundUser.Add(await _userManager.FindByIdAsync(searchId));
@@ -216,8 +217,6 @@ namespace WebApplication2.Controllers
 
         public async Task<IActionResult> RemoveUser(string Id)
         {
-            //user = await _userManager.FindByIdAsync(Id);
-
             var exmsg = "";
 
             try
