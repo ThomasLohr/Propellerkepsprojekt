@@ -3453,7 +3453,8 @@ input:hover, input:focus {
 }
 
     .popular-items .single-popular-items .popular-img img {
-        width: 100%
+        width: 350px;
+        height: 350px;
     }
 
     .popular-items .single-popular-items .popular-img .img-cap {
