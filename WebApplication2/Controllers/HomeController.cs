@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using WebApplication2.ViewModels;
 using System.Security.Claims;
 using WebApplication2.Helpers;
+using WebApplication2.Repositories;
 
 namespace WebApplication2.Controllers
 {
@@ -32,6 +33,7 @@ namespace WebApplication2.Controllers
         private IGenericRepository<Order> _orderRepository = null;
         private IGenericRepository<Product> _productRepository = null;
         private IGenericRepository<OrderProduct> _orderProductRepository = null;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
@@ -81,7 +83,7 @@ namespace WebApplication2.Controllers
             productList.Add(_productService.GetProductById(1));
             productList.Add(_productService.GetProductById(2));
             ViewBag.Products = productList;*/
-            List<Order> orders = _orderService.GetAll();
+            var orders = _orderRepository.GetAll();
 
             //List<Product> products = ViewBag.Products;
             //Sessiondata Testing
@@ -91,7 +93,7 @@ namespace WebApplication2.Controllers
             {
                 foreach(var products in shoppingcartz.Products)
                 {
-                    productList.Add(_productService.GetProductById(products.ProductId));
+                    productList.Add(_productRepository.GetById(products.ProductId));
                 }
             }
             ViewBag.ShoppingCart = productList;
