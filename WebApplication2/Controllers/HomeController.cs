@@ -79,14 +79,7 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> ShoppingCartAsync()
         {
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
-            /*List<Product> productList = new List<Product>();
-            productList.Add(_productService.GetProductById(1));
-            productList.Add(_productService.GetProductById(2));
-            ViewBag.Products = productList;*/
             var orders = _orderRepository.GetAll();
-
-            //List<Product> products = ViewBag.Products;
-            //Sessiondata Testing
             Cart shoppingcartz = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
             List<Product> productList = new List<Product>();
             if (shoppingcartz != null)
@@ -107,8 +100,6 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder, List<int> shoppingCartIds, List<int> shoppingCartQuantities)
         {
-            //_productService.Create(product);
-            //cartOrder.OrderProduct = new OrderProduct() { Quantity = cartOrder.OrderProduct.Quantity };
             cartOrder.Order = new Order();
             cartOrder.Order.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             _orderRepository.Insert(cartOrder.Order);
@@ -121,14 +112,7 @@ namespace WebApplication2.Controllers
                 _orderProductRepository.Insert(cartOrder.OrderProduct);
                 cartOrder.OrderProduct.Id = 0;
             }
-            //cartOrder.OrderProduct.ProductId = shoppingCartIds[0];
-            //_orderProductService.Create(cartOrder.OrderProduct);
-            //For populating the view after order is made
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
-            //List<Product> productList = new List<Product>();
-            //productList.Add(_productRepository.GetById(cartOrder.OrderProduct.ProductId));
-            //productList.Add(_productRepository.GetById(cart));
-            //ViewBag.Products = productList;
             HttpContext.Session.Clear();
             return View();
         }
@@ -138,7 +122,6 @@ namespace WebApplication2.Controllers
             return View();
         }
 
-        //SessionData Experiemtn
         public IActionResult AddToCart(OrderProduct shoppingcartProduct)
         {
             if (!ModelState.IsValid)
