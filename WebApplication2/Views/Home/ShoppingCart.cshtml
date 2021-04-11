@@ -1,6 +1,7 @@
 ﻿@model WebApplication2.ViewModels.OrderViewModel;
 @{
     ViewData["Title"] = "Kundvagn";
+    decimal sum = 0;
 
     ApplicationUser currentUser = checkUser(ViewBag.CurrentUser);
 
@@ -162,12 +163,30 @@
                         <div class="p-4">
                             <p class="font-italic mb-4">Fraktkostnad och ytterligare kostnader beräknas utifrån de värden du har angett.</p>
                             <ul class="list-unstyled mb-4">
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Summa</strong><strong>$390.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Frakt</strong><strong>$10.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Moms</strong><strong>$0.00</strong></li>
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                    <strong class="text-muted">Frakt</strong><strong>
+                                        59kr
+                                        @if (products != null)
+                                        {
+
+                                            if (products.Count != 0)
+                                            {
+                                                sum += 59;
+                                            }
+                                        }
+                                    </strong>
+                                </li>
                                 <li class="d-flex justify-content-between py-3 border-bottom">
                                     <strong class="text-muted">Summa (inkl. moms)</strong>
-                                    <h5 class="font-weight-bold">$400.00</h5>
+
+                                    @if (products != null)
+                                    {
+                                        for (int i = 0; i < products.Count; i++)
+                                        {
+                                            sum += (products[i].Price * orderProducts[i].Quantity);
+                                        }
+                                    }
+                                    <h5 class="font-weight-bold">@sum kr</h5>
                                 </li>
                             </ul>
                             @if (products != null)
