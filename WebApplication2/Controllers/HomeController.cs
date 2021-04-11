@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Identity;
 using WebApplication2.ViewModels;
 using System.Security.Claims;
+using WebApplication2.Helpers;
 
 namespace WebApplication2.Controllers
 {
@@ -27,7 +28,6 @@ namespace WebApplication2.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private OrderService _orderService;
         private OrderProductService _orderProductService;
-
 
 
         public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
@@ -68,16 +68,26 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public async Task<IActionResult> ShoppingCartAsync()
         {
-            ViewBag.Purshases = purchasedItems;
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
-            List<Product> productList = new List<Product>();
+            /*List<Product> productList = new List<Product>();
             productList.Add(_productService.GetProductById(1));
             productList.Add(_productService.GetProductById(2));
-            ViewBag.Products = productList;
+            ViewBag.Products = productList;*/
             List<Order> orders = _orderService.GetAll();
-            
-            List<Product> products = ViewBag.Products;
 
+            //List<Product> products = ViewBag.Products;
+            //Sessiondata Testing
+            Cart shoppingcartz = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            List<Product> productList = new List<Product>();
+            if(shoppingcartz != null)
+            {
+                foreach(var products in shoppingcartz.Products)
+                {
+                    productList.Add(_productService.GetProductById(products.ProductId));
+                }
+            }
+            ViewBag.ShoppingCart = productList;
+            ViewBag.ShoppingQuantities = shoppingcartz.Products;
             return View();
         }
 
@@ -114,6 +124,43 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+        //SessionData Experiemtn
+        public IActionResult AddToCart(OrderProduct shoppingcartProduct)
+        {
+            if (!ModelState.IsValid)
+            {
+                RedirectToAction("Index");
+            }
+
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+            if (shopCart == null)
+            {
+                shopCart = new Cart
+                {
+                    Products = new List<OrderProduct>()
+                };
+            }
+
+            if (shopCart.Products.Exists(p => p.ProductId == shoppingcartProduct.ProductId))
+            {
+                shopCart.Products.First(p => p.ProductId == shoppingcartProduct.ProductId).Quantity += shoppingcartProduct.Quantity;
+            }
+            else
+            {
+                shopCart.Products.Add(new OrderProduct
+                {
+                    ProductId = shoppingcartProduct.ProductId,
+                    Quantity = shoppingcartProduct.Quantity
+
+                });
+            }
+
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+
+            return RedirectToAction("Index", "Home");
+
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

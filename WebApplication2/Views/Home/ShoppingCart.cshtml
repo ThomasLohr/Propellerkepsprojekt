@@ -4,8 +4,8 @@
 
     ApplicationUser currentUser = checkUser(ViewBag.CurrentUser);
 
-    List<Product> products = ViewBag.Products;
-
+    List<Product> products = ViewBag.ShoppingCart;
+    List<OrderProduct> orderProducts = ViewBag.ShoppingQuantities;
     Order order = new Order();
     List<int> cartProductIds = new List<int>();
     ApplicationUser checkUser(ApplicationUser user)
@@ -70,20 +70,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var product in products)
+                                @for(int i = 0; i < products.Count; i++)
+                                //@foreach (var product in products)
                                 {
                                     <tr>
                                         <th scope="row" class="border-0">
                                             <div class="p-2">
-                                                <img src=@product.ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                <img src=@products[i].ImageUrl alt="" width="70" class="img-fluid rounded shadow-sm">
                                                 <div class="ml-3 d-inline-block align-middle">
-                                                    <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id" class="text-dark d-inline-block align-middle">@product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @product.Model</span>
-                                                    <input type="hidden" asp-for="shoppingCartIds" value="@product.Id" />
+                                                    <h5 class="mb-0"> <a asp-controller="Home" asp-action="Product" asp-route-id="@products[i].Id" class="text-dark d-inline-block align-middle">@products[i].ProductName</a></h5><span class="text-muted font-weight-normal font-italic d-block">Modell: @products[i].Model</span>
+                                                    <input type="hidden" asp-for="shoppingCartIds" value="@products[i].Id" />
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class="border-0 align-middle"><strong>@product.Price kr</strong></td>
-                                        <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="1" type="number" style="width:75px" /></strong></td>
+                                        <td class="border-0 align-middle"><strong>@products[i].Price kr</strong></td>
+                                        <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
                                         <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                 }
