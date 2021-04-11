@@ -67,10 +67,6 @@ namespace WebApplication2.Areas.Identity.Pages.Account.Manage
 
             Username = userName;
 
-
-
-
-
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,

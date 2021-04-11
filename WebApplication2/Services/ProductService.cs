@@ -11,10 +11,12 @@ namespace WebApplication2.Services
     public class ProductService
     {
         private ApplicationDbContext _ctx;
+        private GenericRepository<Product> _productRepository;
 
         public ProductService()
         {
             _ctx = new ApplicationDbContext();
+            _productRepository = new GenericRepository<Product>();
         }
 
         public List<Product> GetAll()
@@ -45,7 +47,7 @@ namespace WebApplication2.Services
             _ctx.SaveChanges();
         }
 
-        public List<Product> SortByCategory(string category)
+        public IEnumerable<Product> SortByCategory(string category)
         {
             if (category == "Djur")
             {
@@ -59,45 +61,48 @@ namespace WebApplication2.Services
             {
                 return _ctx.Products.Where(p => p.Category.Equals(category)).ToList();
             }
-            return GetAll();
+            return _productRepository.GetAll();
         }
 
         public IQueryable<Product> SearchProducts(string keyWord)
         {
             // Get all products from DB and save them to an IQueryable
-            var product = from m in _ctx.Products
-                          select m;
+            var products = _productRepository.GetAllRaw();
 
-            // Check if the IQueryable contains the search keyword in tables ProductName, Modekl, Size, Color, Gender
+            //Check if the IQueryable contains the search keyword in tables ProductName, Model, Size, Color, Gender, Category
             if (!string.IsNullOrEmpty(keyWord))
             {
-                if (product.Any(s => s.ProductName.Contains(keyWord)))
+                if (products.Any(s => s.ProductName.Contains(keyWord)))
                 {
-                    product = product.Where(s => s.ProductName.Contains(keyWord));
+                    products = products.Where(s => s.ProductName.Contains(keyWord));
                 }
-                else if (product.Any(s => s.Model.Contains(keyWord)))
+                else if (products.Any(s => s.Model.Contains(keyWord)))
                 {
-                    product = product.Where(s => s.Model.Contains(keyWord));
+                    products = products.Where(s => s.Model.Contains(keyWord));
                 }
-                else if (product.Any(s => s.Size.Contains(keyWord)))
+                else if (products.Any(s => s.Size.Contains(keyWord)))
                 {
-                    product  = product.Where(s => s.Size.Contains(keyWord));
+                    products = products.Where(s => s.Size.Contains(keyWord));
                 }
-                else if (product.Any(s => s.Color.Contains(keyWord)))
+                else if (products.Any(s => s.Color.Contains(keyWord)))
                 {
-                    product = product.Where(s => s.Color.Contains(keyWord));
+                    products = products.Where(s => s.Color.Contains(keyWord));
                 }
-                else if (product.Any(s => s.Gender.Contains(keyWord)))
+                else if (products.Any(s => s.Gender.Contains(keyWord)))
                 {
-                    product = product.Where(s => s.Gender.Contains(keyWord));
+                    products = products.Where(s => s.Gender.Contains(keyWord));
+                }
+                else if (products.Any(s => s.Category.Contains(keyWord)))
+                {
+                    products = products.Where(s => s.Category.Contains(keyWord));
                 }
                 else
                 {
-                    product = null;
+                    products = null;
                 }
             }
 
-            return product;
+            return products;
         }
     }
 }
