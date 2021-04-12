@@ -25,9 +25,11 @@
                             <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id">
                                 <img src="@product.ImageUrl" alt="" />
                             </a>
-                            <div class="img-cap">
-                                <span>Visa detaljer</span>
-                            </div>
+                            <a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id">
+                                <div asp-action="Product" class="img-cap">
+                                    <span>Visa detaljer</span>
+                                </div>
+                            </a>
                         </div>
                         <div class="popular-caption">
                             <h3><a asp-controller="Home" asp-action="Product" asp-route-id="@product.Id">@product.ProductName</a></h3>
