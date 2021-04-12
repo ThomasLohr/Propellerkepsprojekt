@@ -9,7 +9,6 @@
     List<OrderProduct> orderProducts = ViewBag.ShoppingQuantities;
     Order order = new Order();
     List<int> cartProductIds = new List<int>();
-    List<int> kukLuder = new List<int>();
     ApplicationUser checkUser(ApplicationUser user)
     {
         if (user != null)
@@ -90,16 +89,14 @@
                                             <td class="border-0 align-middle"><strong>@products[i].Price kr</strong></td>
                                             <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
                                             <td class="border-0 align-middle"><a asp-action="DIN ACTION" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                                            @{
-                                                kukLuder.Add(orderProducts[i].Quantity);
-                                            }
                                         </tr>
                                     }
                                 }
 
                             </tbody>
                         </table>
-                        <a class="float-right" asp-action="UpdateCart" asp-route-cart="@{kukLuder.Count();}">Uppdatera varukorgen   <i class="fa fa-sync"></i></a>
+                        <a class="float-right" asp-action="UpdateCart" name="Submit1">Uppdatera varukorgen   <i class="fa fa-sync"></i></a>
+                        <input type="submit" value="Work 3" asp-controller="Home" asp-action="UpdateCart"/>
                     </div>
                     <!-- End -->
                 </div>

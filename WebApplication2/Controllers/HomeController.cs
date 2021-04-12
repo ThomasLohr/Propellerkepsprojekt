@@ -100,7 +100,7 @@ namespace WebApplication2.Controllers
         }
 
 
-        public IActionResult UpdateCart(int cart)
+        public IActionResult UpdateCart(List<int> shoppingCartQuantities)
         {
             var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
 
@@ -112,12 +112,9 @@ namespace WebApplication2.Controllers
                 };
             }
 
-            foreach (OrderProduct product in shopCart.Products)
+            for(int i = 0; i < shoppingCartQuantities.Count; i++)
             {
-                if (shopCart.Products.Exists(p => p.ProductId == product.ProductId))
-                {
-                    product.Quantity += 1;
-                }
+                shopCart.Products[i].Quantity = shoppingCartQuantities[i];
             }
 
             SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
