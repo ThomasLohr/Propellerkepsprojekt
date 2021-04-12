@@ -111,7 +111,18 @@ namespace WebApplication2.Controllers
                 cartOrder.OrderProduct.Quantity = shoppingCartQuantities[i - 1];
                 _orderProductRepository.Insert(cartOrder.OrderProduct);
                 cartOrder.OrderProduct.Id = 0;
+             
+ 
             }
+            //Updates the stock of orderered products
+            foreach (int id in shoppingCartIds)
+            {
+                var product = _productRepository.GetById(id);
+                product.Stock -= cartOrder.OrderProduct.Quantity;
+
+                _productRepository.Update(product);
+            }
+
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             HttpContext.Session.Clear();
             return View();
