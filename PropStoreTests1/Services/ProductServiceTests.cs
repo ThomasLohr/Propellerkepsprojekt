@@ -36,10 +36,18 @@ namespace WebApplication2.Services.Tests
         [TestMethod()]
         public void KeyWordIsEqualModel()
         {
-            string tryString = "Standard";
+            string tryString = "Bästa vän";
             productService.SearchProducts(tryString);
-            Assert.AreEqual(tryString, "Standard");
+            Assert.AreEqual(tryString, "Bästa vän");
         }
+        [TestMethod()]
+        public void KeyWordModelFailTest()
+        {
+            string tryString = "Stjärna";
+            productService.SearchProducts(tryString);
+            Assert.Fail(tryString, "Stjärna");
+        }
+
 
 
     }
