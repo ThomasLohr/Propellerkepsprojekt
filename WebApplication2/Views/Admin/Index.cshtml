@@ -14,66 +14,67 @@
     <script src="~/js/RecieveDeliverMessage.js"></script>
 }
 
+<div class="container">
+    <div class="pt-3 text-center">
+        <h1>Admin Kontrollpanel</h1>
+        <a asp-controller="Admin" asp-action="Orders">
+            <input type="button" style='width:300px;height:200px;font-size:30px;margin-top:20px' class="btn btn-primary float-left" value="Ordrar" />
+        </a>
+        <a asp-controller="Admin" asp-action="Users">
+            <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary float-none" value="Användare" />
+        </a>
+        <a asp-controller="Admin" asp-action="Products">
+            <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary float-right" value="Produkter" />
+        </a>
+    </div>
 
-<div class="pt-3">
-    <h1>Admin Kontrollpanel</h1>
-    <a asp-controller="Admin" asp-action="Orders">
-        <input type="button" style='width:300px;height:200px;font-size:30px;margin-top:20px' class="btn btn-primary" value="Ordrar" />
-    </a>
-    <a asp-controller="Admin" asp-action="Users">
-        <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Användare" />
-    </a>
-    <a asp-controller="Admin" asp-action="Products">
-        <input type="button" style='width:300px;height:200px;font-size:30px;margin-left:20px;margin-top:20px' class="btn btn-primary" value="Produkter" />
-    </a>
-</div>
-
-<div class="pt-5">
-    <h5>Snabbstatistik</h5>
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>
-                    Antal Kunder
-                </th>
-                <th>
-                    Antal Order
-                </th>
-                <th>
-                    Skickade Order
-                </th>
-                <th>
-                    Sålda Produkter
-                </th>
-                <th>
-                    Produktsortiment
-                </th>
-                <th>
-                    Totalt Lagersaldo
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="bg-light">
-                <td class="text-align-vertical-middle">
-                    <span title="Totalt antal registrerade kunder.">@Html.DisplayFor(modelItem => Model.NumberOfCustomers)</span>
-                </td>
-                <td class="text-align-vertical-middle">
-                    <span title="Totalt antal bekräftade order.">@Html.DisplayFor(modelItem => Model.NumberOfOrders)</span>
-                </td>
-                <td class="text-align-vertical-middle">
-                    <span title="Totalt antal order skickade till kund.">@Html.DisplayFor(modelItem => Model.NumberOfOrdersSent)</span>
-                </td>
-                <td class="text-align-vertical-middle">
-                    <span title="Totalt antal sålda produkter.">@Html.DisplayFor(modelItem => Model.NumberOfProductsSold)</span>
-                </td>
-                <td class="text-align-vertical-middle">
-                    <span title="Totalt antal produkter i sortiment.">@Html.DisplayFor(modelItem => Model.NumberOfProducts)</span>
-                </td>
-                <td class="text-align-vertical-middle">
-                    <span title="Totalt antal produkter i lager.">@Html.DisplayFor(modelItem => Model.ProductTotalStock)</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="pt-5">
+        <h5>Snabbstatistik</h5>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Antal Kunder
+                    </th>
+                    <th>
+                        Antal Order
+                    </th>
+                    <th>
+                        Skickade Order
+                    </th>
+                    <th>
+                        Sålda Produkter
+                    </th>
+                    <th>
+                        Produktsortiment
+                    </th>
+                    <th>
+                        Totalt Lagersaldo
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-light">
+                    <td class="text-align-vertical-middle">
+                        <span title="Totalt antal registrerade kunder.">@Html.DisplayFor(modelItem => Model.NumberOfCustomers)</span>
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        <span title="Totalt antal bekräftade order.">@Html.DisplayFor(modelItem => Model.NumberOfOrders)</span>
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        <span title="Totalt antal order skickade till kund.">@Html.DisplayFor(modelItem => Model.NumberOfOrdersSent)</span>
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        <span title="Totalt antal sålda produkter.">@Html.DisplayFor(modelItem => Model.NumberOfProductsSold)</span>
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        <span title="Totalt antal produkter i sortiment.">@Html.DisplayFor(modelItem => Model.NumberOfProducts)</span>
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        <span title="Totalt antal produkter i lager.">@Html.DisplayFor(modelItem => Model.ProductTotalStock)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
