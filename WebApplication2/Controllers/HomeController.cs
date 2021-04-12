@@ -28,6 +28,7 @@ namespace WebApplication2.Controllers
 
         // Services
         private ProductService _productService;
+        private OrderProductService _orderProductService;
 
         // Repositories from generic repository class
         private IGenericRepository<Order> _orderRepository = null;
@@ -48,6 +49,7 @@ namespace WebApplication2.Controllers
 
             // Services
             _productService = new ProductService();
+            _orderProductService = new OrderProductService();
         }
 
         public IActionResult Index()
@@ -100,25 +102,14 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder, List<int> shoppingCartIds, List<int> shoppingCartQuantities)
         {
-            cartOrder.Order = new Order();
-            cartOrder.Order.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            _orderRepository.Insert(cartOrder.Order);
-            cartOrder.OrderProduct = new OrderProduct();
-            cartOrder.OrderProduct.OrderId = cartOrder.Order.Id;
-            for (int i = 1; i <= shoppingCartIds.Count; i++)
-            {
-                cartOrder.OrderProduct.ProductId = shoppingCartIds[i - 1];
-                cartOrder.OrderProduct.Quantity = shoppingCartQuantities[i - 1];
-                _orderProductRepository.Insert(cartOrder.OrderProduct);
-                cartOrder.OrderProduct.Id = 0;
-             
- 
-            }
+            //Sends the order to the database
+            _orderProductService.SendToDb(cartOrder, shoppingCartIds, shoppingCartQuantities, User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             //Updates the stock of orderered products
             _productService.UpdateStock(shoppingCartIds, cartOrder);
 
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
+            //Clear the cart sessiondata/cookie
             HttpContext.Session.Clear();
             return View();
         }
