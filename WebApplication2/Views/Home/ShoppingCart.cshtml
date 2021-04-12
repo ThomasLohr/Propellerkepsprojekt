@@ -9,6 +9,7 @@
     List<OrderProduct> orderProducts = ViewBag.ShoppingQuantities;
     Order order = new Order();
     List<int> cartProductIds = new List<int>();
+    List<int> kukLuder = new List<int>();
     ApplicationUser checkUser(ApplicationUser user)
     {
         if (user != null)
@@ -88,12 +89,17 @@
                                             </th>
                                             <td class="border-0 align-middle"><strong>@products[i].Price kr</strong></td>
                                             <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
-                                            <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                            <td class="border-0 align-middle"><a asp-action="DIN ACTION" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                            @{
+                                                kukLuder.Add(orderProducts[i].Quantity);
+                                            }
                                         </tr>
                                     }
                                 }
+
                             </tbody>
                         </table>
+                        <a class="float-right" asp-action="UpdateCart" asp-route-cart="@{kukLuder.Count();}">Uppdatera varukorgen   <i class="fa fa-sync"></i></a>
                     </div>
                     <!-- End -->
                 </div>
@@ -104,38 +110,38 @@
                     <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Dina Uppgifter</div>
 
                     <div class="p-4">
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">E-postadress</a></h5>
+                        <h5 class="mb-0"> <a class="text-dark d-inline-block align-middle">E-postadress</a></h5>
                         <div class="input-group mb-4 border rounded-pill p-2">
                             <input class="form-control border-0" type="text" value="@currentUser.Email" placeholder="Ex. namn@mail.com" aria-describedby="button-addon3" />
                         </div>
                         <div style="display:inline-block">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Förnamn</a></h5>
+                            <h5 class="mb-0"> <a class="text-dark d-inline-block align-middle">Förnamn</a></h5>
                             <div class="input-group mb-4 border rounded-pill p-2">
                                 <input class="form-control border-0" type="text" value="@currentUser.FirstName" placeholder="Ex. Lars" aria-describedby="button-addon3" />
                             </div>
                         </div>
                         <div style="display:inline-block;margin-left:10px">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Efternamn</a></h5>
+                            <h5 class="mb-0"> <a class="text-dark d-inline-block align-middle">Efternamn</a></h5>
                             <div class="input-group mb-4 border rounded-pill p-2">
                                 <input class="form-control border-0" type="text" value="@currentUser.LastName" placeholder="Ex. von Propellerkeps" aria-describedby="button-addon3" />
                             </div>
                         </div>
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Telefonnummer</a></h5>
+                        <h5 class="mb-0"> <a class="text-dark d-inline-block align-middle">Telefonnummer</a></h5>
                         <div class="input-group mb-4 border rounded-pill p-2">
                             <input class="form-control border-0" type="text" value="@currentUser.PhoneNumber" placeholder="Ex. 0771 793 336" aria-describedby="button-addon3" />
                         </div>
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Leveransadress</a></h5>
+                        <h5 class="mb-0"> <a class="text-dark d-inline-block align-middle">Leveransadress</a></h5>
                         <div class="input-group mb-4 border rounded-pill p-2">
                             <input class="form-control border-0" type="text" value="@currentUser.Street" placeholder="Ex. Propellergatan 16" aria-describedby="button-addon3" />
                         </div>
                         <div style="display:inline-block">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Postnummer</a></h5>
+                            <h5 class="mb-0"> <a class="text-dark d-inline-block align-middle">Postnummer</a></h5>
                             <div class="input-group mb-4 border rounded-pill p-2">
                                 <input class="form-control border-0" type="text" value="@currentUser.Zip" placeholder="Ex. 226 56" aria-describedby="button-addon3" />
                             </div>
                         </div>
                         <div style="display:inline-block;margin-left:10px">
-                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Stad</a></h5>
+                            <h5 class="mb-0"> <a class="text-dark d-inline-block align-middle">Stad</a></h5>
                             <div class="input-group mb-4 border rounded-pill p-2">
                                 <input class="form-control border-0" type="text" value="@currentUser.City" placeholder="Ex. Flygköping" aria-describedby="button-addon3" />
                             </div>

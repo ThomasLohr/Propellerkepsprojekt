@@ -99,6 +99,33 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+
+        public IActionResult UpdateCart(int cart)
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+            if (shopCart == null)
+            {
+                shopCart = new Cart
+                {
+                    Products = new List<OrderProduct>()
+                };
+            }
+
+            foreach (OrderProduct product in shopCart.Products)
+            {
+                if (shopCart.Products.Exists(p => p.ProductId == product.ProductId))
+                {
+                    product.Quantity += 1;
+                }
+            }
+
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+
+            return RedirectToAction("ShoppingCart");
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder, List<int> shoppingCartIds, List<int> shoppingCartQuantities)
         {

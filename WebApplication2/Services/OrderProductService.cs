@@ -43,6 +43,7 @@ namespace WebApplication2.Services
 
         public void SendToDb(OrderViewModel cartOrder, List<int> shoppingCartIds, List<int> shoppingCartQuantities, string userId)
         {
+            
             cartOrder.Order = new Order();
             cartOrder.Order.UserId = userId;
             _orderRepository.Insert(cartOrder.Order);
