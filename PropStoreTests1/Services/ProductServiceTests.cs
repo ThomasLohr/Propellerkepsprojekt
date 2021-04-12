@@ -47,8 +47,5 @@ namespace WebApplication2.Services.Tests
             productService.SearchProducts(tryString);
             Assert.Fail(tryString, "Stjärna");
         }
-
-
-
     }
 }
