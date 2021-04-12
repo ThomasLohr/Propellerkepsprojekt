@@ -128,6 +128,15 @@ namespace WebApplication2.Controllers
         {
             orderViewModel.Order.Id = id;
 
+            if (orderViewModel.Order.OrderSent)
+            {
+                orderViewModel.Order.ShippedDate = DateTime.UtcNow;
+            }
+            else
+            {
+                orderViewModel.Order.ShippedDate = null;
+            }
+
             _orderRepository.Update(orderViewModel.Order);
             return RedirectToAction("Orders");
         }
