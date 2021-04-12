@@ -54,6 +54,7 @@ namespace WebApplication2.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
         public IActionResult Product(int id)
