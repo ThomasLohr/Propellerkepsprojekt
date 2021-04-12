@@ -88,7 +88,7 @@
                                             </th>
                                             <td class="border-0 align-middle"><strong>@products[i].Price kr</strong></td>
                                             <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
-                                            <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                            <td class="border-0 align-middle"><a asp-action="RemoveFromCart" asp-route-id="@i" class="text-dark"><i class="fa fa-trash"></i></a></td>
                                         </tr>
                                     }
                                 }
