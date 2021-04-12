@@ -16,6 +16,7 @@ namespace WebApplication2.ViewModels
         public int NumberOfOrdersSent { get; set; }
 
         public int NumberOfProducts { get; set; }
+        public long NumberOfProductsSold { get; set; }
         public int ProductTotalStock { get; set; }
     }
 }

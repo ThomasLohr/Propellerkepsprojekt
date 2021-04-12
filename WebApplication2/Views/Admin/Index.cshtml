@@ -40,6 +40,9 @@
                     Skickade Order
                 </th>
                 <th>
+                    Sålda Produkter
+                </th>
+                <th>
                     Produktsortiment
                 </th>
                 <th>
@@ -54,6 +57,9 @@
                 </td>
                 <td class="text-align-vertical-middle">
                     <span title="Total number of orders shipped to customer">@Html.DisplayFor(modelItem => Model.NumberOfOrdersSent)</span>
+                </td>
+                <td class="text-align-vertical-middle">
+                    <span title="Total number of orders shipped to customer">@Html.DisplayFor(modelItem => Model.NumberOfProductsSold)</span>
                 </td>
                 <td class="text-align-vertical-middle">
                     <span title="Total variety of products in stock.">@Html.DisplayFor(modelItem => Model.NumberOfProducts)</span>
