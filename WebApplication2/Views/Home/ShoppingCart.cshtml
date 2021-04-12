@@ -87,7 +87,7 @@
                                                 </div>
                                             </th>
                                             <td class="border-0 align-middle"><strong>@products[i].Price kr</strong></td>
-                                            <td class="border-0 align-middle"><strong><input class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
+                                            <td class="border-0 align-middle"><strong><input min="1" class="form-control mr-sm-2" asp-for="shoppingCartQuantities" value="@orderProducts[i].Quantity" type="number" style="width:75px" /></strong></td>
                                             <td class="border-0 align-middle"><a asp-action="DIN ACTION" class="text-dark"><i class="fa fa-trash"></i></a></td>
                                         </tr>
                                     }
@@ -95,8 +95,7 @@
 
                             </tbody>
                         </table>
-                        <a class="float-right" asp-action="UpdateCart" name="Submit1">Uppdatera varukorgen   <i class="fa fa-sync"></i></a>
-                        <input type="submit" value="Work 3" asp-controller="Home" asp-action="UpdateCart"/>
+                        <span><input class="float-right btn btn-primary" type="submit" value="Uppdatera kundvagnen" asp-action="UpdateCart" /></i></span>
                     </div>
                     <!-- End -->
                 </div>
