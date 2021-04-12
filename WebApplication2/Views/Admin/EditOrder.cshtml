@@ -23,14 +23,9 @@
                 <input asp-for="Order.CreatedDate" class="form-control" />
                 <span asp-validation-for="Order.CreatedDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Order.ShippedDate" class="control-label">Datum skickad</label>
-                <input asp-for="Order.ShippedDate" class="form-control" />
-                <span asp-validation-for="Order.ShippedDate" class="text-danger"></span>
-            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Order.OrderSent" />
+                    @Html.CheckBoxFor(x => x.Order.OrderSent)
                     Order skickad
                 </label>
             </div>
