@@ -54,10 +54,11 @@ namespace WebApplication2.Controllers
             viewModel.OrderProducts = _orderProductRepository.GetAll();
             viewModel.Products = _productRepository.GetAll();
 
+            viewModel.NumberOfCustomers = _userManager.Users.Count();
             viewModel.NumberOfOrders = viewModel.Orders.Count();
             viewModel.NumberOfOrdersSent = viewModel.Orders.Count(o => o.OrderSent);
-            viewModel.NumberOfProducts = viewModel.Products.Count();
             viewModel.NumberOfProductsSold = viewModel.OrderProducts.Sum(op => op.Quantity);
+            viewModel.NumberOfProducts = viewModel.Products.Count();
             viewModel.ProductTotalStock = viewModel.Products.Sum(p => p.Stock);
 
             return View(viewModel);

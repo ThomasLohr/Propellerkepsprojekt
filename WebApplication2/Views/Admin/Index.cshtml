@@ -34,6 +34,9 @@
         <thead class="thead-dark">
             <tr>
                 <th>
+                    Antal Kunder
+                </th>
+                <th>
                     Antal Order
                 </th>
                 <th>
@@ -53,19 +56,22 @@
         <tbody>
             <tr class="bg-light">
                 <td class="text-align-vertical-middle">
-                    <span title="Total number of confirmed orders">@Html.DisplayFor(modelItem => Model.NumberOfOrders)</span>
+                    <span title="Totalt antal registrerade kunder.">@Html.DisplayFor(modelItem => Model.NumberOfCustomers)</span>
                 </td>
                 <td class="text-align-vertical-middle">
-                    <span title="Total number of orders shipped to customer">@Html.DisplayFor(modelItem => Model.NumberOfOrdersSent)</span>
+                    <span title="Totalt antal bekräftade order.">@Html.DisplayFor(modelItem => Model.NumberOfOrders)</span>
                 </td>
                 <td class="text-align-vertical-middle">
-                    <span title="Total number of orders shipped to customer">@Html.DisplayFor(modelItem => Model.NumberOfProductsSold)</span>
+                    <span title="Totalt antal order skickade till kund.">@Html.DisplayFor(modelItem => Model.NumberOfOrdersSent)</span>
                 </td>
                 <td class="text-align-vertical-middle">
-                    <span title="Total variety of products in stock.">@Html.DisplayFor(modelItem => Model.NumberOfProducts)</span>
+                    <span title="Totalt antal sålda produkter.">@Html.DisplayFor(modelItem => Model.NumberOfProductsSold)</span>
                 </td>
                 <td class="text-align-vertical-middle">
-                    <span title="Total quantity of products in stock.">@Html.DisplayFor(modelItem => Model.ProductTotalStock)</span>
+                    <span title="Totalt antal produkter i sortiment.">@Html.DisplayFor(modelItem => Model.NumberOfProducts)</span>
+                </td>
+                <td class="text-align-vertical-middle">
+                    <span title="Totalt antal produkter i lager.">@Html.DisplayFor(modelItem => Model.ProductTotalStock)</span>
                 </td>
             </tr>
         </tbody>
