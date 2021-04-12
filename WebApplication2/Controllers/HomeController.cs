@@ -103,23 +103,8 @@ namespace WebApplication2.Controllers
 
         public IActionResult UpdateCart(List<int> shoppingCartQuantities)
         {
-            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-
-            if (shopCart == null)
-            {
-                shopCart = new Cart
-                {
-                    Products = new List<OrderProduct>()
-                };
-            }
-
-            for(int i = 0; i < shoppingCartQuantities.Count; i++)
-            {
-                shopCart.Products[i].Quantity = shoppingCartQuantities[i];
-            }
-
-            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
-
+            //Updates the quantity of product in the shoppingcart
+            _orderProductService.UpdateCart(shoppingCartQuantities, HttpContext);
             return RedirectToAction("ShoppingCart");
         }
 
@@ -141,10 +126,8 @@ namespace WebApplication2.Controllers
 
         public IActionResult RemoveFromCart(int removalIndex)
         {
-            Cart shoppingcartz = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-            shoppingcartz.Products.RemoveAt(removalIndex);
-            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shoppingcartz);
-
+            //Removes and item from the shoppingcart
+            _orderProductService.RemoveFromCart(removalIndex, HttpContext);
             return RedirectToAction("ShoppingCart");
         }
 
@@ -155,39 +138,9 @@ namespace WebApplication2.Controllers
 
         public IActionResult AddToCart(OrderProduct shoppingcartProduct)
         {
-            if (!ModelState.IsValid)
-            {
-                RedirectToAction("Index");
-            }
-
-            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
-
-            if (shopCart == null)
-            {
-                shopCart = new Cart
-                {
-                    Products = new List<OrderProduct>()
-                };
-            }
-
-            if (shopCart.Products.Exists(p => p.ProductId == shoppingcartProduct.ProductId))
-            {
-                shopCart.Products.First(p => p.ProductId == shoppingcartProduct.ProductId).Quantity += shoppingcartProduct.Quantity;
-            }
-            else
-            {
-                shopCart.Products.Add(new OrderProduct
-                {
-                    ProductId = shoppingcartProduct.ProductId,
-                    Quantity = shoppingcartProduct.Quantity
-
-                });
-            }
-
-            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
-
+            //Adds an item to the cart from products view
+            _orderProductService.AddToCart(shoppingcartProduct, HttpContext);
             return Redirect($"/Home/Product/{shoppingcartProduct.ProductId}");
-
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

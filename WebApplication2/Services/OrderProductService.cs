@@ -8,6 +8,9 @@ using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Repositories;
 using WebApplication2.ViewModels;
+using WebApplication2.Helpers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
 
 namespace WebApplication2.Services
 {
@@ -16,13 +19,18 @@ namespace WebApplication2.Services
         private ApplicationDbContext _ctx = null;
         private IGenericRepository<Order> _orderRepository;
         private IGenericRepository<OrderProduct> _orderProductRepository;
+        private IGenericRepository<Product> _productRepository;
 
         public OrderProductService()
         {
             _ctx = new ApplicationDbContext();
             _orderRepository = new GenericRepository<Order>();
             _orderProductRepository = new GenericRepository<OrderProduct>();
+            _productRepository = new GenericRepository<Product>();
         }
+
+
+
 
         public List<OrderViewModel> GetOrderProductByOrderId(int id)
         {
@@ -38,6 +46,64 @@ namespace WebApplication2.Services
                         }).ToList();
 
             return orderProductInfo;
+        }
+
+
+        public void RemoveFromCart(int removalIndex, HttpContext httpCtx)
+        {
+            Cart shoppingcartz = SessionHelper.Get<Cart>(httpCtx.Session, "cart");
+            shoppingcartz.Products.RemoveAt(removalIndex);
+            SessionHelper.Set<Cart>(httpCtx.Session, "cart", shoppingcartz);
+        }
+
+
+        public void AddToCart(OrderProduct shoppingcartProduct, HttpContext httpCtx)
+        {
+            var shopCart = SessionHelper.Get<Cart>(httpCtx.Session, "cart");
+
+            if (shopCart == null)
+            {
+                shopCart = new Cart
+                {
+                    Products = new List<OrderProduct>()
+                };
+            }
+
+            if (shopCart.Products.Exists(p => p.ProductId == shoppingcartProduct.ProductId))
+            {
+                shopCart.Products.First(p => p.ProductId == shoppingcartProduct.ProductId).Quantity += shoppingcartProduct.Quantity;
+            }
+            else
+            {
+                shopCart.Products.Add(new OrderProduct
+                {
+                    ProductId = shoppingcartProduct.ProductId,
+                    Quantity = shoppingcartProduct.Quantity
+
+                });
+            }
+
+            SessionHelper.Set<Cart>(httpCtx.Session, "cart", shopCart);
+        }
+
+        public void UpdateCart(List<int> shoppingCartQuantities, HttpContext httpCtx)
+        {
+            var shopCart = SessionHelper.Get<Cart>(httpCtx.Session, "cart");
+
+            if (shopCart == null)
+            {
+                shopCart = new Cart
+                {
+                    Products = new List<OrderProduct>()
+                };
+            }
+
+            for (int i = 0; i < shoppingCartQuantities.Count; i++)
+            {
+                shopCart.Products[i].Quantity = shoppingCartQuantities[i];
+            }
+
+            SessionHelper.Set<Cart>(httpCtx.Session, "cart", shopCart);
         }
 
 
