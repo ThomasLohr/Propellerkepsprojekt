@@ -54,6 +54,7 @@ namespace WebApplication2.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
         public IActionResult Product(int id)
@@ -112,6 +113,15 @@ namespace WebApplication2.Controllers
             //Clear the cart sessiondata/cookie
             HttpContext.Session.Clear();
             return View();
+        }
+
+        public IActionResult RemoveFromCart(int removalIndex)
+        {
+            Cart shoppingcartz = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            shoppingcartz.Products.RemoveAt(removalIndex);
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shoppingcartz);
+
+            return RedirectToAction("ShoppingCart");
         }
 
         public IActionResult AboutUs()

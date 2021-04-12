@@ -99,7 +99,19 @@
 
                                 <li>
                                     <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="ShoppingCart">
-                                        <span class="flaticon-shopping-cart">   <span class="badge" id="lblCartCount">  </span> </span>
+                                        <span class="flaticon-shopping-cart">
+
+                                            @{
+                                                Cart shoppingcartz = WebApplication2.Helpers.SessionHelper.Get<Cart>(Context.Session, "cart");
+                                            }
+
+                                            @if (shoppingcartz != null && shoppingcartz.Products != null && shoppingcartz.Products.Count > 0)
+                                            {
+                                                <span class="badge" id="lblCartCount">
+                                                    @shoppingcartz.Products.Sum(p => p.Quantity)
+                                                </span>
+                                            }
+                                            </span> <!-- SHOPPING CART ICON -->
                                         <i style="font-size:18px"></i>
                                     </a>
                                 </li>
