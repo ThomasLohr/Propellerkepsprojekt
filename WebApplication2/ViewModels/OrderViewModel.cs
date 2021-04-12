@@ -16,6 +16,13 @@ namespace WebApplication2.ViewModels
         public decimal? Price { get; set; }
         [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal? TotalPrice { get; set; }
+        public decimal? TotalPriceShipping
+        {
+            get
+            {
+                return TotalPrice + 59;
+            }
+        }
         public List<OrderViewModel> OrderProductsList { get; set; }
         //Testing list for shoppingcart
         public List<int> shoppingCartIds { get; set; }

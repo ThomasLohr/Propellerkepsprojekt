@@ -8,59 +8,59 @@
 <div class="pt-3">
     <h1>Ordrar</h1>
 </div>
-    <div class="container overflow-hidden">
-        <table class="table">
-            <thead class="thead-dark">
+<div class="container overflow-hidden">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Order ID
+                </th>
+                <th>
+                    Kundnamn
+                </th>
+                <th>
+                    Order Skickad
+                </th>
+                <th>
+                    Skickad
+                </th>
+                <th>
+                    Registrerad
+                </th>
+                <th>
+                    Modifierad
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-                        Order ID
-                    </th>
-                    <th>
-                        Kund ID
-                    </th>
-                    <th>
-                        Order Skickad
-                    </th>
-                    <th>
-                        Skickad
-                    </th>
-                    <th>
-                        Registrerad
-                    </th>
-                    <th>
-                        Modifierad
-                    </th>
-                    <th></th>
+                    <td class="text-align-vertical-middle" width="200">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.OrderSent)
+                    </td>
+                    <td class="text-align-vertical-middle">
+                        @Html.DisplayFor(modelItem => item.ShippedDate)
+                    </td>
+                    <td class="text-align-vertical-middle" width="90">
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td class="text-align-vertical-middle" width="90">
+                        @Html.DisplayFor(modelItem => item.ModifiedDate)
+                    </td>
+                    <td style="width: 150px">
+                        <a asp-action="EditOrder" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
+                        <a asp-action="RemoveOrder" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="text-align-vertical-middle" width="200">
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td class="text-align-vertical-middle">
-                            @Html.DisplayFor(modelItem => item.UserId)
-                        </td>
-                        <td class="text-align-vertical-middle">
-                            @Html.DisplayFor(modelItem => item.OrderSent)
-                        </td>
-                        <td class="text-align-vertical-middle">
-                            @Html.DisplayFor(modelItem => item.ShippedDate)
-                        </td>
-                        <td class="text-align-vertical-middle" width="90">
-                            @Html.DisplayFor(modelItem => item.CreatedDate)
-                        </td>
-                        <td class="text-align-vertical-middle" width="90">
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>
-                        <td style="width: 150px">
-                            <a asp-action="EditOrder" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
-                            <a asp-action="RemoveOrder" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>

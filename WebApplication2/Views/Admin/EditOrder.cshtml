@@ -14,7 +14,7 @@
         <form asp-action="EditOrder">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Order.UserId" class="control-label">Användar-ID</label>
+                <label asp-for="Order.UserId" class="control-label">Kund ID</label>
                 <input asp-for="Order.UserId" class="form-control" />
                 <span asp-validation-for="Order.UserId" class="text-danger"></span>
             </div>
@@ -34,53 +34,102 @@
             </div>
         </form>
     </div>
-    <div style="float:right; margin-left:100px">
-        <h5>Ordersammanfattning</h5>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>
-                        Produkt ID
-                    </th>
-                    <th>
-                        Produktnamn
-                    </th>
-                    <th>
-                        Antal
-                    </th>
-                    <th>
-                        Pris
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.OrderProductsList)
-                {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(m => item.OrderProduct.ProductId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item.ProductName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item.OrderProduct.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item.Price) Kr
-                    </td>
-                </tr>
-                }
-                <tr class="table-dark" >
-                    <td colspan="3">
-                        Summa:
-                    </td>
-                    <td align="right">
-                        @Html.DisplayFor(model => model.TotalPrice) Kr
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="container float-right pt-3">
+        <div>
+            <h5>Ordersammanfattning</h5>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Produkt ID
+                        </th>
+                        <th>
+                            Produktnamn
+                        </th>
+                        <th>
+                            Antal
+                        </th>
+                        <th>
+                            Pris
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderProductsList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.OrderProduct.ProductId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.OrderProduct.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Price) Kr
+                            </td>
+                        </tr>
+                    }
+                    <tr class="table-dark">
+                        <td colspan="3">
+                            Summa (exkl. frakt):
+                        </td>
+                        <td align="left">
+                            @Html.DisplayFor(model => model.TotalPrice) Kr
+                        </td>
+                    </tr>
+                    <tr class="table-dark pt-3">
+                        <td colspan="3">
+                            Total Summa:
+                        </td>
+                        <td align="left">
+                            @Html.DisplayFor(model => model.TotalPriceShipping) Kr
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pt-3">
+            <h5>Leveransdetaljer</h5>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Mottagare
+                        </th>
+                        <th>
+                            Gata
+                        </th>
+                        <th>
+                            Postnummer
+                        </th>
+                        <th>
+                            Stad
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.Order.User.FirstName) @Html.DisplayFor(model => model.Order.User.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Order.User.Street)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Order.User.Zip)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Order.User.City)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

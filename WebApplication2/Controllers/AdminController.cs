@@ -107,7 +107,14 @@ namespace WebApplication2.Controllers
         public IActionResult Orders()
         {
 
-            return View(_orderRepository.GetAll());
+            var orders = _orderRepository.GetAll();
+
+            foreach (var order in orders)
+            {
+                order.User = _userManager.Users.Where(u => u.Id == order.UserId).FirstOrDefault();
+            }
+
+            return View(orders);
         }
 
         [HttpGet]
@@ -119,6 +126,7 @@ namespace WebApplication2.Controllers
             orderViewModel.Order = _orderRepository.GetById(Id);
             orderViewModel.OrderProductsList = _orderProductService.GetOrderProductByOrderId(Id);
             orderViewModel.TotalPrice = orderViewModel.OrderProductsList.Sum(op => op.Price);
+            orderViewModel.Order.User = _userManager.Users.First(u => u.Id == orderViewModel.Order.UserId);
 
             return View(orderViewModel);
         }
