@@ -114,6 +114,15 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+        public IActionResult RemoveFromCart(int removalIndex)
+        {
+            Cart shoppingcartz = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+            shoppingcartz.Products.RemoveAt(removalIndex);
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shoppingcartz);
+
+            return RedirectToAction("ShoppingCart");
+        }
+
         public IActionResult AboutUs()
         {
             return View();
