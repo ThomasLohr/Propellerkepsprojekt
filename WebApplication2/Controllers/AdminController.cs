@@ -128,7 +128,7 @@ namespace WebApplication2.Controllers
             orderViewModel.Order = _orderRepository.GetById(Id);
             orderViewModel.OrderProductsList = _orderProductService.GetOrderProductByOrderId(Id);
             orderViewModel.TotalPrice = orderViewModel.OrderProductsList.Sum(op => op.Price);
-            orderViewModel.Order.User = _userManager.Users.First(u => u.Id == orderViewModel.Order.UserId);
+            orderViewModel.Order.User = _userManager.Users.FirstOrDefault(u => u.Id == orderViewModel.Order.UserId);
 
             return View(orderViewModel);
         }
