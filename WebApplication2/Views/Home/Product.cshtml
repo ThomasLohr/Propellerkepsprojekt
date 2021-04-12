@@ -61,7 +61,7 @@
 
                                 <td class="pl-0">
                                     <div class="def-number-input number-input safari_only mb-0">
-                                        <input class="quantity" id="myInput" min="0" name="Quantity" value="1" type="number" >
+                                        <input class="quantity" id="myInput" min="1" name="Quantity" max="@Model.Stock" value="1" type="number">
                                     </div>
                                 </td>
                                 <td>
@@ -79,9 +79,21 @@
                         </table>
                     </div>
                     <input type="hidden" name="ProductId" value="@Model.Id" />
-                    <button type="submit" class="btn btn-light btn-md mr-1 mb-2">
-                        <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
-                    </button>
+                    @if (Model.Stock <= 0)
+                    {
+                        <h5>Varan är tyvärr slut i lager!</h5>
+                        <button disabled class="btn btn-light btn-md mr-1 mb-2">
+                            <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-light btn-md mr-1 mb-2">
+                            <i class="fas fa-shopping-cart pr-2"></i>Lägg till i Kundvagn
+                        </button>
+                        <h6>Varor i lager: @Model.Stock st</h6>
+                    }
+
                 </form>
                 <div>
                     <a asp-action="Products">Gå tillbaka</a>
