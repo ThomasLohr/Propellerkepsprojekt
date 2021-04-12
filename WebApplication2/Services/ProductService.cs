@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
 using WebApplication2.Repositories;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Services
 {
@@ -18,6 +19,19 @@ namespace WebApplication2.Services
             _ctx = new ApplicationDbContext();
             _productRepository = new GenericRepository<Product>();
         }
+
+
+        public void UpdateStock(List<int> shoppingCartIds, OrderViewModel cartOrder)
+        {
+            foreach (int id in shoppingCartIds)
+            {
+                var product = _productRepository.GetById(id);
+                product.Stock -= cartOrder.OrderProduct.Quantity;
+
+                _productRepository.Update(product);
+            }
+        }
+
 
         public IEnumerable<Product> SortByCategory(string category)
         {

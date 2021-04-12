@@ -114,14 +114,9 @@ namespace WebApplication2.Controllers
              
  
             }
-            //Updates the stock of orderered products
-            foreach (int id in shoppingCartIds)
-            {
-                var product = _productRepository.GetById(id);
-                product.Stock -= cartOrder.OrderProduct.Quantity;
 
-                _productRepository.Update(product);
-            }
+            //Updates the stock of orderered products
+            _productService.UpdateStock(shoppingCartIds, cartOrder);
 
             ViewBag.CurrentUser = await _userManager.GetUserAsync(User);
             HttpContext.Session.Clear();
