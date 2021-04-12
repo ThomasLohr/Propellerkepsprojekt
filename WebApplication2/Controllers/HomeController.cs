@@ -100,6 +100,30 @@ namespace WebApplication2.Controllers
             return View();
         }
 
+
+        public IActionResult UpdateCart(List<int> shoppingCartQuantities)
+        {
+            var shopCart = SessionHelper.Get<Cart>(HttpContext.Session, "cart");
+
+            if (shopCart == null)
+            {
+                shopCart = new Cart
+                {
+                    Products = new List<OrderProduct>()
+                };
+            }
+
+            for(int i = 0; i < shoppingCartQuantities.Count; i++)
+            {
+                shopCart.Products[i].Quantity = shoppingCartQuantities[i];
+            }
+
+            SessionHelper.Set<Cart>(HttpContext.Session, "cart", shopCart);
+
+            return RedirectToAction("ShoppingCart");
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> ShoppingCartAsync(OrderViewModel cartOrder, List<int> shoppingCartIds, List<int> shoppingCartQuantities)
         {
