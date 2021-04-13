@@ -96,7 +96,7 @@
 
                 </form>
                 <div>
-                    <a asp-action="Products">Gå tillbaka</a>
+                    <a href="javascript: history.go(-1)" >Gå tillbaka</a>
                 </div>
                 <div>
                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
