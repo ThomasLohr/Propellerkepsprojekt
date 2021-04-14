@@ -4,9 +4,11 @@
     ViewData["Title"] = "Lägg till ny produkt";
     Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
+
+
 <div class="pt-3">
     <h1>Lägg till ny produkt</h1>
-<hr />
+    <hr />
 </div>
 <form asp-action="CreateProduct" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -91,5 +93,8 @@
 </div>
 
 @section Scripts {
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+    <script src="~/js/RecieveDeliverMessage.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

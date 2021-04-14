@@ -4,6 +4,14 @@
     ViewData["Title"] = "Användare";
     Layout = "~/Views/Shared/_NavbarLayout.cshtml";
 }
+
+@section Scripts{
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+    <script src="~/js/RecieveDeliverMessage.js"></script>
+}
+
+
 <div class="pt-3">
     <h1>Användare</h1>
     <div class="container overflow-hidden">
@@ -44,31 +52,31 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td class="text-align-vertical-middle" width="200">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td class="text-align-vertical-middle">
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td class="text-align-vertical-middle">
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td class="text-align-vertical-middle">
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
-                    </td>
-                    <td class="text-align-vertical-middle" width="90">
-                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td class="text-align-vertical-middle" width="90">
-                        @Html.DisplayFor(modelItem => item.ModifiedDate)
-                    </td>
-                    <td style="width: 150px">
-                        <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
-                        <a asp-action="RemoveUser" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="text-align-vertical-middle" width="200">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class="text-align-vertical-middle">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td class="text-align-vertical-middle">
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td class="text-align-vertical-middle">
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td class="text-align-vertical-middle" width="90">
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td class="text-align-vertical-middle" width="90">
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </td>
+                        <td style="width: 150px">
+                            <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa fa-edit" title="Redigera"></i></a>
+                            <a asp-action="RemoveUser" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash" title="Ta bort"></i></a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
